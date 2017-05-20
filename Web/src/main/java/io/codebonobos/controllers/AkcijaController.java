@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import javax.websocket.server.PathParam;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -28,7 +29,7 @@ public class AkcijaController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        List<Akcija> list = null;
+        List<Akcija> list;
         String message = null;
 
         try {
@@ -84,8 +85,23 @@ public class AkcijaController {
         return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "end", method = RequestMethod.GET)
+    @RequestMapping(value = "/end", method = RequestMethod.GET)
     public void finishAction(@RequestParam String actionId) {
         akcijaDao.finishAction(actionId);
     }
+
+    @RequestMapping(value = "/active/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getActiveActionByUserId(@PathVariable String userId) {
+        Akcija akcija;
+        String message = null;
+        try {
+            akcija = akcijaDao.getActiveActionById(userId);
+        } catch (Exception e) {
+            message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(akcija, message), HttpStatus.OK);
+    }
+
 }

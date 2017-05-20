@@ -84,6 +84,18 @@ public class AkcijaDao {
         return mapToAction(result.get(0));
     }
 
+    public Akcija getActiveActionById(String userId) throws Exception {
+        String query = "SELECT * FROM SPASAVATELJ_AKCIJA AS SA " +
+            "JOIN AKCIJA AS A ON A.ID_A = SA.ID_AKCIJA " +
+            "WHERE SA.ID_SPASAVATELJ = "+userId+" AND A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
+
+        if (result == null || result.isEmpty()) {
+            throw new Exception("No such action");
+        }
+
+        return mapToAction(result.get(0));
+    }
 
     public void finishAction(String actionId) {
         String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID_A = '" + actionId + "'";
