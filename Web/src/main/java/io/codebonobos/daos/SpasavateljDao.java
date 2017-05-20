@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +93,20 @@ public class SpasavateljDao {
         return (int) jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE USERNAME = '" + username + "'").get(0).get("ID");
     }
 
+    public void saveRescuer(Spasavatelj rescuer){
+        String query = "INSERT INTO SPASAVATELJ(IME, BROJ_TELEFONA, SPECIJALNOST, ISKUSTVO, LOKACIJA_LAT, LOKACIJA_LNG, AKTIVAN, USERNAME, PWORD) VALUES('"
+            + rescuer.getIme() + "'," +
+            " '" + rescuer.getBrojTelefona() + "'," +
+            " '" + rescuer.getSpecijalnost().getValue() + "'," +
+            " '" + rescuer.getIskustvo().getValue() + "'," +
+            " '" + rescuer.getLokacija().getLat() + "'," +
+            " '" + rescuer.getLokacija().getLng() + "'," +
+            " '" + rescuer.isActive() + "'," +
+            " '" + rescuer.getIme() + "'," +
+            " '1234')";
+        jdbcTemplate.update(query);
+    }
+
     private Spasavatelj mapToSpasavatelj(Map<String, Object> dbRow) {
         Spasavatelj rescuer = new Spasavatelj();
         if (dbRow.get("ID") != null) {
@@ -112,7 +125,7 @@ public class SpasavateljDao {
             rescuer.setIskustvo(HgssIskustvo.getByValue((int) dbRow.get("ISKUSTVO")));
         }
         if(dbRow.get("AKTIVAN") != null) {
-            rescuer.setActive((boolean) dbRow.get("AKTIVAN"));
+            rescuer.setIsActive((boolean) dbRow.get("AKTIVAN"));
         }
         if(dbRow.get("LOKACIJA_LAT") != null) {
             rescuer.setLokacija(new HgssLocation((String) dbRow.get("LOKACIJA_LAT"), (String) dbRow.get("LOKACIJA_LNG")));

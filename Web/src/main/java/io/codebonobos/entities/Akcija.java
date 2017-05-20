@@ -57,4 +57,28 @@ public class Akcija {
     public void setPrihvaceniSpasavatelji(List<Spasavatelj> prihvaceniSpasavatelji) {
         this.prihvaceniSpasavatelji = prihvaceniSpasavatelji;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getVoditelj() {
+        return voditelj;
+    }
+
+    public void setVoditelj(String voditelj) {
+        this.voditelj = voditelj;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean active) {
+        isActive = active;
+    }
 }
