@@ -97,8 +97,9 @@ public class SpasavateljiController {
             id = new IdWrapper(spasavateljDao.getByLogin(username, password).getId());
         } catch (Exception e) {
             message = e.getMessage();
+            return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.OK);
     }
 }
