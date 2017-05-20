@@ -1,38 +1,35 @@
 <div class="form-wrapper" ng-controller="RescController">
 
-    <div class="row">
+    <div class="row btn-row">
         <!-- DODAVANJE NOVOG -->
-        <div class="col-md-2 col-sm-2 col-xs-2 ">
-            <div class="widget">
-                <a href="#/addResc">DODAJ</a>
-            </div>
-        </div>
+        <a href="#/addResc" class="button button-normal">Dodaj spašavatelja</a>
     </div>
+    <div class="clear"></div>
 
     <div class="row">
         <!-- PRETRAGA -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="widget">
                 <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Pretraga
+                    Pretraži spašavatelje
                 </div>
                 <div class="widget-body">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-4">
-                            <label>Pretraga</label>
-                            <div class="input-group">
-                            <input type="text">
-                                </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="search-wrapper icon-search">
+                                <input type="text" placeholder="Pretraži..." class="input-field">
+                            </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-4">
-                            <label>Specijalnost</label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                <div class="btn-group mr-2" role="group" aria-label="First group">
-                                    <button type="button" class="btn btn-secondary">1</button>
-                                    <button type="button" class="btn btn-secondary">2</button>
-                                    <button type="button" class="btn btn-secondary">3</button>
-                                    <button type="button" class="btn btn-secondary">4</button>
+                                <div class="btn-group mr-2 spec-wrapper" role="group" aria-label="First group">
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-alp"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-doc"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-heli"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-map"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-dog"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-ski"></button>
+                                    <button type="button" ng-class="{'active-filter' : specActive}" class="spec-img img-spel"></button>
                                 </div>
                             </div>
                         </div>
@@ -41,14 +38,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row spasavatelji-tables">
         <!-- AKTIVNI -->
         <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Slobodni spašavatelji</div>
             <div class="widget">
-                <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Slobodni spašavatelji
-                </div>
+
                 <div class="widget-body fix-height-500">
                     <table class="table">
                         <thead>
@@ -62,9 +57,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                            <tr>
 
-                        </tr>
+                            </tr>
                         <!-- -->
                         </tbody>
                     </table>
@@ -73,11 +68,8 @@
         </div>
         <!-- ZAUZETI -->
         <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Zauzeti spašavatelji</div>
             <div class="widget">
-                <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Zauzeti spašavatelji
-                </div>
                 <div class="widget-body fix-height-500">
                     <table class="table">
                         <thead>
@@ -102,11 +94,9 @@
         </div>
         <!-- NEAKTIVNI -->
         <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Neaktivni spašavatelji</div>
             <div class="widget">
-                <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Neaktivni spašavatelji
-                </div>
+
                 <div class="widget-body fix-height-500">
                     <table class="table">
                         <thead>

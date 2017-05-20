@@ -53,6 +53,27 @@
 .icon-worker:before {
   content: "\65";
 }
-.icon-cs-bb:before {
+.icon-tick:before {
   content: "\66";
+}
+.icon-search:before {
+  content: "\67";
+}
+.icon-chevrondown:before {
+  content: "\69";
+}
+.icon-chevronleft:before {
+  content: "\6a";
+}
+.icon-chevronright:before {
+  content: "\6b";
+}
+.icon-chevronup:before {
+  content: "\6c";
+}
+.icon-cabin-3:before {
+  content: "\6e";
+}
+.icon-cabin-5:before {
+  content: "\68";
 }
