@@ -90,14 +90,14 @@ public class SpasavateljiController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity<ResponseWrapper<IdWrapper>> getIdFromLogin(@RequestParam String username, @RequestParam String password) throws Exception {
+    public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password) throws Exception {
         IdWrapper id = null;
         String message = null;
         try {
             id = new IdWrapper(spasavateljDao.getByLogin(username, password).getId());
         } catch (Exception e) {
             message = e.getMessage();
-            return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.OK);

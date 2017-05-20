@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +41,14 @@ public class SpasavateljDao {
 //        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = AS.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
 //        List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
 //
-//        for (Map<String, Object> dbRow : available) {
+//        Map<Integer, List<Spasavatelj>> lists = new HashMap<>();
 //
+//        List<Spasavatelj> active = new ArrayList<>();
+//        for (Map<String, Object> dbRow : available) {
+//            active.add(mapToSpasavatelj(dbRow));
 //        }
+//
+//
 //    }
 
     public Spasavatelj getByFbToken(String fbToken) throws Exception {
