@@ -30,6 +30,26 @@ app.factory('UserFactory', ['$http', function ($http) {
     return result;
 }]);
 
+app.factory('ActionFactory', ['$http', function ($http) {
+    var result = {};
+    
+    result.addAction = function (action) {
+        $http({
+            method: 'PUT',
+            url: '/api/akcije/add',
+            data: action,
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }).success(function (data, status, header, config) {
+            return data.id;
+        }).error(function (data, status, header, config) {
+            // TODO
+            return -1;
+        });
+    };
+
+    return result;
+}]);
+
 app.factory('RescFactory', ['$http', function ($http) {
     var result = {};
 

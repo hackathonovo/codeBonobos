@@ -55,10 +55,33 @@ app.controller('CodesController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('AddActionController', ['$scope', function ($scope) {
+app.controller('AddActionController', ['$scope', 'NgMap', 'ActionFactory', function ($scope, NgMap, ActionFactory) {
     // ==== MODELS ====
+    $scope.currentAction = {
+        id: null,
+        ime: null,
+        isActive: true,
+        opis: null,
+        pozvaniSpasavatelji: null,
+        prihvaceniSpasavatelji: null,
+        location: {
+            lat: "45.00",
+            lng: "15.00"
+        },
+        radius: 0,
+        voditelj: null
+    };
     // ==== INIT MODELS ====
+
     // ==== CONTROL FUNCTIONS ====
+    $scope.createAction = function () {
+        ActionFactory.addAction($scope.currentAction);
+    };
+
+    $scope.markerChanged = function (event) {
+        $scope.currentAction.location.lat = event.latLng.lat();
+        $scope.currentAction.location.lng = event.latLng.lng();
+    }
 }]);
 
 app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, RescFactory) {
