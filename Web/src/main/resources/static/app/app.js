@@ -20,6 +20,9 @@ app.config(['$routeProvider',
         }).when('/addAction', {
             templateUrl: '/app/views/addAction.html',
             controller: 'AddActionController'
+        }).when('/addResc', {
+            templateUrl: '/app/views/addResc.html',
+            controller: 'AddRescController'
         }).otherwise({
             redirectTo: '/'
         });

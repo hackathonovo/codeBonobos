@@ -60,3 +60,9 @@ app.controller('AddActionController', ['$scope', function ($scope) {
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
 }]);
+
+app.controller('AddRescController', ['$scope', function ($scope) {
+    // ==== MODELS ====
+    // ==== INIT MODELS ====
+    // ==== CONTROL FUNCTIONS ====
+}]);
