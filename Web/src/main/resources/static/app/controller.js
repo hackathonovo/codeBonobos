@@ -31,10 +31,118 @@ app.controller('MainController', ['$scope', '$sce', '$http', '$route', 'UserFact
     };
 }]);
 
-app.controller('RescController', ['$scope', function ($scope) {
+app.controller('RescController', ['$scope', 'RescFactory', function ($scope, RescFactory) {
     // ==== MODELS ====
+    RescFactory.getAllGrouped().then(function (response) {
+        var allResc = response.data.response;
+        $scope.freeResc = allResc.available;
+        $scope.actionResc = allResc.inAction;
+        $scope.inactiveResc = allResc.inactive;
+
+        $scope.filteredFreeResc = [];
+        $scope.filteredActionResc = [];
+        $scope.filteredInactiveResc = [];
+
+
+        angular.copy($scope.freeResc, $scope.filteredFreeResc);
+        angular.copy($scope.actionResc, $scope.filteredActionResc);
+        angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
+    });
+
+    $scope.dict = {
+        alpinizam: "Alpinizam",
+        doktor: "Doktor",
+        speleologija: "Speleologija",
+        vodic_potraznih_pasa: "Vodić potražnih pasa",
+        crtac_mapa: "Crtač mape",
+        helikoptersko_spasavanje: "Helikoptersko spašavanje",
+        turno_skijanje: "Turno skijanje"
+    };
+
+    $scope.specCategoryFilter = [
+        {
+            val: false,
+            name: "alpinizam"
+
+        },
+        {
+            val: false,
+            name: "doktor"
+
+        },
+        {
+            val: false,
+            name: "helikoptersko_spasavanje"
+
+        },
+        {
+            val: false,
+            name: "crtac_mapa"
+
+        },
+        {
+            val: false,
+            name: "vodic_potraznih_pasa"
+
+        },
+        {
+            val: false,
+            name: "turno_skijanje"
+
+        },
+        {
+            val: false,
+            name: "speleologija"
+
+        }
+    ];
     // ==== INIT MODELS ====
+    var v = 2;
     // ==== CONTROL FUNCTIONS ====
+    $scope.specCategoryClick = function (ind) {
+        $scope.specCategoryFilter[ind].val = !$scope.specCategoryFilter[ind].val;
+
+        $scope.filteredFreeResc = [];
+        $scope.filteredActionResc = [];
+        $scope.filteredInactiveResc = [];
+
+        var changed = false;
+
+        $scope.specCategoryFilter.forEach(function (cat) {
+            if (cat.val) {
+                $scope.freeResc.forEach(function (e1) {
+                    if (e1.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredFreeResc.push(e1);
+
+                    }
+                });
+                $scope.actionResc.forEach(function (e2) {
+                    if (e2.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredActionResc.push(e2);
+
+                    }
+                });
+                $scope.inactiveResc.forEach(function (e3) {
+                    if (e3.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredInactiveResc.push(e3);
+
+                    }
+                })
+            }
+        });
+
+        $scope.specCategoryFilter.forEach(function (ch) {
+            if(ch.val == true) {
+                changed = true;
+            }
+        });
+
+        if(!changed) {
+            angular.copy($scope.freeResc, $scope.filteredFreeResc);
+            angular.copy($scope.actionResc, $scope.filteredActionResc);
+            angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
+        }
+    }
 }]);
 
 app.controller('ActionController', ['$scope', 'NgMap', function ($scope, $NgMap) {
@@ -53,6 +161,120 @@ app.controller('CodesController', ['$scope', function ($scope) {
     // ==== MODELS ====
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+}]);
+
+app.controller('AddActionRescController', ['$scope', 'NgMap', 'ActionFactory', 'RescFactory', function ($scope, NgMap, ActionFactory, RescFactory) {
+    // ==== MODELS ====
+    RescFactory.getAllGrouped().then(function (response) {
+        var allResc = response.data.response;
+        $scope.freeResc = allResc.available;
+        $scope.actionResc = allResc.inAction;
+        $scope.inactiveResc = allResc.inactive;
+
+        $scope.filteredFreeResc = [];
+        $scope.filteredActionResc = [];
+        $scope.filteredInactiveResc = [];
+
+
+        angular.copy($scope.freeResc, $scope.filteredFreeResc);
+        angular.copy($scope.actionResc, $scope.filteredActionResc);
+        angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
+    });
+
+    $scope.dict = {
+        alpinizam: "Alpinizam",
+        doktor: "Doktor",
+        speleologija: "Speleologija",
+        vodic_potraznih_pasa: "Vodić potražnih pasa",
+        crtac_mapa: "Crtač mape",
+        helikoptersko_spasavanje: "Helikoptersko spašavanje",
+        turno_skijanje: "Turno skijanje"
+    };
+
+    $scope.specCategoryFilter = [
+        {
+            val: false,
+            name: "alpinizam"
+
+        },
+        {
+            val: false,
+            name: "doktor"
+
+        },
+        {
+            val: false,
+            name: "helikoptersko_spasavanje"
+
+        },
+        {
+            val: false,
+            name: "crtac_mapa"
+
+        },
+        {
+            val: false,
+            name: "vodic_potraznih_pasa"
+
+        },
+        {
+            val: false,
+            name: "turno_skijanje"
+
+        },
+        {
+            val: false,
+            name: "speleologija"
+
+        }
+    ];
+    // ==== INIT MODELS ====
+    var v = 2;
+    // ==== CONTROL FUNCTIONS ====
+    $scope.specCategoryClick = function (ind) {
+        $scope.specCategoryFilter[ind].val = !$scope.specCategoryFilter[ind].val;
+
+        $scope.filteredFreeResc = [];
+        $scope.filteredActionResc = [];
+        $scope.filteredInactiveResc = [];
+
+        var changed = false;
+
+        $scope.specCategoryFilter.forEach(function (cat) {
+            if (cat.val) {
+                $scope.freeResc.forEach(function (e1) {
+                    if (e1.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredFreeResc.push(e1);
+
+                    }
+                });
+                $scope.actionResc.forEach(function (e2) {
+                    if (e2.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredActionResc.push(e2);
+
+                    }
+                });
+                $scope.inactiveResc.forEach(function (e3) {
+                    if (e3.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                        $scope.filteredInactiveResc.push(e3);
+
+                    }
+                })
+            }
+        });
+
+        $scope.specCategoryFilter.forEach(function (ch) {
+            if(ch.val == true) {
+                changed = true;
+            }
+        });
+
+        if(!changed) {
+            angular.copy($scope.freeResc, $scope.filteredFreeResc);
+            angular.copy($scope.actionResc, $scope.filteredActionResc);
+            angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
+        }
+    }
 }]);
 
 app.controller('AddActionController', ['$scope', 'NgMap', 'ActionFactory', function ($scope, NgMap, ActionFactory) {
@@ -84,7 +306,7 @@ app.controller('AddActionController', ['$scope', 'NgMap', 'ActionFactory', funct
     }
 }]);
 
-app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, RescFactory) {
+app.controller('AddRescController', ['$scope', '$location', 'RescFactory', function ($scope, $location, RescFactory) {
     // ==== MODELS ====
     $scope.currentResc = {
         id: null,
@@ -174,5 +396,7 @@ app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, 
         var val = $scope.selectedSpec - 1;
         $scope.currentResc.specijalnost = $scope.spec[val].enum;
         RescFactory.addResc($scope.currentResc);
+
+        $location.url('/resc')
     };
 }]);

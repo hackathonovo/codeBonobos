@@ -60,6 +60,10 @@ app.factory('RescFactory', ['$http', function ($http) {
     result.getAll = function () {
         return $http.get('/api/spasavatelji/all')
     };
+    
+    result.getAllNear = function () {
+        
+    };
 
     result.addResc = function (resc) {
         $http({
