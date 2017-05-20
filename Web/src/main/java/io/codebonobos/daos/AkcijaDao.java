@@ -30,7 +30,7 @@ public class AkcijaDao {
 
     public int saveAction(Akcija action) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOKACIJA_LAT, LOKACIJA_LNG, RADIUS, OPIS, AKTIVNA) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA) VALUES(?,?,?,?,?,?)";
 
 
         jdbcTemplate.update(connection -> {
@@ -74,7 +74,7 @@ public class AkcijaDao {
     }
 
     public Akcija getActionById(String id) throws Exception {
-        String query = "SELECT * FROM AKCIJA WHERE ID LIKE '"+id+"'";
+        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '"+id+"'";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {
@@ -86,24 +86,24 @@ public class AkcijaDao {
 
 
     public void finishAction(String actionId) {
-        String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID = '" + actionId + "'";
+        String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID_A = '" + actionId + "'";
         jdbcTemplate.update(query);
     }
 
     private Akcija mapToAction(Map<String, Object> dbRow) {
         Akcija action = new Akcija();
         HgssLocation location = new HgssLocation();
-        if (dbRow.get("ID") != null) {
-            action.setId((int) dbRow.get("ID"));
+        if (dbRow.get("ID_A") != null) {
+            action.setId((int) dbRow.get("ID_A"));
         }
         if (dbRow.get("VODITELJ_BROJ") != null) {
             action.setVoditelj((String) dbRow.get("VODITELJ_BROJ"));
         }
-        if (dbRow.get("LOKACIJA_LAT") != null) {
-            location.setLat((String) dbRow.get("LOKACIJA_LAT"));
+        if (dbRow.get("LOK_LAT") != null) {
+            location.setLat((String) dbRow.get("LOK_LAT"));
         }
-        if (dbRow.get("LOKACIJA_LNG") != null) {
-            location.setLng((String) dbRow.get("LOKACIJA_LNG"));
+        if (dbRow.get("LOK_LNG") != null) {
+            location.setLng((String) dbRow.get("LOK_LNG"));
         }
         if (dbRow.get("RADIUS") != null) {
             action.setRadius((double) dbRow.get("RADIUS"));

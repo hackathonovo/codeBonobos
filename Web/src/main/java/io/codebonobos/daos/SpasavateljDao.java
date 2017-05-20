@@ -37,8 +37,8 @@ public class SpasavateljDao {
     }
 
     public RescuerListsWrapper getRescuersByGroups() {
-        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
-        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
+        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
         List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
 
         List<Spasavatelj> avail = new ArrayList<>();
@@ -60,7 +60,7 @@ public class SpasavateljDao {
     }
 
     public List<Spasavatelj> getAvailable() {
-        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
 
         List<Spasavatelj> avail = new ArrayList<>();
         for (Map<String, Object> dbRow : available) {
