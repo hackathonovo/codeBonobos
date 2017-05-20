@@ -15,4 +15,32 @@ public enum HgssIskustvo {
         this.value = value;
         this.code = code;
     }
+
+    public static HgssIskustvo getByValue(int i) {
+        switch(i) {
+            case 1:
+                return PRIDRUZENI_CLAN;
+            case 2:
+            default:
+                return PRIPRAVNIK;
+            case 3:
+                return ISKUSAN;
+        }
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }

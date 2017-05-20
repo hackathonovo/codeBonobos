@@ -1,8 +1,12 @@
 package io.codebonobos.controllers;
 
+import io.codebonobos.daos.AkcijaDao;
 import io.codebonobos.entities.Akcija;
+import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.utils.ResponseWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/akcije")
 public class AkcijaController {
+    @Autowired
+    private AkcijaDao akcijaDao;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseWrapper<List<Akcija>> getAll() {
@@ -41,11 +47,16 @@ public class AkcijaController {
         return new ResponseWrapper<>(list, message);
     }
 
-    @RequestMapping(value = "/action/{id}", method = RequestMethod.GET)
-    public ResponseWrapper<Akcija> getActionById(@PathVariable String id) {
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public ResponseWrapper<Akcija> getActionByUserId(@PathVariable String id) {
         Akcija akcija = null;
         String message = null;
 
         return new ResponseWrapper<>(akcija, message);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.PUT)
+    public void addRescuer(@RequestBody Akcija action) {
+        akcijaDao.saveAction(action);
     }
 }
