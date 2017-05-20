@@ -2,6 +2,7 @@ package io.codebonobos.daos;
 
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.HgssLocation;
+import io.codebonobos.entities.Spasavatelj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -99,11 +100,15 @@ public class AkcijaDao {
         jdbcTemplate.update(query);
     }
 
-    public void addInvitedRescuers(String actionId, List<Integer> userIds) {
+    public List<String> addInvitedRescuers(String actionId, List<Integer> userIds) {
+        List<String> devTokens = new ArrayList<>();
         userIds.forEach(id -> {
             String query = "INSERT INTO SPASAVATELJ_AKCIJA VALUES(" + id + ", " + actionId + ", FALSE)";
             jdbcTemplate.update(query);
+            devTokens.add(jdbcTemplate.queryForObject("SELECT DEV_TOKEN FROM SPASAVATELJ WHERE ID = " + id, String.class));
         });
+
+        return devTokens;
     }
 
     private Akcija mapToAction(Map<String, Object> dbRow) {
@@ -134,5 +139,11 @@ public class AkcijaDao {
         action.setLocation(location);
 
         return action;
+    }
+
+    public List<Spasavatelj> getUsersInActionByActionId(String actionId) {
+        String query = "SELECT * FROM SPASAVATELJ AS S JOIN SPASAVATELJ_AKCIJA AS SA ON SA.ID_SPASAVATELJ = S.ID WHERE ID_AKCIJA = " + actionId;
+
+        return new ArrayList<>();
     }
 }

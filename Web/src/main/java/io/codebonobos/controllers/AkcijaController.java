@@ -1,7 +1,5 @@
 package io.codebonobos.controllers;
 
-import static io.codebonobos.firebase.AndroidPushNotificationsService.FIREBASE_SERVER_KEY;
-
 import io.codebonobos.daos.AkcijaDao;
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.firebase.AndroidPushNotificationsService;
@@ -123,47 +121,53 @@ public class AkcijaController {
     public ResponseEntity<?> inviteUsers(@RequestBody List<Integer> userIds, @PathVariable String actionId) throws JSONException {
         Akcija akcija;
         String message = null;
+        List<String> devTokens;
         try {
-            akcijaDao.addInvitedRescuers(actionId, userIds);
+            devTokens = akcijaDao.addInvitedRescuers(actionId, userIds);
         } catch (Exception e) {
             message = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
-        JSONObject body = new JSONObject();
-        body.put("to", FIREBASE_SERVER_KEY);
-        body.put("priority", "high");
+        for (String devToken : devTokens) {
+            JSONObject body = new JSONObject();
+            body.put("to", devToken);
+            body.put("priority", "high");
 
-        JSONObject notification = new JSONObject();
-        notification.put("body", "body string here");
-        notification.put("title", "title string here");
+            JSONObject notification = new JSONObject();
+            notification.put("body", "Akcija#" + actionId);
+            notification.put("title", "Pozvani ste na akciju");
 
-        JSONObject data = new JSONObject();
-        data.put("key1", "value1");
-        data.put("key2", "value2");
+            JSONObject data = new JSONObject();
+            data.put("actionId", actionId);
 
-        body.put("notification", notification);
-        body.put("data", data);
+            body.put("notification", notification);
+            body.put("data", data);
 
-        HttpEntity<String> request = new HttpEntity<>(body.toString());
+            HttpEntity<String> request = new HttpEntity<>(body.toString());
 
-        CompletableFuture<FirebaseResponse> pushNotification = androidPushNotificationsService.send(request);
-        CompletableFuture.allOf(pushNotification).join();
+            CompletableFuture<FirebaseResponse> pushNotification = androidPushNotificationsService.send(request);
+            CompletableFuture.allOf(pushNotification).join();
 
-        try {
-            FirebaseResponse firebaseResponse = pushNotification.get();
-            if (firebaseResponse.getSuccess() == 1) {
-                log.info("push notification sent ok!");
-            } else {
-                log.error("error sending push notifications: " + firebaseResponse.toString());
+            try {
+                FirebaseResponse firebaseResponse = pushNotification.get();
+                if (firebaseResponse.getSuccess() == 1) {
+                    log.info("push notification sent ok!");
+                } else {
+                    log.error("error sending push notifications: " + firebaseResponse.toString());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-            return new ResponseEntity<>(firebaseResponse.toString(), HttpStatus.OK);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
-        return new ResponseEntity<>("the push notification cannot be send.", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
+
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Akcija getActionByActionId(@PathVariable int actionId) {
+//
+//    }
+
 }

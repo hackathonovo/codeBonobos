@@ -87,14 +87,17 @@ public class SpasavateljDao {
         return (int) jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE FB_TOKEN = '" + fbToken + "'").get(0).get("ID");
     }
 
-    public Spasavatelj getByLogin(String username, String password) throws Exception {
+    public Spasavatelj getByLogin(String username, String password, String devToken) throws Exception {
         List<Map<String, Object>> result = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE USERNAME = '" + username + "' AND PWORD = '" + password + "'");
-
+        Spasavatelj spasavatelj = mapToSpasavatelj(result.get(0));
+        if (getDeviceTokenById(spasavatelj.getId()) == null && devToken != null) {
+            jdbcTemplate.execute("UPDATE SPASAVATELJ SET DEV_TOKEN = '" + devToken + "' WHERE ID = " + spasavatelj.getId());
+        }
         if (result == null || result.isEmpty()) {
             throw new Exception("No such user");
         }
 
-        return mapToSpasavatelj(result.get(0));
+        return spasavatelj;
     }
 
     public int saveFromLoginAndGetId(String username, String password) throws Exception {
@@ -145,5 +148,17 @@ public class SpasavateljDao {
         return rescuer;
     }
 
+    public String getDeviceTokenById(Integer id) {
+        String query = "SELECT DEV_TOKEN FROM SPASAVATELJ WHERE ID = " + id;
+        return jdbcTemplate.queryForObject(query, String.class);
+    }
 
+
+    public void acceptAction(String userId){
+        jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE");
+    }
+
+    public void refuseAction(String userId){
+        jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId);
+    }
 }
