@@ -1,0 +1,48 @@
+<div class="form-wrapper" ng-controller="AddActionController">
+    <div class="row">
+        <!-- AKTIVNE AKCIJE -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="fa fa-list" aria-hidden="true"></span>
+                    Neimenovana
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <form>
+                            <div class="form-group">
+                                <label for="actionName">Ime akcije</label>
+                                <input type="text" class="form-control" id="actionName">
+                            </div>
+                            <div class="form-group">
+                                <label for="actionDetails">Opis akcije</label>
+                                <textarea class="form-control" rows="3" id="actionDetails"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label >LOKACIJA AKCIJE</label><br>
+
+                                <label for="actionLong">Geografska širina</label>
+                                <input type="text" id="actionLong" class="form-control">
+
+
+                                <label for="actionLat">Geografska visina</label>
+                                <input type="text" id="actionLat" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label >DETALJI SASTAJANJA</label><br>
+
+                                <label for="actionLong">Lokacija</label>
+                                <input type="text" id="actionStartLocation" class="form-control">
+
+
+                                <label for="actionLat">Vrijeme</label>
+                                <input type="time" id="actionStartTime" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

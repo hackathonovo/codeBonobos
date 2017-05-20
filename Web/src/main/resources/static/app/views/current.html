@@ -1,2 +1,53 @@
 <div class="form-wrapper" ng-controller="CurrentController">
+
+    <div class="row">
+        <!-- DODAVANJE NOVE -->
+        <div class="col-md-2 col-sm-2 col-xs-2 ">
+            <div class="widget">
+                <a href="#/addAction">DODAJ</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- AKTIVNE AKCIJE -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="fa fa-list" aria-hidden="true"></span>
+                    Akcija123
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <div class="row">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-secondary" select="select">1</button>
+                                        <button type="button" class="btn btn-secondary">2</button>
+                                        <button type="button" class="btn btn-secondary">3</button>
+                                        <button type="button" class="btn btn-secondary">4</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>Broj ukljucenih spašavatelja</label>
+                                <label>12</label>
+                            </div>
+                            <div class="row">
+                                <div class="short-decription">
+                                    Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <ng-map center="[45.814919, 15.935150]">
+                                <marker position="[45.814919, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
+                                <marker position="[45.85, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
+                            </ng-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

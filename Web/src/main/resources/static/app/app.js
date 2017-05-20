@@ -3,20 +3,23 @@ var app = angular.module('application', ['ngRoute', 'ngResource', 'ui.bootstrap'
 app.config(['$routeProvider',
     function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {
-            templateUrl: '/static/app/views/main.html',
+            templateUrl: '/app/views/main.html',
             controller: 'MainController'
         }).when('/resc', {
-            templateUrl: '/static/app/views/resc.html',
+            templateUrl: '/app/views/resc.html',
             controller: 'RescController'
         }).when('/action', {
-            templateUrl: '/static/app/views/action.html',
+            templateUrl: '/app/views/action.html',
             controller: 'ActionController'
         }).when('/current', {
-            templateUrl: '/static/app/views/current.html',
+            templateUrl: '/app/views/current.html',
             controller: 'CurrentController'
         }).when('/codes', {
-            templateUrl: '/static/app/views/codes.html',
+            templateUrl: '/app/views/codes.html',
             controller: 'CodesController'
+        }).when('/addAction', {
+            templateUrl: '/app/views/addAction.html',
+            controller: 'AddActionController'
         }).otherwise({
             redirectTo: '/'
         });

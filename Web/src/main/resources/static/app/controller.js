@@ -37,7 +37,7 @@ app.controller('RescController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('ActionController', ['$scope', function ($scope) {
+app.controller('ActionController', ['$scope', 'NgMap', function ($scope, $NgMap) {
     // ==== MODELS ====
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
@@ -50,6 +50,12 @@ app.controller('CurrentController', ['$scope', function ($scope) {
 }]);
 
 app.controller('CodesController', ['$scope', function ($scope) {
+    // ==== MODELS ====
+    // ==== INIT MODELS ====
+    // ==== CONTROL FUNCTIONS ====
+}]);
+
+app.controller('AddActionController', ['$scope', function ($scope) {
     // ==== MODELS ====
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
