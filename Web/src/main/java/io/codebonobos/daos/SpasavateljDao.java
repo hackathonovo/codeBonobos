@@ -37,8 +37,8 @@ public class SpasavateljDao {
     }
 
     public RescuerListsWrapper getRescuersByGroups() {
-        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
-        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
+        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
         List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
 
         List<Spasavatelj> avail = new ArrayList<>();
@@ -57,6 +57,17 @@ public class SpasavateljDao {
         }
 
         return new RescuerListsWrapper(avail, action, notActive);
+    }
+
+    public List<Spasavatelj> getAvailable() {
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
+
+        List<Spasavatelj> avail = new ArrayList<>();
+        for (Map<String, Object> dbRow : available) {
+            avail.add(mapToSpasavatelj(dbRow));
+        }
+
+        return avail;
     }
 
     public Spasavatelj getByFbToken(String fbToken) throws Exception {
@@ -93,7 +104,7 @@ public class SpasavateljDao {
         return (int) jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE USERNAME = '" + username + "'").get(0).get("ID");
     }
 
-    public void saveRescuer(Spasavatelj rescuer){
+    public void saveRescuer(Spasavatelj rescuer) {
         String query = "INSERT INTO SPASAVATELJ(IME, BROJ_TELEFONA, SPECIJALNOST, ISKUSTVO, LOKACIJA_LAT, LOKACIJA_LNG, AKTIVAN, USERNAME, PWORD) VALUES('"
             + rescuer.getIme() + "'," +
             " '" + rescuer.getBrojTelefona() + "'," +
@@ -118,16 +129,16 @@ public class SpasavateljDao {
         if (dbRow.get("BROJ_TELEFONA") != null) {
             rescuer.setBrojTelefona((String) dbRow.get("BROJ_TELEFONA"));
         }
-        if(dbRow.get("SPECIJALNOST") != null) {
+        if (dbRow.get("SPECIJALNOST") != null) {
             rescuer.setSpecijalnost(HgssSpecijalnost.getByValue((int) dbRow.get("SPECIJALNOST")));
         }
-        if(dbRow.get("ISKUSTVO") != null) {
+        if (dbRow.get("ISKUSTVO") != null) {
             rescuer.setIskustvo(HgssIskustvo.getByValue((int) dbRow.get("ISKUSTVO")));
         }
-        if(dbRow.get("AKTIVAN") != null) {
+        if (dbRow.get("AKTIVAN") != null) {
             rescuer.setIsActive((boolean) dbRow.get("AKTIVAN"));
         }
-        if(dbRow.get("LOKACIJA_LAT") != null) {
+        if (dbRow.get("LOKACIJA_LAT") != null && dbRow.get("LOKACIJA_LNG") != null) {
             rescuer.setLokacija(new HgssLocation((String) dbRow.get("LOKACIJA_LAT"), (String) dbRow.get("LOKACIJA_LNG")));
         }
 
