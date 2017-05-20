@@ -4,6 +4,7 @@ import io.codebonobos.entities.HgssLocation;
 import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.enums.HgssIskustvo;
 import io.codebonobos.enums.HgssSpecijalnost;
+import io.codebonobos.utils.RescuerListsWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -36,20 +37,28 @@ public class SpasavateljDao {
         return mapToSpasavatelj(result.get(0));
     }
 
-//    public Map<Integer, List<Spasavatelj>> getRescuersByGroups(String id) {
-//        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = AS.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
-//        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = AS.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
-//        List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
-//
-//        Map<Integer, List<Spasavatelj>> lists = new HashMap<>();
-//
-//        List<Spasavatelj> active = new ArrayList<>();
-//        for (Map<String, Object> dbRow : available) {
-//            active.add(mapToSpasavatelj(dbRow));
-//        }
-//
-//
-//    }
+    public RescuerListsWrapper getRescuersByGroups() {
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
+        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
+        List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
+
+        List<Spasavatelj> avail = new ArrayList<>();
+        for (Map<String, Object> dbRow : available) {
+            avail.add(mapToSpasavatelj(dbRow));
+        }
+
+        List<Spasavatelj> action = new ArrayList<>();
+        for (Map<String, Object> dbRow : inAction) {
+            action.add(mapToSpasavatelj(dbRow));
+        }
+
+        List<Spasavatelj> notActive = new ArrayList<>();
+        for (Map<String, Object> dbRow : inactive) {
+            notActive.add(mapToSpasavatelj(dbRow));
+        }
+
+        return new RescuerListsWrapper(avail, action, notActive);
+    }
 
     public Spasavatelj getByFbToken(String fbToken) throws Exception {
         List<Map<String, Object>> result = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE FB_TOKEN = '" + fbToken + "'");

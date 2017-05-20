@@ -3,6 +3,7 @@ package io.codebonobos.controllers;
 import io.codebonobos.daos.SpasavateljDao;
 import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.utils.IdWrapper;
+import io.codebonobos.utils.RescuerListsWrapper;
 import io.codebonobos.utils.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,17 @@ public class SpasavateljiController {
     }
 
     @RequestMapping(value = "/all-grouped", method = RequestMethod.GET)
-    public ResponseWrapper<List<Spasavatelj>> getAllGroupedByType() {
-        List<Spasavatelj> list = null;
+    public ResponseWrapper<RescuerListsWrapper> getAllGroupedByType() {
+        RescuerListsWrapper lists = null;
         String message = null;
 
-        return new ResponseWrapper<>(list, message);
+        try {
+            lists = spasavateljDao.getRescuersByGroups();
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+
+        return new ResponseWrapper<>(lists, message);
     }
 
     @RequestMapping(value = "/active", method = RequestMethod.GET)
