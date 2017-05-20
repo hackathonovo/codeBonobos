@@ -5,6 +5,8 @@ import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.utils.IdWrapper;
 import io.codebonobos.utils.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,5 +87,18 @@ public class SpasavateljiController {
         }
 
         return new ResponseWrapper<>(id, message);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ResponseEntity<ResponseWrapper<IdWrapper>> getIdFromLogin(@RequestParam String username, @RequestParam String password) throws Exception {
+        IdWrapper id = null;
+        String message = null;
+        try {
+            id = new IdWrapper(spasavateljDao.getByLogin(username, password).getId());
+        } catch (Exception e) {
+            message = e.getMessage();
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.NOT_FOUND);
     }
 }
