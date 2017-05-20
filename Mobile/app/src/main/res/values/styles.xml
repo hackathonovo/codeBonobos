@@ -1,0 +1,52 @@
+<resources>
+
+    <style name="AppToolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="titleTextAppearance">@style/AppToolbar.Title</item>
+        <item name="titleMarginStart">16dp</item>
+    </style>
+
+    <style name="AppToolbar.Dark" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="titleTextAppearance">@style/AppToolbar.Title.Dark</item>
+        <item name="titleMarginStart">16dp</item>
+    </style>
+
+    <style name="AppToolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppToolbar.Title.Dark">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppToolbar.Title.Transparent">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#00FFFFFF</item>
+    </style>
+
+    <style name="ButtonBase" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <!-- background here -->
+    </style>
+
+    <style name="TherapyButton" parent="ButtonBase"/>
+
+    <style name="TherapyButton.Primary">
+        <!-- background here -->
+    </style>
+
+    <style name="BottomSheetTitle">
+        <item name="android:paddingLeft">@dimen/bottom_sheet_title_margin_left</item>
+        <item name="android:paddingTop">@dimen/bottom_sheet_title_margin_top</item>
+        <item name="android:paddingBottom">@dimen/bottom_sheet_title_margin_bottom</item>
+        <item name="android:textSize">@dimen/bottom_sheet_title_text_size</item>
+    </style>
+
+
+</resources>
