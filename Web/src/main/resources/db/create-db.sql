@@ -31,14 +31,14 @@ CREATE TABLE SPASAVATELJ_AKCIJA (
 );
 
 INSERT INTO SPASAVATELJ
-VALUES (1, 'Ante Filakovic', '0993246333', 1, 3, '45.815399', '15.966568', TRUE, 'abd', '123', '123'
+VALUES (1, 'Ante Filakovic', '0993246333', 1, 3, '45.815399', '15.966568', TRUE, 'afilakovic', '1234', '123'
 );
 
 INSERT INTO SPASAVATELJ
-VALUES (2, 'Stefano Kliba', '0993246444', 2, 2, '45.815399', '15.966568', FALSE, 'acd','234', '123');
+VALUES (2, 'Stefano Kliba', '0993246444', 2, 2, '45.815399', '15.966568', FALSE, 'skliba','1234', '123');
 
 INSERT INTO SPASAVATELJ
-VALUES (3, 'Mak Muftic', '0993246555', 3, 1, '45.815399', '15.966568', TRUE, 'adf','345', '123');
+VALUES (3, 'Mak Muftic', '0993246555', 3, 1, '45.815399', '15.966568', TRUE, 'mmuftic','1234', '123');
 
 INSERT INTO AKCIJA
 VALUES (1, '0993246333', '45.815399', '15.966568', 10, 'Super kul akcija, spasili smo 10 ljudi', TRUE);
