@@ -26,16 +26,16 @@ public class SpasavateljiController {
     @Autowired
     private SpasavateljDao spasavateljDao;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseWrapper<List<Spasavatelj>> getAll() {
-        List<Spasavatelj> list = null;
-        String message = null;
-
-        return new ResponseWrapper<>(list, message);
-    }
+//    @RequestMapping(value = "/all", method = RequestMethod.GET)
+//    public ResponseWrapper<List<Spasavatelj>> getAll() {
+//        List<Spasavatelj> list = null;
+//        String message = null;
+//
+//        return new ResponseWrapper<>(list, message);
+//    }
 
     @RequestMapping(value = "/all-grouped", method = RequestMethod.GET)
-    public ResponseWrapper<RescuerListsWrapper> getAllGroupedByType() {
+    public ResponseEntity<?> getAllGroupedByType() {
         RescuerListsWrapper lists = null;
         String message = null;
 
@@ -43,63 +43,65 @@ public class SpasavateljiController {
             lists = spasavateljDao.getRescuersByGroups();
         } catch (Exception e) {
             message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseWrapper<>(lists, message);
+        return new ResponseEntity<>(new ResponseWrapper<>(lists, message), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/active", method = RequestMethod.GET)
-    public ResponseWrapper<List<Spasavatelj>> getActive() {
-        List<Spasavatelj> list = null;
-        String message = null;
+//    @RequestMapping(value = "/active", method = RequestMethod.GET)
+//    public ResponseWrapper<List<Spasavatelj>> getActive() {
+//        List<Spasavatelj> list = null;
+//        String message = null;
+//
+//        return new ResponseWrapper<>(list, message);
+//    }
 
-        return new ResponseWrapper<>(list, message);
-    }
+//    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
+//    public ResponseWrapper<List<Spasavatelj>> getInactive() {
+//        List<Spasavatelj> list = null;
+//        String message = null;
+//
+//        return new ResponseWrapper<>(list, message);
+//    }
 
-    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
-    public ResponseWrapper<List<Spasavatelj>> getInactive() {
-        List<Spasavatelj> list = null;
-        String message = null;
-
-        return new ResponseWrapper<>(list, message);
-    }
-
-    @RequestMapping(value = "/action", method = RequestMethod.GET)
-    public ResponseWrapper<List<Spasavatelj>> getThoseInAction() {
-        List<Spasavatelj> list = null;
-        String message = null;
-
-        return new ResponseWrapper<>(list, message);
-    }
+//    @RequestMapping(value = "/action", method = RequestMethod.GET)
+//    public ResponseWrapper<List<Spasavatelj>> getThoseInAction() {
+//        List<Spasavatelj> list = null;
+//        String message = null;
+//
+//        return new ResponseWrapper<>(list, message);
+//    }
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
-    public ResponseWrapper<Spasavatelj> getProfile(@PathVariable int id) {
+    public ResponseEntity<?> getProfile(@PathVariable int id) {
         Spasavatelj spasavatelj = null;
         String message = null;
         try {
             spasavatelj = spasavateljDao.getById(id);
         } catch (Exception e) {
             message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
-        return new ResponseWrapper<>(spasavatelj, message);
+        return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/fb/{token}", method = RequestMethod.GET)
-    public ResponseWrapper<IdWrapper> getIdByFbToken(@PathVariable String token, @RequestParam String name) throws Exception {
-        IdWrapper id;
-        String message = null;
-        try {
-            id = new IdWrapper(spasavateljDao.getByFbToken(token).getId());
-        } catch (Exception e) {
-            id = new IdWrapper(spasavateljDao.saveFromFbTokenAndGetId(name, token));
-        }
-
-        return new ResponseWrapper<>(id, message);
-    }
+//    @RequestMapping(value = "/fb/{token}", method = RequestMethod.GET)
+//    public ResponseWrapper<IdWrapper> getIdByFbToken(@PathVariable String token, @RequestParam String name) throws Exception {
+//        IdWrapper id;
+//        String message = null;
+//        try {
+//            id = new IdWrapper(spasavateljDao.getByFbToken(token).getId());
+//        } catch (Exception e) {
+//            id = new IdWrapper(spasavateljDao.saveFromFbTokenAndGetId(name, token));
+//        }
+//
+//        return new ResponseWrapper<>(id, message);
+//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password) throws Exception {
-        IdWrapper id = null;
+        IdWrapper id;
         String message = null;
         try {
             id = new IdWrapper(spasavateljDao.getByLogin(username, password).getId());

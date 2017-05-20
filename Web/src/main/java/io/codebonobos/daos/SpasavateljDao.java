@@ -127,7 +127,7 @@ public class SpasavateljDao {
         if(dbRow.get("AKTIVAN") != null) {
             rescuer.setIsActive((boolean) dbRow.get("AKTIVAN"));
         }
-        if(dbRow.get("LOKACIJA_LAT") != null) {
+        if(dbRow.get("LOKACIJA_LAT") != null && dbRow.get("LOKACIJA_LNG") != null) {
             rescuer.setLokacija(new HgssLocation((String) dbRow.get("LOKACIJA_LAT"), (String) dbRow.get("LOKACIJA_LNG")));
         }
 
