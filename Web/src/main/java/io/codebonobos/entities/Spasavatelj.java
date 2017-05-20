@@ -1,6 +1,7 @@
 package io.codebonobos.entities;
 
 import io.codebonobos.enums.HgssIskustvo;
+import io.codebonobos.enums.HgssSpecijalnost;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -9,7 +10,7 @@ public class Spasavatelj {
     private int id;
     private String ime;
     private String brojTelefona;
-    private String specijalnost;
+    private HgssSpecijalnost specijalnost;
     private HgssIskustvo iskustvo;
     private HgssLocation lokacija;
     private boolean isActive;
@@ -17,13 +18,14 @@ public class Spasavatelj {
     public Spasavatelj() {
     }
 
-    public Spasavatelj(int id, String ime, String brojTelefona, String specijalnost, HgssIskustvo iskustvo, HgssLocation lokacija) {
+    public Spasavatelj(int id, String ime, String brojTelefona, HgssSpecijalnost specijalnost, HgssIskustvo iskustvo, HgssLocation lokacija, boolean isActive) {
         this.id = id;
         this.ime = ime;
         this.brojTelefona = brojTelefona;
         this.specijalnost = specijalnost;
         this.iskustvo = iskustvo;
         this.lokacija = lokacija;
+        this.isActive = isActive;
     }
 
     public int getId() {
@@ -50,11 +52,11 @@ public class Spasavatelj {
         this.brojTelefona = brojTelefona;
     }
 
-    public String getSpecijalnost() {
+    public HgssSpecijalnost getSpecijalnost() {
         return specijalnost;
     }
 
-    public void setSpecijalnost(String specijalnost) {
+    public void setSpecijalnost(HgssSpecijalnost specijalnost) {
         this.specijalnost = specijalnost;
     }
 
@@ -72,5 +74,13 @@ public class Spasavatelj {
 
     public void setLokacija(HgssLocation lokacija) {
         this.lokacija = lokacija;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
