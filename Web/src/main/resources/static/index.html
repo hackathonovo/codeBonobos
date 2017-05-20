@@ -2,6 +2,7 @@
 <html lang="en" ng-app="application" ng-controller="applicationController">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Title</title>
     <!-- Angularjs and JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="app/css/theme.css">
     <link rel="stylesheet" href="app/css/rdash.min.css">
     <link rel="stylesheet" href="app/css/in2font.css">
+    <link rel="stylesheet" href="app/css/style.css">
 
     <!-- Bootstrap Angular directive -->
     <script src="app/libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
@@ -34,7 +36,7 @@
     <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
 </head>
 <body class="hamburg">
-<div id="page-wrapper" ng-class="{open: showSidebar}">
+<div id="page-wrapper" ng-class="{open: showSidebar, closed : !showSidebar}">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar">
@@ -46,19 +48,19 @@
             </li>
             <li class="sidebar-title"><span>NAVIGACIJA</span></li>
             <li class="sidebar-list">
-                <a href="#/">Panel <span class="menu-icon fa fa-tachometer"></span></a>
+                <a ng-class="{'active-tab' : activeTab}" href="#/">Panel <span class="menu-icon icon-cabin-3"></span></a>
             </li>
             <li class="sidebar-list">
-                <a href="#/resc">Spašavatelji <span class="menu-icon icon-worker"></span></a>
+                <a ng-class="{'active-tab' : activeTab}" href="#/resc">Spašavatelji <span class="menu-icon icon-worker"></span></a>
             </li>
             <li class="sidebar-list">
-                <a href="#/action">Akcije <span class="menu-icon icon-cs-bb"></span></a>
+                <a ng-class="{'active-tab' : activeTab}" href="#/current">Akcije u tijeku<span class="menu-icon icon-error-triangle" aria-hidden="true"></span></a>
             </li>
             <li class="sidebar-list">
-                <a href="#/current">Trenutne akcije <span class="menu-icon icon-error-triangle" aria-hidden="true"></span></a>
+                <a ng-class="{'active-tab' : activeTab}" href="#/codes">Šifrarnik <span class="menu-icon icon-table" aria-hidden="true"></span></a>
             </li>
             <li class="sidebar-list">
-                <a href="#/codes">Šifrarnik <span class="menu-icon icon-table" aria-hidden="true"></span></a>
+                <a ng-class="{'active-tab' : activeTab}" href="#/action">Završene akcije<span class="menu-icon icon-tick"></span></a>
             </li>
         </ul>
         <div class="sidebar-footer">
