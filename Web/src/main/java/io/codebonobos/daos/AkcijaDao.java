@@ -141,9 +141,5 @@ public class AkcijaDao {
         return action;
     }
 
-    public List<Spasavatelj> getUsersInActionByActionId(String actionId) {
-        String query = "SELECT * FROM SPASAVATELJ AS S JOIN SPASAVATELJ_AKCIJA AS SA ON SA.ID_SPASAVATELJ = S.ID WHERE ID_AKCIJA = " + actionId;
 
-        return new ArrayList<>();
-    }
 }

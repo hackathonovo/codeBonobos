@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -108,7 +109,7 @@ public class SpasavateljDao {
     }
 
     public void saveRescuer(Spasavatelj rescuer) {
-        String query = "INSERT INTO SPASAVATELJ(IME, BROJ_TELEFONA, SPECIJALNOST, ISKUSTVO, LOKACIJA_LAT, LOKACIJA_LNG, AKTIVAN, USERNAME, PWORD) VALUES('"
+        String query = "INSERT INTO SPASAVATELJ(IME, BROJ_TELEFONA, SPECIJALNOST, ISKUSTVO, LOKACIJA_LAT, LOKACIJA_LNG, AKTIVAN, USERNAME, PWORD, IS_RESCUER) VALUES('"
             + rescuer.getIme() + "'," +
             " '" + rescuer.getBrojTelefona() + "'," +
             " '" + rescuer.getSpecijalnost().getValue() + "'," +
@@ -116,8 +117,16 @@ public class SpasavateljDao {
             " '" + rescuer.getLokacija().getLat() + "'," +
             " '" + rescuer.getLokacija().getLng() + "'," +
             " '" + rescuer.isActive() + "'," +
-            " '" + rescuer.getIme() + "'," +
-            " '1234')";
+            " '" + rescuer.getIme() + new Random().nextLong() + "'," +
+            " '1234', TRUE)";
+        jdbcTemplate.update(query);
+    }
+
+    public void saveUser(String username, String password, String phone) {
+        String query = "INSERT INTO SPASAVATELJ(USERNAME, PWORD, BROJ_TELEFONA, IS_RESCUER) VALUES('"
+            + username + "'," +
+            " '" + password + "'," +
+            " '" + phone + "', FALSE)";
         jdbcTemplate.update(query);
     }
 
@@ -154,11 +163,27 @@ public class SpasavateljDao {
     }
 
 
-    public void acceptAction(String userId){
+    public void acceptAction(String userId) {
         jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE");
     }
 
-    public void refuseAction(String userId){
+    public void refuseAction(String userId) {
         jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId);
+    }
+
+    public List<Spasavatelj> getUsersInActionByActionId(String actionId, boolean accepted) {
+        String query = "SELECT * FROM SPASAVATELJ AS S JOIN SPASAVATELJ_AKCIJA AS SA ON SA.ID_SPASAVATELJ = S.ID WHERE ID_AKCIJA = " + actionId + " AND PRIHVATIO = " + accepted;
+        List<Map<String, Object>> spasavatelji = jdbcTemplate.queryForList(query);
+
+        List<Spasavatelj> retval = new ArrayList<>();
+
+        spasavatelji.forEach(map -> retval.add(mapToSpasavatelj(map)));
+
+        return retval;
+    }
+
+    public void saveUserLocation(String userId, double lat, double lng, long timestamp) {
+        String query = "INSERT INTO USER_LOCATION VALUES (" + userId + ", " + timestamp + ", '" + lat + "', '" + lng + "')";
+        jdbcTemplate.update(query);
     }
 }

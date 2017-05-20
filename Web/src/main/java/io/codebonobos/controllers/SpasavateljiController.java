@@ -161,10 +161,31 @@ public class SpasavateljiController {
                 spasavateljDao.refuseAction(userId);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/location/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<?> rememberUserLocation(@PathVariable String userId, @RequestParam double lat, @RequestParam double lng, @RequestParam long timestamp) {
+        try {
+            spasavateljDao.saveUserLocation(userId, lat, lng, timestamp);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    public ResponseEntity<?> saveUser(@RequestParam String username, @RequestParam String password, @RequestParam String phone) {
+        try {
+            spasavateljDao.saveUser(username, password, phone);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }

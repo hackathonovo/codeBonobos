@@ -1,6 +1,7 @@
 package io.codebonobos.controllers;
 
 import io.codebonobos.daos.AkcijaDao;
+import io.codebonobos.daos.SpasavateljDao;
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.firebase.AndroidPushNotificationsService;
 import io.codebonobos.firebase.FirebaseResponse;
@@ -36,6 +37,9 @@ public class AkcijaController {
 
     @Autowired
     private AkcijaDao akcijaDao;
+
+    @Autowired
+    private SpasavateljDao spasavateljDao;
 
     @Autowired
     AndroidPushNotificationsService androidPushNotificationsService;
@@ -162,12 +166,23 @@ public class AkcijaController {
                 e.printStackTrace();
             }
         }
-        return new ResponseEntity<>(null,HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public Akcija getActionByActionId(@PathVariable int actionId) {
-//
-//    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getActionByActionId(@PathVariable String actionId) {
+        Akcija akcija = null;
+        String message = null;
+        try {
+            akcija = akcijaDao.getActionById(actionId);
+            akcija.setPrihvaceniSpasavatelji(spasavateljDao.getUsersInActionByActionId(actionId, true));
+            akcija.setPozvaniSpasavatelji(spasavateljDao.getUsersInActionByActionId(actionId, false));
+        } catch (Exception e) {
+            message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(akcija, message), HttpStatus.OK);
+    }
 
 }
