@@ -1,8 +1,12 @@
 package io.codebonobos.controllers;
 
+import io.codebonobos.daos.AkcijaDao;
 import io.codebonobos.daos.SpasavateljDao;
+import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.Spasavatelj;
+import io.codebonobos.utils.Haversine;
 import io.codebonobos.utils.IdWrapper;
+import io.codebonobos.utils.RescuerDistanceWrapper;
 import io.codebonobos.utils.RescuerListsWrapper;
 import io.codebonobos.utils.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -25,6 +31,9 @@ import java.util.List;
 public class SpasavateljiController {
     @Autowired
     private SpasavateljDao spasavateljDao;
+
+    @Autowired
+    private AkcijaDao akcijaDao;
 
 //    @RequestMapping(value = "/all", method = RequestMethod.GET)
 //    public ResponseWrapper<List<Spasavatelj>> getAll() {
@@ -116,5 +125,31 @@ public class SpasavateljiController {
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
     public void addRescuer(@RequestBody Spasavatelj user) {
         spasavateljDao.saveRescuer(user);
+    }
+
+    @RequestMapping(value = "/get-closest", method = RequestMethod.GET)
+    public ResponseEntity<?> getClosestRescuers(@RequestParam String actionId) {
+        Akcija action;
+        List<Spasavatelj> rescuers;
+        String message = null;
+
+        try {
+            action = akcijaDao.getActionById(actionId);
+            rescuers = spasavateljDao.getAvailable();
+            if(action.getLocation().getLng() == null || action.getLocation().getLat() == null){
+                throw new Exception("Bad coordinates.");
+            }
+        } catch (Exception e) {
+            message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+
+        List<RescuerDistanceWrapper> sortedRdw = rescuers.stream()
+            .filter(r -> r.getLokacija() != null)
+            .map(r -> new RescuerDistanceWrapper(r, Haversine.distance(r.getLokacija(), action.getLocation())))
+            .sorted((t0, t1) -> t0.getDistance() <= t1.getDistance() ? 0 : 1)
+            .collect(Collectors.toList());
+
+        return new ResponseEntity<>(new ResponseWrapper<>(sortedRdw, message), HttpStatus.OK);
     }
 }

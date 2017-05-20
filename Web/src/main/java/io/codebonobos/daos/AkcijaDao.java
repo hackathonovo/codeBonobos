@@ -73,6 +73,18 @@ public class AkcijaDao {
         return retval;
     }
 
+    public Akcija getActionById(String id) throws Exception {
+        String query = "SELECT * FROM AKCIJA WHERE ID LIKE '"+id+"'";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
+
+        if (result == null || result.isEmpty()) {
+            throw new Exception("No such action");
+        }
+
+        return mapToAction(result.get(0));
+    }
+
+
     public void finishAction(String actionId) {
         String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID = '" + actionId + "'";
         jdbcTemplate.update(query);
