@@ -61,8 +61,94 @@ app.controller('AddActionController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('AddRescController', ['$scope', function ($scope) {
+app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, RescController) {
     // ==== MODELS ====
+    $scope.currentResc = {
+        id: null,
+        ime: null,
+        isActive: false,
+        brojTelefona: null,
+        specijalnost: null,
+        iskustvo: null,
+        lokacije: {
+            long: null,
+            lat: null
+        }
+    };
+
+    $scope.spec = [
+        {
+            id: 1,
+            name: "Speleologija",
+            csscl: "",
+            enum: "SPELEOLOGIJA"
+        },
+        {
+            id: 2,
+            name: "Alpinizam",
+            csscl: "",
+            enum: "ALPINIZAM"
+        },
+        {
+            id: 3,
+            name: "Turno skijanje",
+            csscl: "",
+            enum: "TURNO_SKIJANJE"
+        },
+        {
+            id: 4,
+            name: "Vodić potražnih pasa",
+            csscl: "",
+            enum: "VODIC_POTRAZNIH_PASA"
+        },
+        {
+            id: 5,
+            name: "Doktor",
+            csscl: "",
+            enum: "DOKTOR"
+        },
+        {
+            id: 6,
+            name: "Crtač mape",
+            csscl: "",
+            enum: "CRTAC_MAPA"
+        },
+        {
+            id: 7,
+            name: "Helikoptersko spašavanje",
+            csscl: "",
+            enum: "HELIKOPTERSKO_SPASAVANJE"
+        }
+    ];
+
+    $scope.exp = [
+        {
+            id: 1,
+            name: "Pridruženi član",
+            enum: "PRIDRUZENI_CLAN"
+        },
+        {
+            id: 2,
+            name: "Pripravnik",
+            enum: "PRIPRAVNIK"
+        },
+        {
+            id: 3,
+            name: "Gorski spasitelj",
+            enum: "ISKUSAN"
+        }
+    ];
+
+    $scope.selectedExp = null;
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+    $scope.selectSpec = function (s) {
+        $scope.selectedSpec = s.id;
+    };
+
+    $scope.saveResc = function () {
+        $scope.currentResc.iskustvo = $scope.selectedExp.enum;
+        $scope.currentResc.specijalnost = $scope.spec[$scope.selectedSpec].enum;
+        RescFactory.addResc($scope.currentResc);
+    };
 }]);
