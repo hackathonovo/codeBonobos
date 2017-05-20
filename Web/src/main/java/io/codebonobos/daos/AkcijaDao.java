@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,7 @@ public class AkcijaDao {
     private Akcija mapToAction(Map<String, Object> dbRow) {
         Akcija action = new Akcija();
         HgssLocation location = new HgssLocation();
+
         if (dbRow.get("ID_A") != null) {
             action.setId((int) dbRow.get("ID_A"));
         }
@@ -134,6 +136,12 @@ public class AkcijaDao {
         }
         if (dbRow.get("AKTIVNA") != null) {
             action.setIsActive((boolean) dbRow.get("AKTIVNA"));
+        }
+        if (dbRow.get("LOC_SAS") != null) {
+            action.setLocSas((String) dbRow.get("LOC_SAS"));
+        }
+        if (dbRow.get("TIME_SAS") != null) {
+            action.setTimeSas((Timestamp) dbRow.get("TIME_SAS"));
         }
 
         action.setLocation(location);

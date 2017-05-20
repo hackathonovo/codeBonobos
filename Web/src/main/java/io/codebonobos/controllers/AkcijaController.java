@@ -169,7 +169,7 @@ public class AkcijaController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{actionId}", method = RequestMethod.GET)
     public ResponseEntity<?> getActionByActionId(@PathVariable String actionId) {
         Akcija akcija = null;
         String message = null;
