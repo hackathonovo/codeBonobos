@@ -17,10 +17,9 @@ public class SplashPresenter implements SplashMvp.Presenter {
 
     @Override
     public void checkUserLoggedIn() {
-        if(SharedPrefsUtil.isLoggedIn()) {
+        if (SharedPrefsUtil.isLoggedIn()) {
             view.navigateToMain();
-        }
-        else {
+        } else {
             view.navigateToLogin();
         }
     }

@@ -26,6 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
                 android:hint="Username"/>
 
         <EditText
@@ -33,6 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"/>
 
     </LinearLayout>

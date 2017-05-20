@@ -12,8 +12,17 @@ public class SharedPrefsUtil {
 
     private static final String USER_ID = "user_id";
 
+    private static final String PANIC_KEYWORD = "panic_keyword";
+
+    private static final String OK_KEYWORD = "ok_keyword";
+
+    private static final String FIRST_PANIC_NUMBER = "first_num";
+
+    private static final String SECOND_PANIC_NUMBER = "second_num";
+
     public static boolean isLoggedIn() {
-        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).contains(ACCESS_TOKEN);
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).contains(ACCESS_TOKEN) || PreferenceManager
+                .getDefaultSharedPreferences(SaviourApplication.getInstance()).contains(USER_ID);
     }
 
     public static String getAccessToken() {
@@ -34,5 +43,40 @@ public class SharedPrefsUtil {
 
     public static void setUserId(int userId) {
         PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit().putInt(USER_ID, userId).apply();
+    }
+
+    public static void setPanicKeyword(String panicKeyword) {
+        PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit().putString(PANIC_KEYWORD, panicKeyword)
+                .apply();
+    }
+
+    public static void setOkKeyword(String okKeyword) {
+        PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit().putString(OK_KEYWORD, okKeyword).apply();
+    }
+
+    public static String panicKeyword() {
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).getString(PANIC_KEYWORD, "");
+    }
+
+    public static String okKeyword() {
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).getString(OK_KEYWORD, "");
+    }
+
+    public static String getFirstPanicNumber() {
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).getString(FIRST_PANIC_NUMBER, "");
+    }
+
+    public static String getSecondPanicNumber() {
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).getString(SECOND_PANIC_NUMBER, "");
+    }
+
+    public static void setFirstPanicNumber(String firstPanicNumber) {
+        PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit()
+                .putString(FIRST_PANIC_NUMBER, firstPanicNumber).apply();
+    }
+
+    public static void setSecondPanicNumber(String secondPanicNumber) {
+        PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit()
+                .putString(SECOND_PANIC_NUMBER, secondPanicNumber).apply();
     }
 }

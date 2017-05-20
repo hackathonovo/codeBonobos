@@ -15,8 +15,7 @@
                 android:id="@+id/userImage"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_margin="16dp"
-                tools:src="@drawable/ic_user"/>
+                android:layout_margin="16dp"/>
 
         <TextView
                 android:id="@+id/userName"

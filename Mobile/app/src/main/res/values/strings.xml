@@ -3,4 +3,21 @@
     <string name="please_wait">Please wait...</string>
     <string name="facebook_app_id">358192847916807</string>
     <string name="fb_login_protocol_scheme">fb358192847916807</string>
+    <string-array name="intervals_array">
+        <item>Select interval</item>
+        <item>5 – 5 seconds</item>
+        <item>10 – 10 seconds</item>
+        <item>15 – 15 seconds</item>
+        <item>30 – 30 seconds</item>
+        <item>60 – 1 minute</item>
+        <item>120 – 2 minutes</item>
+        <item>180 – 3 minutes</item>
+        <item>240 – 4 minutes</item>
+        <item>300 – 5 minutes</item>
+        <item>360 – 6 minutes</item>
+        <item>420 – 7 minutes</item>
+        <item>480 – 8 minutes</item>
+        <item>540 – 9 minutes</item>
+        <item>600 – 10 minutes</item>
+    </string-array>
 </resources>

@@ -5,9 +5,9 @@
             icon="@drawable/ic_news"
             title="News"/>
     <tab
-            id="@+id/favoritesTab"
-            icon="@drawable/ic_favorite"
-            title="Favorites"/>
+            id="@+id/actionsTab"
+            icon="@drawable/ic_explore"
+            title="My Action"/>
     <tab
             id="@+id/profileTab"
             icon="@drawable/ic_user"

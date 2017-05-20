@@ -1,6 +1,5 @@
 package dev.skliba.saviourapp.ui.login;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import dev.skliba.saviourapp.di.MvpFactory;
 import dev.skliba.saviourapp.ui.dashboard.MainActivity;
 import dev.skliba.saviourapp.ui.shared.BaseActivity;
 import dev.skliba.saviourapp.util.SharedPrefsUtil;
-
 
 public class LoginActivity extends BaseActivity implements LoginMvp.View {
 

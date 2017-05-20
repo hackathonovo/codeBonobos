@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import dev.skliba.saviourapp.R;
 import dev.skliba.saviourapp.di.MvpFactory;
+import dev.skliba.saviourapp.ui.guardian.GuardianAngelDialog;
 import dev.skliba.saviourapp.ui.login.LoginActivity;
 import dev.skliba.saviourapp.ui.shared.BaseFragment;
 import dev.skliba.saviourapp.ui.shared.BaseMvp;
@@ -45,7 +46,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
     }
 
     private void initUi() {
-        userImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_user));
+        userImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_user_placeholder));
         userName.setText("George Clooney");
     }
 
@@ -56,7 +57,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
 
     @OnClick(R.id.guardianAngel)
     protected void onGuardianAngelClicked() {
-
+        new GuardianAngelDialog().show(getChildFragmentManager(), "myTag");
     }
 
     @Override

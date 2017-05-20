@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.newsTab:
                     fragment = new NewsFragment();
                     break;
-                case R.id.favoritesTab:
+                case R.id.actionsTab:
                     fragment = new ContactFragment();
                     break;
                 case R.id.profileTab:
