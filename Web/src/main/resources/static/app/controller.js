@@ -61,7 +61,7 @@ app.controller('AddActionController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, RescController) {
+app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, RescFactory) {
     // ==== MODELS ====
     $scope.currentResc = {
         id: null,
@@ -70,9 +70,9 @@ app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, 
         brojTelefona: null,
         specijalnost: null,
         iskustvo: null,
-        lokacije: {
-            long: null,
-            lat: null
+        lokacija: {
+            lat: null,
+            lng: null
         }
     };
 
@@ -148,7 +148,8 @@ app.controller('AddRescController', ['$scope', 'RescFactory', function ($scope, 
 
     $scope.saveResc = function () {
         $scope.currentResc.iskustvo = $scope.selectedExp.enum;
-        $scope.currentResc.specijalnost = $scope.spec[$scope.selectedSpec].enum;
+        var val = $scope.selectedSpec - 1;
+        $scope.currentResc.specijalnost = $scope.spec[val].enum;
         RescFactory.addResc($scope.currentResc);
     };
 }]);

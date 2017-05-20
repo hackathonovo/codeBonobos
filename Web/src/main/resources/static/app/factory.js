@@ -43,8 +43,8 @@ app.factory('RescFactory', ['$http', function ($http) {
 
     result.addResc = function (resc) {
         $http({
-            method: 'POST',
-            url: '/api/spasavatelj/add',
+            method: 'PUT',
+            url: '/api/spasavatelji/add',
             data: resc,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data, status, header, config) {
