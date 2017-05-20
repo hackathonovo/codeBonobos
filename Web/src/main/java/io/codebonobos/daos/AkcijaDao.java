@@ -4,13 +4,10 @@ import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.HgssLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +71,7 @@ public class AkcijaDao {
     }
 
     public Akcija getActionById(String id) throws Exception {
-        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '"+id+"'";
+        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '" + id + "'";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {
@@ -87,7 +84,7 @@ public class AkcijaDao {
     public Akcija getActiveActionById(String userId) throws Exception {
         String query = "SELECT * FROM SPASAVATELJ_AKCIJA AS SA " +
             "JOIN AKCIJA AS A ON A.ID_A = SA.ID_AKCIJA " +
-            "WHERE SA.ID_SPASAVATELJ = "+userId+" AND A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE";
+            "WHERE SA.ID_SPASAVATELJ = " + userId + " AND A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {
@@ -100,6 +97,13 @@ public class AkcijaDao {
     public void finishAction(String actionId) {
         String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID_A = '" + actionId + "'";
         jdbcTemplate.update(query);
+    }
+
+    public void addInvitedRescuers(String actionId, List<Integer> userIds) {
+        userIds.forEach(id -> {
+            String query = "INSERT INTO SPASAVATELJ_AKCIJA VALUES(" + id + ", " + actionId + ", FALSE)";
+            jdbcTemplate.update(query);
+        });
     }
 
     private Akcija mapToAction(Map<String, Object> dbRow) {
