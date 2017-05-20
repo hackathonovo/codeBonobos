@@ -41,8 +41,8 @@ public class AkcijaController {
         return new ResponseWrapper<>(list, message);
     }
 
-    @RequestMapping(value = "/action/{id}", method = RequestMethod.GET)
-    public ResponseWrapper<Akcija> getActionById(@PathVariable String id) {
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public ResponseWrapper<Akcija> getActionByUserId(@PathVariable String id) {
         Akcija akcija = null;
         String message = null;
 

@@ -24,6 +24,14 @@ public class SpasavateljiController {
         return new ResponseWrapper<>(list, message);
     }
 
+    @RequestMapping(value = "/all-grouped", method = RequestMethod.GET)
+    public ResponseWrapper<List<Spasavatelj>> getAllGroupedByType() {
+        List<Spasavatelj> list = null;
+        String message = null;
+
+        return new ResponseWrapper<>(list, message);
+    }
+
     @RequestMapping(value = "/active", method = RequestMethod.GET)
     public ResponseWrapper<List<Spasavatelj>> getActive() {
         List<Spasavatelj> list = null;

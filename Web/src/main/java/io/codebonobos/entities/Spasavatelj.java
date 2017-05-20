@@ -12,6 +12,7 @@ public class Spasavatelj {
     private String specijalnost;
     private HgssIskustvo iskustvo;
     private HgssLocation lokacija;
+    private boolean isActive;
 
     public Spasavatelj() {
     }

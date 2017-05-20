@@ -6,11 +6,14 @@ import java.util.List;
  * Created by afilakovic on 20.05.17..
  */
 public class Akcija {
+    private int id;
+    private String voditelj;
     private HgssLocation location;
     private double radius;
     private String opis;
     private List<Spasavatelj> pozvaniSpasavatelji;
     private List<Spasavatelj> prihvaceniSpasavatelji;
+    private boolean isActive;
 
     public Akcija() {
     }
