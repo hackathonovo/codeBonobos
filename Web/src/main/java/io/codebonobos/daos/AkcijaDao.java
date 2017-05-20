@@ -2,7 +2,6 @@ package io.codebonobos.daos;
 
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.HgssLocation;
-import io.codebonobos.entities.Spasavatelj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -137,11 +136,11 @@ public class AkcijaDao {
         if (dbRow.get("AKTIVNA") != null) {
             action.setIsActive((boolean) dbRow.get("AKTIVNA"));
         }
-        if (dbRow.get("LOC_SAS") != null) {
-            action.setLocSas((String) dbRow.get("LOC_SAS"));
+        if (dbRow.get("LOC_MEETING") != null) {
+            action.setMeetingLocation((String) dbRow.get("LOC_MEETING"));
         }
-        if (dbRow.get("TIME_SAS") != null) {
-            action.setTimeSas((Timestamp) dbRow.get("TIME_SAS"));
+        if (dbRow.get("TIME_MEETING") != null) {
+            action.setMeetingTime((String) dbRow.get("TIME_MEETING"));
         }
 
         action.setLocation(location);
