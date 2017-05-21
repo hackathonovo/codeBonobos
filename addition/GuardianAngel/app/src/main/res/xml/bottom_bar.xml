@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+            id="@+id/newsTab"
+            icon="@drawable/ic_news"
+            title="News"/>
+    <tab
+            id="@+id/favoritesTab"
+            icon="@drawable/ic_favorite"
+            title="Favorites"/>
+    <tab
+            id="@+id/profileTab"
+            icon="@drawable/ic_user"
+            title="Profile"/>
+</tabs>

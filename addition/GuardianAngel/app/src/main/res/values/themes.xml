@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="buttonStyle">@style/TherapyButton</item>
+        <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item> <!-- Fixes dialog button color! -->
+        <item name="actionMenuTextColor">@color/action_menu_text_color</item> <!-- toolbar menu item text color -->
+        <item name="toolbarStyle">@style/AppToolbar</item>
+    </style>
+
+    <style name="BaseAppTheme.Dark">
+        <item name="toolbarStyle">@style/AppToolbar.Dark</item>
+        <item name="actionMenuTextColor">@android:color/white</item> <!-- toolbar menu item text color -->
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme"/>
+
+    <style name="AppTheme.DarkStatusBar" parent="BaseAppTheme.Dark"/>
+
+    <style name="AppTheme.DarkStatusBar.Splash">
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+
+    <style name="AppTheme.Main">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.SlideUpDown">
+        <item name="android:windowAnimationStyle">@style/DialogFragmentAnimations</item>
+    </style>
+
+    <style name="DialogFragmentAnimations" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+
+    <style name="AppTheme.AlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+</resources>

@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "dev.skliba.guardianangel"
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext {
+    okhttp_version = '3.6.0'
+    retrofit_version = '2.2.0'
+    support_version = '25.3.1'
+    play_services_version = '10.2.4'
+    butterknife_version = '8.5.1'
+    threetenabp_version = '1.0.5'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // support && play services
+    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:recyclerview-v7:$support_version"
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile "com.android.support:cardview-v7:$support_version"
+    compile "com.android.support:support-v13:$support_version"
+    compile "com.android.support:design:$support_version"
+    compile "com.google.android.gms:play-services-vision:$play_services_version"
+    compile "com.google.android.gms:play-services-gcm:$play_services_version"
+
+    // networking
+    compile "com.squareup.okhttp3:okhttp:$okhttp_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+    // ui
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.roughike:bottom-bar:2.1.1'
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    compile 'com.google.android:flexbox:0.2.5'
+    compile 'co.infinum:materialdatetimepicker-support:3.1.3'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.4'
+    compile "com.jakewharton:butterknife:$butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+    compile 'co.infinum:mjolnirrecyclerview:2.1.0@aar'
+
+    //other
+    compile "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
+    //facebook
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //firebase
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
+
+    //nfc
+    compile 'be.appfoundry:nfc-lib:1.1'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+
+}
+
+
+apply plugin: 'com.google.gms.google-services'

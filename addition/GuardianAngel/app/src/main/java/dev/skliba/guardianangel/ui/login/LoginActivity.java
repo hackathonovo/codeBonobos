@@ -1,4 +1,5 @@
-package dev.skliba.saviourapp.ui.login;
+package dev.skliba.guardianangel.ui.login;
+
 
 import android.Manifest;
 import android.content.Context;
@@ -19,17 +20,16 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dev.skliba.saviourapp.R;
-import dev.skliba.saviourapp.SaviourApplication;
-import dev.skliba.saviourapp.data.managers.FacebookManager;
-import dev.skliba.saviourapp.data.models.response.BaseResponse;
-import dev.skliba.saviourapp.data.models.response.PanicModeResponse;
-import dev.skliba.saviourapp.data.network.BaseCallback;
-import dev.skliba.saviourapp.di.ManagerFactory;
-import dev.skliba.saviourapp.di.MvpFactory;
-import dev.skliba.saviourapp.ui.dashboard.MainActivity;
-import dev.skliba.saviourapp.ui.shared.BaseActivity;
-import dev.skliba.saviourapp.util.SharedPrefsUtil;
+import dev.skliba.guardianangel.GuardianAngelApp;
+import dev.skliba.guardianangel.R;
+import dev.skliba.guardianangel.data.managers.FacebookManager;
+import dev.skliba.guardianangel.data.models.response.BaseResponse;
+import dev.skliba.guardianangel.data.network.BaseCallback;
+import dev.skliba.guardianangel.di.ManagerFactory;
+import dev.skliba.guardianangel.di.MvpFactory;
+import dev.skliba.guardianangel.ui.dashboard.MainActivity;
+import dev.skliba.guardianangel.ui.shared.BaseActivity;
+import dev.skliba.guardianangel.utils.SharedPrefsUtil;
 import retrofit2.Call;
 import retrofit2.Response;
 import timber.log.Timber;
@@ -46,6 +46,10 @@ public class LoginActivity extends BaseActivity implements LoginMvp.View {
     @BindView(R.id.password)
     EditText password;
 
+    private LoginMvp.Presenter presenter;
+
+    private FacebookManager facebookManager;
+
     private static final long LOCATION_REFRESH_TIME = 2000;
 
     private static final float LOCATION_REFRESH_DISTANCE = 7.5f;
@@ -55,10 +59,6 @@ public class LoginActivity extends BaseActivity implements LoginMvp.View {
     private static final int RC_SMS_PERM = 0x03;
 
     private String[] permissions = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION};
-
-    private LoginMvp.Presenter presenter;
-
-    private FacebookManager facebookManager;
 
     private Location currentLocation;
 
@@ -73,6 +73,11 @@ public class LoginActivity extends BaseActivity implements LoginMvp.View {
         ButterKnife.bind(this);
         presenter = MvpFactory.providePresenter(this);
         facebookManager = ManagerFactory.provideManager(this);
+        initUi();
+    }
+
+    private void initUi() {
+
     }
 
     @OnClick(R.id.facebook_login)
@@ -150,7 +155,7 @@ public class LoginActivity extends BaseActivity implements LoginMvp.View {
     }
 
     private void sendLocationToApi() {
-        Call<BaseResponse<Void>> call = SaviourApplication.getApiService()
+        Call<BaseResponse<Void>> call = GuardianAngelApp.getApiService()
                 .sendUserLocation(SharedPrefsUtil.getUserId(), currentLocation.getLatitude(), currentLocation.getLongitude(),
                         System.currentTimeMillis());
 

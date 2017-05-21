@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:background="@color/primary">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="We make you feel safe"
+            />
+
+    <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_logo_user"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:text="SaviourApp"
+            android:textStyle="bold"
+            />
+
+</LinearLayout>

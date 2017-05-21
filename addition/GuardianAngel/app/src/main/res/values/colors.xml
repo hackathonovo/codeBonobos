@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="accent">#78909c</color>
+    <color name="disabled_accent">#3d484e</color>
+    <color name="text_color_primary">#000000</color>
+    <color name="text_color_plain_button">#ec9a1f</color>
+    <color name="text_color_plain_button_disabled">#7fec9a1f</color>
+    <color name="button_disabled_background">#7f9d9d9c</color>
+    <color name="button_primary_disabled_background">#7f5291dd</color>
+    <color name="text_color_secondary">#9d9d9c</color>
+    <color name="divider">#dbdbdb</color>
+</resources>

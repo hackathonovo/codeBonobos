@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="left|center_vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImage"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_margin="16dp"
+                tools:src="@drawable/ic_user"/>
+
+        <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="Jake Wharton"/>
+
+        <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <Button
+                android:id="@+id/signOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="4dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@drawable/ic_log_out"
+                android:gravity="center_vertical"
+                android:drawablePadding="16dp"
+                android:text="Sign out"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c2c2c2"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/friendsPhonesText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Friends' phones"
+                android:padding="16dp"
+                android:textSize="16sp"/>
+
+        <LinearLayout
+                android:id="@+id/firstNumberContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/friendsPhonesText"
+                android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_croatian_flag"/>
+
+            <EditText
+                    android:id="@+id/firstPersonNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+385 "
+                    android:padding="8dp"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/secondNumberContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/firstNumberContainer"
+                android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_croatian_flag"/>
+
+            <EditText
+                    android:id="@+id/secondPersonNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+385 "
+                    android:padding="8dp"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/guardianAngel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Guardian angel"
+                android:background="@drawable/guardian_angel_background"/>
+
+        <Button
+                android:id="@+id/saveNumbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_above="@id/guardianAngel"
+                android:text="Save numbers"
+                android:enabled="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/send_numb_background"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
