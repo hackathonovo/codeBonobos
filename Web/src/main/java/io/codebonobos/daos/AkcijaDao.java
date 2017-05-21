@@ -27,7 +27,7 @@ public class AkcijaDao {
 
     public int saveAction(Akcija action) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA, LOC_MEETING, TIME_MEETING) VALUES(?,?,?,?,?,?,?,?)";
 
 
         jdbcTemplate.update(connection -> {
@@ -38,6 +38,8 @@ public class AkcijaDao {
             ps.setDouble(4, action.getRadius());
             ps.setString(5, action.getOpis());
             ps.setBoolean(6, action.isActive());
+            ps.setString(7, action.getMeetingLocation());
+            ps.setString(8, action.getMeetingTime());
             return ps;
         }, keyHolder);
 

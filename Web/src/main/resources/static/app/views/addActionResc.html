@@ -1,10 +1,4 @@
 <div class="form-wrapper" ng-controller="AddActionRescController">
-    <div class="row btn-row">
-        <!-- DODAVANJE NOVOG -->
-        <a href="#/addResc" class="button button-normal">Dodaj spašavatelja</a>
-    </div>
-    <div class="clear"></div>
-
     <div class="row">
         <!-- PRETRAGA -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
@@ -47,22 +41,26 @@
                     <table class="table">
                         <thead>
                         <tr>
+                            <th><button ng-click="selectAll()">All</button></th>
                             <th>Ime</th>
                             <th>Specijalnost</th>
                             <!-- to expand line -->
-
+                            <th>Udaljenost</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="fr in filteredFreeResc | filter:userSearch">
-                            <td>{{fr.ime}}</td>
-                            <td>{{dict[fr.specijalnost.toLowerCase()]}}</td>
+                        <tr ng-repeat="fr in filteredFreeResc | filter:userSearch" ng-class="{'selected': fr.selected}" ng-click="select(fr)">
+                            <td></td>
+                            <td>{{fr.rescuer.ime}}</td>
+                            <td>{{dict[fr.rescuer.specijalnost.toLowerCase()]}}</td>
+                            <td ng-class="generateCssClass(fr.distance)">{{fr.distance}}</td>
                         </tr>
                         <!-- -->
                         </tbody>
                     </table>
                 </div>
             </div>
+            <button ng-click="getAllSelectedRows()">Pozovi</button>
         </div>
     </div>
 </div>
