@@ -117,7 +117,7 @@ public class SpasavateljDao {
             " '" + rescuer.getLokacija().getLat() + "'," +
             " '" + rescuer.getLokacija().getLng() + "'," +
             " '" + rescuer.isActive() + "'," +
-            " '" + rescuer.getIme() + new Random().nextLong() + "'," +
+            " '" + rescuer.getIme() + "'," +
             " '1234', TRUE)";
         jdbcTemplate.update(query);
     }
