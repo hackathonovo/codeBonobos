@@ -26,6 +26,9 @@ app.config(['$routeProvider',
         }).when('/addActionResc', {
             templateUrl: '/app/views/addActionResc.html',
             controller: 'AddActionRescController'
+        }).when('/details/:id', {
+            templateUrl: '/app/views/showDetails.html',
+            controller: 'ShowDetailsController'
         }).otherwise({
             redirectTo: '/'
         });

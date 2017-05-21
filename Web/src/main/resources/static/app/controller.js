@@ -166,7 +166,7 @@ app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope
         "1": "Srednje",
         "2": "Hitno"
     };
-    
+
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
     $scope.showDetails = function (action) {
@@ -178,6 +178,21 @@ app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope
 }]);
 
 app.controller('CodesController', ['$scope', function ($scope) {
+    // ==== MODELS ====
+
+    SchFactory.getAll('TITLE').then(function (response) {
+        $scope.codebook = response;
+    });
+
+    // ==== INIT MODELS ====
+    // ==== CONTROL FUNCTIONS ====
+    $scope.insertNew = function (val) {
+        SchFactory.insert('TITLE', val);
+    }
+
+}]);
+
+app.controller('ShowDetailsController', ['$scope', function ($scope) {
     // ==== MODELS ====
 
     SchFactory.getAll('TITLE').then(function (response) {
