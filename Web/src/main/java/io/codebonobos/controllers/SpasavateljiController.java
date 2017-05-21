@@ -68,8 +68,7 @@ public class SpasavateljiController {
         try {
             spasavatelj = spasavateljDao.getByLogin(username, password, firebaseToken);
         } catch (Exception e) {
-            message = e.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
