@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-<div class="form-wrapper" ng-controller="CodesController">
-=======
 <div class="form-wrapper sifra" ng-controller="CodesController">
   <input type="text" placeholder="Unesi..." class="input-field" ng-model="newTitle">
   <button type="button" class="button button-normal" ng-click="insertNew(newTitle)">Add</button>
->>>>>>> 03c285299ae76935e24c2ccb5ad6b5c66f60eecb
   <table class="table">
     <thead>
     <tr>
@@ -13,9 +9,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="entry in codebook.data.response.entries">
-      <td>{{entry.id}}</td>
-      <td>{{entry.value}}</td>
+    <tr ng-repeat="entry in codebook track by $index">
+      <td>{{$index}}</td>
+      <td>{{entry}}</td>
     </tr>
     </tbody>
   </table>
