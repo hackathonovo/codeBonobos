@@ -53,12 +53,12 @@ public class GuardianAngelDialog extends BaseDialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi();
-        //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     private void initUi() {
         toolbar.setNavigationOnClickListener(v -> dismiss());
         toolbar.setTitle("Guardian Angel");
+        toolbar.setNavigationIcon(R.drawable.ic_close);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.intervals_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

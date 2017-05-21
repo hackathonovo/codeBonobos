@@ -21,7 +21,8 @@
 
         <activity
                 android:name=".ui.splash.SplashActivity"
-                android:theme="@style/AppTheme.DarkStatusBar.Splash">
+                android:theme="@style/AppTheme.DarkStatusBar.Splash"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -29,10 +30,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.dashboard.MainActivity">
+        <activity android:name=".ui.dashboard.MainActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".ui.login.LoginActivity"/>
+        <activity android:name=".ui.login.LoginActivity"
+                  android:screenOrientation="portrait"/>
 
         <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
@@ -56,8 +59,10 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.voice.VoiceActivity"/>
-        <activity android:name=".ui.dashboard.nfc.new_scan.NfcScanActivity"/>
+        <activity android:name=".ui.voice.VoiceActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.dashboard.nfc.new_scan.NfcScanActivity"
+                  android:screenOrientation="portrait"/>
 
         <service
                 android:name=".ui.push.GAFirebaseInstanceIdService">

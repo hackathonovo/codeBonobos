@@ -137,26 +137,28 @@ public class VoiceActivity extends BaseActivity {
     }
 
     private void sendLocationToApi() {
-        Call<BaseResponse<Void>> call = SaviourApplication.getApiService()
-                .sendUserLocation(SharedPrefsUtil.getUserId(), currentLocation.getLatitude(), currentLocation.getLongitude(),
-                        System.currentTimeMillis());
+        if (currentLocation != null) {
+            Call<BaseResponse<Void>> call = SaviourApplication.getApiService()
+                    .sendUserLocation(SharedPrefsUtil.getUserId(), currentLocation.getLatitude(), currentLocation.getLongitude(),
+                            System.currentTimeMillis());
 
-        BaseCallback<BaseResponse<Void>> callback = new BaseCallback<BaseResponse<Void>>() {
-            @Override
-            public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
-                Toast.makeText(VoiceActivity.this,
-                        "I've alerted your friends and sent your coordinates to the designated services. Don't move from your location!",
-                        Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(() -> killEverything(), DELAY_MILLIS);
-            }
+            BaseCallback<BaseResponse<Void>> callback = new BaseCallback<BaseResponse<Void>>() {
+                @Override
+                public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
+                    Toast.makeText(VoiceActivity.this,
+                            "I've alerted your friends and sent your coordinates to the designated services. Don't move from your location!",
+                            Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(() -> killEverything(), DELAY_MILLIS);
+                }
 
-            @Override
-            public void onUnknownError(@Nullable String error) {
-                Toast.makeText(VoiceActivity.this, error, Toast.LENGTH_SHORT).show();
-            }
-        };
+                @Override
+                public void onUnknownError(@Nullable String error) {
+                    Toast.makeText(VoiceActivity.this, error, Toast.LENGTH_SHORT).show();
+                }
+            };
 
-        call.enqueue(callback);
+            call.enqueue(callback);
+        }
     }
 
     private void sendSmsToClosestPeople() {

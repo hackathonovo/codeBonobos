@@ -40,7 +40,7 @@
                 android:padding="4dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@android:color/transparent"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_color_secondary"
                 android:drawableLeft="@drawable/ic_log_out"
                 android:gravity="center_vertical"
                 android:drawablePadding="16dp"

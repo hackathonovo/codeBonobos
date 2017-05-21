@@ -39,7 +39,7 @@
                 android:padding="4dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@android:color/transparent"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_color_secondary"
                 android:drawableLeft="@drawable/ic_log_out"
                 android:gravity="center_vertical"
                 android:drawablePadding="16dp"
@@ -84,7 +84,7 @@
                     android:id="@+id/firstPersonNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+385 "
+                    android:text="+385"
                     android:padding="8dp"
                     android:textSize="16sp"/>
 
@@ -111,7 +111,7 @@
                     android:id="@+id/secondPersonNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+385 "
+                    android:text="+385"
                     android:padding="8dp"
                     android:textSize="16sp"/>
 

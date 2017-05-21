@@ -3,6 +3,7 @@ package dev.skliba.saviourapp.ui.guardian;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -43,11 +44,14 @@ public class GuardianAngelService extends Service {
 
     private void raiseEnabledNotification() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), GuardianBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 765, intent, 0);
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Guardian Angel")
                 .setContentText("Guardian Angel deployed. Don't worry, I got your back.")
+                .setDeleteIntent(pendingIntent)
                 .build();
 
         notificationManager.notify(HOOVER_NOTIFICATION_ID, notification);

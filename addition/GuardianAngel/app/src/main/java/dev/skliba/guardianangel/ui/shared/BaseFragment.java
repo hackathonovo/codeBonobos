@@ -8,12 +8,16 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dev.skliba.guardianangel.R;
 
 public abstract class BaseFragment extends Fragment implements BaseMvp.View {
 
@@ -38,6 +42,16 @@ public abstract class BaseFragment extends Fragment implements BaseMvp.View {
         progressView = createProgressView();
         errorView = createErrorView();
         presenter = providePresenter();
+        Window window = getActivity().getWindow();
+
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.primary_dark));
         return root;
     }
 

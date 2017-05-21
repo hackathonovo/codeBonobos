@@ -8,11 +8,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import dev.skliba.guardianangel.R;
+import timber.log.Timber;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseMvp.View {
 
@@ -25,6 +30,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMvp.
         super.onCreate(savedInstanceState);
         errorView = new AlertDialogErrorView(this);
         progressView = createProgressView();
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary_dark));
     }
 
     private BaseMvp.ProgressView createProgressView() {
@@ -77,7 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMvp.
         if (browserIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(browserIntent);
         } else {
-            Log.d("GUADRIANANGEL", "Browser not found!");
+            Timber.d("Browser not found");
         }
     }
 

@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import android.view.WindowManager;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dev.skliba.guardianangel.R;
+import timber.log.Timber;
 
 public abstract class BaseDialogFragment extends AppCompatDialogFragment implements BaseMvp.View {
 
@@ -171,7 +171,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment impleme
         }
 
         if (!valueFound) {
-            Log.w("GUARDIANANGEL", "colorPrimaryDark or android:statusBarColor was not found in theme!");
+            Timber.d("colorPrimaryDark or android:statusBarColor was not found in theme!");
             return Color.BLACK;
         } else {
             return value.data;
