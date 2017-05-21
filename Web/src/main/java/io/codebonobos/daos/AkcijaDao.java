@@ -27,6 +27,7 @@ public class AkcijaDao {
 
     public int saveAction(Akcija action) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
         String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA, LOC_MEETING, TIME_MEETING, PRIO) VALUES(?,?,?,?,?,?,?,?,?)";
 
 

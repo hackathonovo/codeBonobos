@@ -151,14 +151,31 @@ app.controller('ActionController', ['$scope', 'NgMap', function ($scope, $NgMap)
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('CurrentController', ['$scope', function ($scope) {
+app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope, ActionFactory) {
     // ==== MODELS ====
+    ActionFactory.getAllActive().then(function (response) {
+        $scope.allActive = response.data.response;
+
+        $scope.allActive.forEach(function (e) {
+            e.expended = false;
+        })
+    });
+
+    $scope.dictPrio = {
+        "0": "Normalno",
+        "1": "Srednje",
+        "2": "Hitno"
+    };
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+    $scope.showDetails = function (action) {
+        action.expended ? action.expanded = false : action.expanded = true;
+    }
 }]);
 
-app.controller('CodesController', ['$scope', 'SchFactory', function ($scope, SchFactory) {
+app.controller('CodesController', ['$scope', function ($scope) {
     // ==== MODELS ====
+
     SchFactory.getAll('TITLE').then(function (response) {
         $scope.codebook = response;
     });
@@ -168,6 +185,7 @@ app.controller('CodesController', ['$scope', 'SchFactory', function ($scope, Sch
     $scope.insertNew = function(val){
         SchFactory.insert('TITLE', val);
     }
+
 }]);
 
 app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $location, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
@@ -177,6 +195,8 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
 
     $scope.freeResc = [];
     $scope.filteredFreeResc = [];
+
+    
 
     $scope.tmp =  RescFactory.getAllNear($scope.actionId).then(function (response) {
         $scope.freeResc = response.data.response;
@@ -315,15 +335,12 @@ app.controller('AddActionController', ['$scope', '$location', 'NgMap', 'ActionFa
             lng: "15.00"
         },
         radius: 0,
-        voditelj: null,
-        meetingTime: null,
-        meetingLocation: null
+        voditelj: null
     };
     // ==== INIT MODELS ====
-    $scope.tmpTime = null;
+
     // ==== CONTROL FUNCTIONS ====
     $scope.createAction = function () {
-        $scope.currentAction.meetingTime = $scope.tmpTime.getHours()+":"+$scope.tmpTime.getMinutes();
         var id = ActionFactory.addAction($scope.currentAction);
         $location.url('/addActionResc')
     };
