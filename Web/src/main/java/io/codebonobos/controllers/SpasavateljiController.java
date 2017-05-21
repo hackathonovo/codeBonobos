@@ -153,14 +153,15 @@ public class SpasavateljiController {
     }
 
     @RequestMapping(value = "/answer-invite", method = RequestMethod.GET)
-    public ResponseEntity<?> actionInviteAnswer(@RequestParam boolean answer, @RequestParam String userId) {
+    public ResponseEntity<?> actionInviteAnswer(@RequestParam boolean answer, @RequestParam String userId, @RequestParam String actionId) {
         try {
             if (answer) {
-                spasavateljDao.acceptAction(userId);
+                spasavateljDao.acceptAction(userId, actionId);
             } else {
-                spasavateljDao.refuseAction(userId);
+                spasavateljDao.refuseAction(userId, actionId);
             }
         } catch (Exception e) {
+            return new ResponseEntity<>("Fail", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>("Success", HttpStatus.OK);
