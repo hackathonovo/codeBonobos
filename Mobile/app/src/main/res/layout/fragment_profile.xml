@@ -151,11 +151,12 @@
                 android:hint="Available"/>
 
         <Button
+                android:id="@+id/sendLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/isUserAvailable"
+                android:layout_marginRight="16dp"
                 android:layout_above="@id/saveNumbers"
-                android:layout_marginLeft="40dp"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/button_background"
                 android:padding="16dp"
                 android:text="Send location"/>

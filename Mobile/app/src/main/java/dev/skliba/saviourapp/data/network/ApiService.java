@@ -32,6 +32,7 @@ public interface ApiService {
     @GET("akcije/active/{userId}")
     Call<BaseResponse<ContactResponse>> checkIfIHaveAnyActions(@Path("userId") int userId);
 
+
     Call<BaseResponse<PanicModeResponse>> panicModeEngaged(@Path("userId") int userId, @Query("lat") double latitude,
             @Query("lng") double longitude, @Query("timestamp") long ms);
 

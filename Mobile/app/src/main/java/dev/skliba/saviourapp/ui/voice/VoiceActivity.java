@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import dev.skliba.saviourapp.SaviourApplication;
 import dev.skliba.saviourapp.data.models.response.BaseResponse;
-import dev.skliba.saviourapp.data.models.response.PanicModeResponse;
 import dev.skliba.saviourapp.data.network.BaseCallback;
 import dev.skliba.saviourapp.ui.guardian.GuardianAngelService;
 import dev.skliba.saviourapp.ui.shared.BaseActivity;
@@ -138,13 +137,13 @@ public class VoiceActivity extends BaseActivity {
     }
 
     private void sendLocationToApi() {
-        Call<BaseResponse<PanicModeResponse>> call = SaviourApplication.getApiService()
-                .panicModeEngaged(SharedPrefsUtil.getUserId(), currentLocation.getLatitude(), currentLocation.getLongitude(),
+        Call<BaseResponse<Void>> call = SaviourApplication.getApiService()
+                .sendUserLocation(SharedPrefsUtil.getUserId(), currentLocation.getLatitude(), currentLocation.getLongitude(),
                         System.currentTimeMillis());
 
-        BaseCallback<BaseResponse<PanicModeResponse>> callback = new BaseCallback<BaseResponse<PanicModeResponse>>() {
+        BaseCallback<BaseResponse<Void>> callback = new BaseCallback<BaseResponse<Void>>() {
             @Override
-            public void onSuccess(BaseResponse<PanicModeResponse> body, Response<BaseResponse<PanicModeResponse>> response) {
+            public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
                 Toast.makeText(VoiceActivity.this,
                         "I've alerted your friends and sent your coordinates to the designated services. Don't move from your location!",
                         Toast.LENGTH_SHORT).show();
@@ -195,7 +194,6 @@ public class VoiceActivity extends BaseActivity {
             ActivityCompat.requestPermissions(this, permissions, RC_PERMISSIONS);
         }
     }
-
 
     private final LocationListener locationListener = new LocationListener() {
         @Override

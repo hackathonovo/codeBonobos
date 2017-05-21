@@ -4,7 +4,10 @@ package dev.skliba.saviourapp.ui.guardian;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -51,7 +54,7 @@ public class GuardianAngelService extends Service {
     }
 
     private void raiseNotification() {
-       /* NotificationManager notificationManager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -64,7 +67,7 @@ public class GuardianAngelService extends Service {
         AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
         MediaPlayer mp = MediaPlayer.create(this, R.raw.notification_noise);
-        mp.start();*/
+        mp.start();
 
         Intent voiceActivityIntent = new Intent(getApplicationContext(), VoiceActivity.class);
         voiceActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
