@@ -163,7 +163,7 @@ app.controller('CodesController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('AddActionRescController', ['$scope', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
+app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $location, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
     // ==== MODELS ====
 
     $scope.actionId = ActionCreate.get();
@@ -245,6 +245,8 @@ app.controller('AddActionRescController', ['$scope', '$filter', 'NgMap', 'Action
         });
         
         ActionFactory.addRescToAction($scope.actionId, selected);
+
+        $location.url('/current')
     };
 
     $scope.selectAll = function () {

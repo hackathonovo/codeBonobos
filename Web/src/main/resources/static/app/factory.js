@@ -50,10 +50,9 @@ app.factory('ActionFactory', ['$http', 'ActionCreate', function ($http, ActionCr
 
     result.addRescToAction = function (actionID, rescIdArray) {
         $http({
-            method: 'PUT',
-            url: '/api/akcije/add',
+            method: 'POST',
+            url: '/api/akcije/invite-rescuers/'+actionID,
             data: rescIdArray,
-            params: {actionId: actionID} ,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data, status, header, config) {
             ActionCreate.set(data.response.id);
