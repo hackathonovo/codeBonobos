@@ -163,12 +163,12 @@ public class SpasavateljDao {
     }
 
 
-    public void acceptAction(String userId) {
-        jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE");
+    public void acceptAction(String userId, String actionId) {
+        jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE" + " AND ID_AKCIJA = " + actionId);
     }
 
-    public void refuseAction(String userId) {
-        jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId);
+    public void refuseAction(String userId, String actionId) {
+        jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId + " AND ID_AKCIJA = " + actionId);
     }
 
     public List<Spasavatelj> getUsersInActionByActionId(String actionId, boolean accepted) {
