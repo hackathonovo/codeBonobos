@@ -21,6 +21,9 @@ public class AkcijaDao {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
+    private SpasavateljDao spasavateljDao;
+
+    @Autowired
     public AkcijaDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -67,7 +70,10 @@ public class AkcijaDao {
         List<Akcija> retval = new ArrayList<>();
 
         for (Map<String, Object> dbRow : result) {
-            retval.add(mapToAction(dbRow));
+            Akcija tmp = mapToAction(dbRow);
+            tmp.setPrihvaceniSpasavatelji(spasavateljDao.getUsersInActionByActionId(String.valueOf(tmp.getId()), true));
+            tmp.setPozvaniSpasavatelji(spasavateljDao.getUsersInActionByActionId(String.valueOf(tmp.getId()), false));
+            retval.add(tmp);
         }
 
         return retval;

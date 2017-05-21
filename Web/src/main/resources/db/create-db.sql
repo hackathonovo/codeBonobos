@@ -62,13 +62,13 @@ INSERT INTO SPASAVATELJ
 VALUES (4, 'Nikol Badanjak', '0993246444', 5, 2, '41.815399', '18.966568', TRUE, 'yololord', '1234', '123', NULL, TRUE);
 
 INSERT INTO SPASAVATELJ
-VALUES (5, 'Mak', '0993246444', 2, 3, '44.815399', '14.966568', TRUE, 'lana', '1234', '123', NULL, TRUE);
+VALUES (5, 'Marko Marić', '0993246444', 2, 3, '44.815399', '14.966568', TRUE, 'lana', '1234', '123', NULL, TRUE);
 
 INSERT INTO SPASAVATELJ
-VALUES (6, 'Stefano', '0993246444', 4, 2, '43.815399', '13.966568', TRUE, 'jurcevic', '1234', '123', NULL, TRUE);
+VALUES (6, 'Stefano Drei', '0993246444', 4, 2, '43.815399', '13.966568', TRUE, 'jurcevic', '1234', '123', NULL, TRUE);
 
 INSERT INTO SPASAVATELJ
-VALUES (7, 'Ante', '0993246444', 7, 3, '44.815399', '14.966568', FALSE, 'asdasd', '1234', '123', NULL, FALSE);
+VALUES (7, 'Ante Josipovic', '0993246444', 7, 3, '44.815399', '14.966568', FALSE, 'asdasd', '1234', '123', NULL, FALSE);
 
 INSERT INTO SPASAVATELJ
 VALUES (8, 'Mario Filakovic', '0993246444', 2, 2, '45.915399', '15.966568', TRUE, 'dsadsa', '1234', '123', NULL, TRUE);
@@ -86,16 +86,16 @@ INSERT INTO AKCIJA
 VALUES (1, '0993246333', '48.815399', '17.966568', 10, 'Super kul akcija, spasili smo 10 ljudi', TRUE, 'Nazorova 11, Zagreb', '14:00', 1);
 
 INSERT INTO AKCIJA
-VALUES (2, '0993246333', '47.815399', '16.966568', 15, 'Super kul akcija, spasili smo 11 ljudi', TRUE, 'Nazorova 11, Split', '13:00', 1);
+VALUES (2, '0912314451', '47.815399', '16.966568', 15, 'Super kul akcija, spasili smo 11 ljudi', TRUE, 'Maruliceva 23, Split', '13:30', 2);
 
 INSERT INTO AKCIJA
-VALUES (3, '0993246333', '46.815399', '18.966568', 12, 'Super kul akcija, spasili smo 12 ljudi', TRUE, 'Nazorova 11, Osijek', '15:00', 0);
+VALUES (3, '0983276231', '46.815399', '18.966568', 12, 'Super kul akcija, spasili smo 12 ljudi', TRUE, 'Gunduliceva 1, Osijek', '15:00', 0);
 
 INSERT INTO AKCIJA
-VALUES (4, '0993246333', '45.815399', '17.966568', 13, 'Super kul akcija, spasili smo 13 ljudi', FALSE, 'Nazorova 11, Rijeka', '16:00', 1);
+VALUES (4, '0991146283', '45.815399', '17.966568', 13, 'Super kul akcija, spasili smo 13 ljudi', FALSE, 'Nazorova 11, Rijeka', '16:00', 1);
 
 INSERT INTO AKCIJA
-VALUES (5, '0993246333', '48.315399', '17.966568', 14, 'Super kul akcija, spasili smo 14 ljudi', FALSE, 'Nazorova 11, Zapresic', '17:00', 2);
+VALUES (5, '0993276231', '48.315399', '17.966568', 14, 'Super kul akcija, spasili smo 14 ljudi', FALSE, 'Nazorova 11, Zapresic', '17:00', 2);
 
 INSERT INTO SPASAVATELJ_AKCIJA
 VALUES (1, 1, TRUE);
@@ -117,12 +117,6 @@ VALUES (7, 4, TRUE);
 
 INSERT INTO SPASAVATELJ_AKCIJA
 VALUES (8, 5, TRUE);
-
-INSERT INTO TITLE
-VALUES (1, 'DR.SC.');
-
-INSERT INTO TITLE
-VALUES (2, 'PROF.SC.');
 
 INSERT INTO USER_LOCATION
 VALUES (1, 1495339840874, '15.1124124124', '16.12312312');
