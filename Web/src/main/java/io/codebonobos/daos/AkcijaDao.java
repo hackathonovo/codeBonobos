@@ -30,7 +30,6 @@ public class AkcijaDao {
 
         String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA, LOC_MEETING, TIME_MEETING, PRIO) VALUES(?,?,?,?,?,?,?,?,?)";
 
-
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, action.getVoditelj());
