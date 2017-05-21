@@ -140,6 +140,17 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@drawable/send_numb_background"/>
 
+        <Button
+                android:id="@+id/panicMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_above="@+id/saveNumbers"
+                android:text="Panic mode"
+                android:background="@drawable/guardian_angel_background"/>
+
     </RelativeLayout>
 
 </LinearLayout>
