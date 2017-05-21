@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -115,7 +116,7 @@ public class AkcijaController {
         String message = null;
         List<String> devTokens;
         try {
-            devTokens = akcijaDao.addInvitedRescuers(actionId, userIds);
+            devTokens = akcijaDao.addInvitedRescuers(actionId, Arrays.asList(2)); //ids
         } catch (Exception e) {
             message = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
