@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -55,7 +54,6 @@ public class SpasavateljDao {
 
         return new RescuerListsWrapper(avail, action, notActive);
     }
-
 
 
     public List<Spasavatelj> getAvailable() {
@@ -189,5 +187,9 @@ public class SpasavateljDao {
     public void saveUserLocation(String userId, double lat, double lng, long timestamp) {
         String query = "INSERT INTO USER_LOCATION VALUES (" + userId + ", " + timestamp + ", '" + lat + "', '" + lng + "')";
         jdbcTemplate.update(query);
+    }
+
+    public long getNumOfAvailUsers() {
+        return (long) getAvailable().size();
     }
 }

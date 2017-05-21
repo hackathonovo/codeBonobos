@@ -158,10 +158,23 @@ public class SpasavateljiController {
     @RequestMapping(value = "/no-of-active-rescuers", method = RequestMethod.GET)
     public ResponseEntity<?> getNumOfActiveRescuers() {
         long count;
+        String message = null;
         try {
             count = spasavateljDao.getNumOfActiveUsers();
         } catch (Exception e) {
             return new ResponseEntity<>(new ResponseWrapper<>(14, null), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(count, message), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/no-of-avail-rescuers", method = RequestMethod.GET)
+    public ResponseEntity<?> getNumOfAvailableRescuers() {
+        long count;
+        try {
+            count = spasavateljDao.getNumOfAvailUsers();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseWrapper<>(36, null), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);
