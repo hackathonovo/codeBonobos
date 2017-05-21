@@ -34,27 +34,24 @@
     <div class="row spasavatelji-tables">
         <!-- AKTIVNI -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
-            <div class="widget-name">Slobodni spašavatelji</div>
             <div class="widget">
-
                 <div class="widget-body fix-height-500">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th><button ng-click="selectAll()">All</button></th>
+                            <th><button ng-click="selectAll()" class="check-all icon-tick"></button></th>
                             <th>Ime</th>
                             <th>Specijalnost</th>
-                            <!-- to expand line -->
-                            <th>Udaljenost</th>
+                            <th>Relacija</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="fr in filteredFreeResc | filter:userSearch" ng-class="{'selected': fr.selected}" ng-click="select(fr)">
-                            <td></td>
-                            <td>{{fr.rescuer.ime}}</td>
-                            <td>{{dict[fr.rescuer.specijalnost.toLowerCase()]}}</td>
-                            <td ng-class="generateCssClass(fr.distance)">{{fr.distance}}</td>
-                        </tr>
+                            <tr ng-repeat="fr in filteredFreeResc | filter:userSearch" ng-class="{'selected': fr.selected}" ng-click="select(fr)">
+                                <td class="check"></td>
+                                <td>{{fr.rescuer.ime}}</td>
+                                <td>{{dict[fr.rescuer.specijalnost.toLowerCase()]}}</td>
+                                <td class="distance" ng-class="generateCssClass(fr.distance)"><span></span></td>
+                            </tr>
                         <!-- -->
                         </tbody>
                     </table>
