@@ -4,13 +4,10 @@ import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.HgssLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +71,7 @@ public class AkcijaDao {
     }
 
     public Akcija getActionById(String id) throws Exception {
-        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '"+id+"'";
+        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '" + id + "'";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {
@@ -84,15 +81,39 @@ public class AkcijaDao {
         return mapToAction(result.get(0));
     }
 
+    public Akcija getActiveActionById(String userId) throws Exception {
+        String query = "SELECT * FROM SPASAVATELJ_AKCIJA AS SA " +
+            "JOIN AKCIJA AS A ON A.ID_A = SA.ID_AKCIJA " +
+            "WHERE SA.ID_SPASAVATELJ = " + userId + " AND A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
+
+        if (result == null || result.isEmpty()) {
+            throw new Exception("No such action");
+        }
+
+        return mapToAction(result.get(0));
+    }
 
     public void finishAction(String actionId) {
         String query = "UPDATE AKCIJA SET AKTIVNA=FALSE WHERE ID_A = '" + actionId + "'";
         jdbcTemplate.update(query);
     }
 
+    public List<String> addInvitedRescuers(String actionId, List<Integer> userIds) {
+        List<String> devTokens = new ArrayList<>();
+        userIds.forEach(id -> {
+            String query = "INSERT INTO SPASAVATELJ_AKCIJA VALUES(" + id + ", " + actionId + ", FALSE)";
+            jdbcTemplate.update(query);
+            devTokens.add(jdbcTemplate.queryForObject("SELECT DEV_TOKEN FROM SPASAVATELJ WHERE ID = " + id, String.class));
+        });
+
+        return devTokens;
+    }
+
     private Akcija mapToAction(Map<String, Object> dbRow) {
         Akcija action = new Akcija();
         HgssLocation location = new HgssLocation();
+
         if (dbRow.get("ID_A") != null) {
             action.setId((int) dbRow.get("ID_A"));
         }
@@ -114,9 +135,17 @@ public class AkcijaDao {
         if (dbRow.get("AKTIVNA") != null) {
             action.setIsActive((boolean) dbRow.get("AKTIVNA"));
         }
+        if (dbRow.get("LOC_MEETING") != null) {
+            action.setMeetingLocation((String) dbRow.get("LOC_MEETING"));
+        }
+        if (dbRow.get("TIME_MEETING") != null) {
+            action.setMeetingTime((String) dbRow.get("TIME_MEETING"));
+        }
 
         action.setLocation(location);
 
         return action;
     }
+
+
 }

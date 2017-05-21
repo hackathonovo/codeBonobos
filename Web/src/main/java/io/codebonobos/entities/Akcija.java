@@ -1,5 +1,6 @@
 package io.codebonobos.entities;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ public class Akcija {
     private List<Spasavatelj> pozvaniSpasavatelji;
     private List<Spasavatelj> prihvaceniSpasavatelji;
     private boolean isActive;
+    private String meetingTime;
+    private String meetingLocation;
 
     public Akcija() {
     }
@@ -79,6 +82,22 @@ public class Akcija {
     }
 
     public void setIsActive(boolean active) {
-        isActive = active;
+        this.isActive = active;
+    }
+
+    public String getMeetingTime() {
+        return meetingTime;
+    }
+
+    public void setMeetingTime(String timesSas) {
+        this.meetingTime = timesSas;
+    }
+
+    public String getMeetingLocation() {
+        return meetingLocation;
+    }
+
+    public void setMeetingLocation(String meetingLocation) {
+        this.meetingLocation = meetingLocation;
     }
 }

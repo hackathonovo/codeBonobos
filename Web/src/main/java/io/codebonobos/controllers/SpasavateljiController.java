@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,13 +34,13 @@ public class SpasavateljiController {
     @Autowired
     private AkcijaDao akcijaDao;
 
-//    @RequestMapping(value = "/all", method = RequestMethod.GET)
-//    public ResponseWrapper<List<Spasavatelj>> getAll() {
-//        List<Spasavatelj> list = null;
-//        String message = null;
-//
-//        return new ResponseWrapper<>(list, message);
-//    }
+    //    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    //    public ResponseWrapper<List<Spasavatelj>> getAll() {
+    //        List<Spasavatelj> list = null;
+    //        String message = null;
+    //
+    //        return new ResponseWrapper<>(list, message);
+    //    }
 
     @RequestMapping(value = "/all-grouped", method = RequestMethod.GET)
     public ResponseEntity<?> getAllGroupedByType() {
@@ -58,29 +57,29 @@ public class SpasavateljiController {
         return new ResponseEntity<>(new ResponseWrapper<>(lists, message), HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/active", method = RequestMethod.GET)
-//    public ResponseWrapper<List<Spasavatelj>> getActive() {
-//        List<Spasavatelj> list = null;
-//        String message = null;
-//
-//        return new ResponseWrapper<>(list, message);
-//    }
+    //    @RequestMapping(value = "/active", method = RequestMethod.GET)
+    //    public ResponseWrapper<List<Spasavatelj>> getActive() {
+    //        List<Spasavatelj> list = null;
+    //        String message = null;
+    //
+    //        return new ResponseWrapper<>(list, message);
+    //    }
 
-//    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
-//    public ResponseWrapper<List<Spasavatelj>> getInactive() {
-//        List<Spasavatelj> list = null;
-//        String message = null;
-//
-//        return new ResponseWrapper<>(list, message);
-//    }
+    //    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
+    //    public ResponseWrapper<List<Spasavatelj>> getInactive() {
+    //        List<Spasavatelj> list = null;
+    //        String message = null;
+    //
+    //        return new ResponseWrapper<>(list, message);
+    //    }
 
-//    @RequestMapping(value = "/action", method = RequestMethod.GET)
-//    public ResponseWrapper<List<Spasavatelj>> getThoseInAction() {
-//        List<Spasavatelj> list = null;
-//        String message = null;
-//
-//        return new ResponseWrapper<>(list, message);
-//    }
+    //    @RequestMapping(value = "/action", method = RequestMethod.GET)
+    //    public ResponseWrapper<List<Spasavatelj>> getThoseInAction() {
+    //        List<Spasavatelj> list = null;
+    //        String message = null;
+    //
+    //        return new ResponseWrapper<>(list, message);
+    //    }
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getProfile(@PathVariable int id) {
@@ -95,25 +94,25 @@ public class SpasavateljiController {
         return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/fb/{token}", method = RequestMethod.GET)
-//    public ResponseWrapper<IdWrapper> getIdByFbToken(@PathVariable String token, @RequestParam String name) throws Exception {
-//        IdWrapper id;
-//        String message = null;
-//        try {
-//            id = new IdWrapper(spasavateljDao.getByFbToken(token).getId());
-//        } catch (Exception e) {
-//            id = new IdWrapper(spasavateljDao.saveFromFbTokenAndGetId(name, token));
-//        }
-//
-//        return new ResponseWrapper<>(id, message);
-//    }
+    //    @RequestMapping(value = "/fb/{token}", method = RequestMethod.GET)
+    //    public ResponseWrapper<IdWrapper> getIdByFbToken(@PathVariable String token, @RequestParam String name) throws Exception {
+    //        IdWrapper id;
+    //        String message = null;
+    //        try {
+    //            id = new IdWrapper(spasavateljDao.getByFbToken(token).getId());
+    //        } catch (Exception e) {
+    //            id = new IdWrapper(spasavateljDao.saveFromFbTokenAndGetId(name, token));
+    //        }
+    //
+    //        return new ResponseWrapper<>(id, message);
+    //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password) throws Exception {
+    public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String firebaseToken) throws Exception {
         IdWrapper id;
         String message = null;
         try {
-            id = new IdWrapper(spasavateljDao.getByLogin(username, password).getId());
+            id = new IdWrapper(spasavateljDao.getByLogin(username, password, firebaseToken).getId());
         } catch (Exception e) {
             message = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -136,7 +135,7 @@ public class SpasavateljiController {
         try {
             action = akcijaDao.getActionById(actionId);
             rescuers = spasavateljDao.getAvailable();
-            if(action.getLocation().getLng() == null || action.getLocation().getLat() == null){
+            if (action.getLocation().getLng() == null || action.getLocation().getLat() == null) {
                 throw new Exception("Bad coordinates.");
             }
         } catch (Exception e) {
@@ -152,4 +151,41 @@ public class SpasavateljiController {
 
         return new ResponseEntity<>(new ResponseWrapper<>(sortedRdw, message), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/answer-invite", method = RequestMethod.GET)
+    public ResponseEntity<?> actionInviteAnswer(@RequestParam boolean answer, @RequestParam String userId) {
+        try {
+            if (answer) {
+                spasavateljDao.acceptAction(userId);
+            } else {
+                spasavateljDao.refuseAction(userId);
+            }
+        } catch (Exception e) {
+        }
+
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/location/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<?> rememberUserLocation(@PathVariable String userId, @RequestParam double lat, @RequestParam double lng, @RequestParam long timestamp) {
+        try {
+            spasavateljDao.saveUserLocation(userId, lat, lng, timestamp);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/add-user", method = RequestMethod.GET)
+    public ResponseEntity<?> saveUser(@RequestParam String username, @RequestParam String password, @RequestParam String phone) {
+        try {
+            spasavateljDao.saveUser(username, password, phone);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 }
