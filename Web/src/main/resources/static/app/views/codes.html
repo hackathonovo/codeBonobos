@@ -9,9 +9,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="entry in codebook.data.response.entries">
-      <td>{{entry.id}}</td>
-      <td>{{entry.value}}</td>
+    <tr ng-repeat="entry in codebook track by $index">
+      <td>{{$index}}</td>
+      <td>{{entry}}</td>
     </tr>
     </tbody>
   </table>

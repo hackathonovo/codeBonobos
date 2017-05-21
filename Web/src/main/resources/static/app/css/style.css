@@ -499,3 +499,28 @@ label {
 .row.widget-row span:nth-child(2) {
     font-weight: bold;
 }
+
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-map, .active-actions .row:nth-child(3) .spec-img.img-map {
+	background-image: url("../content/spec/doktor.png");
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-dog, .active-actions .row:nth-child(3) .spec-img.img-dog {
+	background-image: url("../content/spec/skijanje.png");
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-ski, .active-actions .row:nth-child(3) .spec-img.img-ski {
+	display: none;
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-spel, .active-actions .row:nth-child(3) .spec-img.img-spel {
+	display: none;
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-map, .active-actions .row:nth-child(4) .spec-img.img-map {
+	background-image: url("../content/spec/alpinizam.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-dog, .active-actions .row:nth-child(4) .spec-img.img-dog {
+	background-image: url("../content/spec/mapa.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-ski, .active-actions .row:nth-child(4) .spec-img.img-ski {
+	background-image: url("../content/spec/helikopter.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-spel, .active-actions .row:nth-child(4) .spec-img.img-spel {
+	display: none;
+}
