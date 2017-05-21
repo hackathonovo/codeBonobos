@@ -1,31 +1,88 @@
 <div class="main-view-wrapper" ng-controller="MainController as controller">
-    <div class="col-xs-12 col-md-8">
-        <div class="widget">
-            <div class="widget-header">Akcije u tijeku</div>
-            <div class="widget-body">
-
-            </div>
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="dezurni">
+            <span></span>
+            <label>Dezurni spasavatelj</label>
+            <p class="dolje">George Clooney</p>
+            <label class="gore">Kontakt</label>
+            <p>0987542182</p>
         </div>
     </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="widget">
-                <div class="widget-header">Stanica Zagreb</div>
-                <div class="widget-body">
-                    <div class="row">
-                        <label>Dezurni spasavatelj</label>
-                        <p>Pero Peric</p>
-                    </div>
-                    <div class="row">
-                        <label>Kontakt</label>
-                        <p>0987542182</p>
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="planina">
+            <span></span>
+            <label>Trenutno aktivnih spasavatelja</label>
+            <p>14</p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <div class="nesto">
+            <span></span>
+            <label>Trenutno dostupnih spasavatelja</label>
+            <p>103</p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12 no-margin">
+        <div class="widget-name akcije-u-tijeku">Akcije u tijeku</div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="widgets-wrapper">
+                <div class="widget action-widget normal">
+                    <div class="widget-header">Akcija123</div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <button type="button" class="spec-img img-map"></button>
+                                            <button type="button" class="spec-img img-dog"></button>
+                                            <button type="button" class="spec-img img-ski"></button>
+                                            <button type="button" class="spec-img img-spel"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="short-decription">
+                                        Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.
+                                    </div>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="">Voditelj:</span>
+                                    <span class="">Pajo Patak</span>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="">Kontakt broj:</span>
+                                    <span class="">0918542210</span>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="">Lokacija polaska:</span>
+                                    <span class="">Andrije Zaje 10</span>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="">Vrijeme polaska:</span>
+                                    <span class="">23:00h</span>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="">Stupanj hitnosti:</span>
+                                    <span class="hitnost">Hitno</span>
+                                </div>
+                                <div class="row widget-row">
+                                    <span class="resc-no-label">Broj aktivnih spašavatelja:</span>
+                                    <span class="resc-no">12</span>
+                                    <a class="button button-normal">Pozovi jos spasavatelja</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <ng-map center="[45.814919, 15.935150]">
+                <marker position="[45.814919, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
+                <marker position="[45.85, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
+            </ng-map>
+        </div>
     </div>
-    <h2>MAP</h2>
-    <ng-map center="[45.00, 15.00]">
-        <marker position="[45.814919, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
-        <marker position="[45.85, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
-    </ng-map>
 </div>

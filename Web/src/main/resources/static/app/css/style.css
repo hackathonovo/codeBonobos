@@ -5,6 +5,10 @@ html, body, .hamburg {
 .clear {
 	clear: both;
 }
+.row.header .meta .page {
+	font-size: 18px;
+    padding-top: 19px;
+}
 .btn-row {
     padding: 0 16px;
     margin-bottom: 16px;
@@ -373,15 +377,22 @@ label {
 .distance_mid span {
 	border: 3px solid orange;
 }
-.distanceclose span {
+.distance_close span {
 	border: 3px solid green;
+}
+.table .check {
+	position: relative;
+	padding-left: 40px;
 }
 .check-all {
 	background-color: #fff;
 	border: 1px solid #d8dde6;
 	border-radius: 5px;
+	position: absolute;
+    left: 6px;
+    top: 6px;
 }
-.check-all:hover, .check-all:hover {
+.check-all:hover, .check-all:focus {
 	background-color: #f4f6f9;
 	outline: none;
 }
@@ -389,12 +400,86 @@ label {
     display: inline-block;
     position: relative;
     top: 3px;
-    color: #54698d;
+    color: #30426A;
 }
 .selected .check:before {
 	font-family: 'in2';
 	content: '\66';
+	position: absolute;
+    left: 12px;
+    top: 6px;
+    font-size: 15px;
+    color: #30426A;
 }
 .selected td {
-	background-color: #f5fdff;
+	background-color: #faffbd;
+}
+.table.call-resc td {
+	cursor: pointer;
+}
+.active-actions .widget {
+	margin-bottom: 10px;
+}
+.main-view-wrapper .widget {
+	margin-bottom: 10px;
+}
+.stanica {
+	margin-left: 15px;
+}
+.stanica p {
+	font-weight: bold;
+}
+.nesto, .planina, .dezurni {
+	display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+.nesto p, .planina p, .dezurni p {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.planina span {
+	background-image: url("../content/mountains (1).png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.nesto span {
+	background-image: url("../content/binoculars (1).png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.dezurni span {
+	background-image: url("../content/phone-call.png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.dolje {
+	margin-bottom: 0;
+}
+.gore {
+	margin-top: 0;
+}
+.akcije-u-tijeku {
+	font-size: 19px;
+    margin-left: 21px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.no-margin {
+	padding: 0;
 }
