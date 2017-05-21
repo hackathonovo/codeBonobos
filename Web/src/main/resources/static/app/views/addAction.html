@@ -43,11 +43,11 @@
                                 <label>DETALJI SASTAJANJA</label><br>
 
                                 <label for="actionLong">Lokacija</label>
-                                <input type="text" id="actionStartLocation" class="form-control">
+                                <input type="text" id="actionStartLocation" class="form-control" ng-model="currentAction.meetingLocation">
 
 
                                 <label for="actionLat">Vrijeme</label>
-                                <input type="time" id="actionStartTime" class="form-control">
+                                <input type="time" id="actionStartTime" class="form-control" ng-model="tmpTime">
                             </div>
                             <div class="form-group">
                                 <label for="nmb">Broj telefona</label>
