@@ -8,15 +8,15 @@
                     <form>
                         <div class="form-group">
                             <label for="rescName">Ime i prezime spašavatelja</label>
-                            <input type="text" class="form-control" id="rescName" ng-model="currentResc.ime">
+                            <input type="text" class="input-field" id="rescName" ng-model="currentResc.ime">
                         </div>
                         <div class="form-group">
                             <label for="rescNum">Broj telefona</label>
-                            <input type="text" class="form-control" id="rescNum" ng-model="currentResc.brojTelefona">
+                            <input type="text" class="input-field" id="rescNum" ng-model="currentResc.brojTelefona">
                         </div>
                         <div class="form-group">
                             <label for="rescName">Iskustvo</label>
-                            <select class="form-control" ng-options="e as e.name for e in exp track by e.id" ng-model="selectedExp">
+                            <select class="input-field" ng-options="e as e.name for e in exp track by e.id" ng-model="selectedExp">
                             </select>
                         </div>
                         <div class="form-group section-wrapper">
@@ -24,12 +24,12 @@
                                 <label class="section-name">Bazna lokacija spasavatelja</label><br>
                                 <div class="col-md-12 col-sm-6 col-xs-6 left">
                                     <label for="actionLong">Geografska širina</label>
-                                    <input type="text" id="actionLong" class="form-control" ng-model="currentResc.lokacija.lng">
+                                    <input type="text" id="actionLong" class="input-field" ng-model="currentResc.lokacija.lng">
 
                                 </div>
                                 <div class="col-md-12 col-sm-6 col-xs-6 right">
                                     <label for="actionLat">Geografska visina</label>
-                                    <input type="text" id="actionLat" class="form-control" ng-model="currentResc.lokacija.lat">
+                                    <input type="text" id="actionLat" class="input-field" ng-model="currentResc.lokacija.lat">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">

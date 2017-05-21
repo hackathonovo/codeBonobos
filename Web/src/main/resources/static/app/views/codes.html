@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 <div class="form-wrapper" ng-controller="CodesController">
+=======
+<div class="form-wrapper sifra" ng-controller="CodesController">
+  <input type="text" placeholder="Unesi..." class="input-field" ng-model="newTitle">
+  <button type="button" class="button button-normal" ng-click="insertNew(newTitle)">Add</button>
+>>>>>>> 03c285299ae76935e24c2ccb5ad6b5c66f60eecb
   <table class="table">
     <thead>
     <tr>
@@ -11,11 +17,6 @@
       <td>{{entry.id}}</td>
       <td>{{entry.value}}</td>
     </tr>
-    <!-- -->
     </tbody>
   </table>
-
-  <input type="text" placeholder="Unesi..." class="input-field" ng-model="newTitle">
-  <button type="button" class="btn btn-secondary" ng-click="insertNew(newTitle)">Add</button>
-
 </div>

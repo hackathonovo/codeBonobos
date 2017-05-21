@@ -192,18 +192,13 @@ app.controller('CodesController', ['$scope', function ($scope) {
 
 }]);
 
-app.controller('ShowDetailsController', ['$scope', function ($scope) {
-    // ==== MODELS ====
+app.controller('ShowDetailsController', ['$scope', '$stateParams', 'ActionFactory', function ($scope, $stateParams, ActionFactory) {
+    var rescId = $stateParams.id;
 
-    SchFactory.getAll('TITLE').then(function (response) {
-        $scope.codebook = response;
-    });
+    ActionFactory.getDetails(rescId).then(function (response) {
+        var s = response;
+    })
 
-    // ==== INIT MODELS ====
-    // ==== CONTROL FUNCTIONS ====
-    $scope.insertNew = function (val) {
-        SchFactory.insert('TITLE', val);
-    }
 
 }]);
 
