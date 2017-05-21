@@ -17,12 +17,21 @@ public class Akcija {
     private boolean isActive;
     private String meetingTime;
     private String meetingLocation;
+    private int priority;
 
     public Akcija() {
     }
 
     public HgssLocation getLocation() {
         return location;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public void setLocation(HgssLocation location) {

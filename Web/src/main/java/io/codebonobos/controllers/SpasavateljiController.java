@@ -5,7 +5,6 @@ import io.codebonobos.daos.SpasavateljDao;
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.utils.Haversine;
-import io.codebonobos.utils.IdWrapper;
 import io.codebonobos.utils.RescuerDistanceWrapper;
 import io.codebonobos.utils.RescuerListsWrapper;
 import io.codebonobos.utils.ResponseWrapper;
@@ -109,16 +108,16 @@ public class SpasavateljiController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String firebaseToken) throws Exception {
-        IdWrapper id;
+        Spasavatelj spasavatelj;
         String message = null;
         try {
-            id = new IdWrapper(spasavateljDao.getByLogin(username, password, firebaseToken).getId());
+            spasavatelj = spasavateljDao.getByLogin(username, password, firebaseToken);
         } catch (Exception e) {
             message = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
@@ -175,7 +174,7 @@ public class SpasavateljiController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper<>(null, "Success"), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)

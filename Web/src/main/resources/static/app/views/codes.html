@@ -1,2 +1,25 @@
 <div class="form-wrapper" ng-controller="CodesController">
+<<<<<<< HEAD
 </div>
+=======
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Vrijednost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="entry in codebook.data.response.entries">
+      <td>{{entry.id}}</td>
+      <td>{{entry.value}}</td>
+    </tr>
+    <!-- -->
+    </tbody>
+  </table>
+
+  <input type="text" placeholder="Unesi..." class="input-field" ng-model="newTitle">
+  <button type="button" class="btn btn-secondary" ng-click="insertNew(newTitle)">Add</button>
+
+</div>
+>>>>>>> e0eeeaac4477465137163f9b95ca7e1baf09fd76

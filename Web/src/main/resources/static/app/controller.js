@@ -162,8 +162,20 @@ app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope
 
 app.controller('CodesController', ['$scope', function ($scope) {
     // ==== MODELS ====
+<<<<<<< HEAD
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+=======
+    SchFactory.getAll('TITLE').then(function (response) {
+        $scope.codebook = response;
+    });
+
+    // ==== INIT MODELS ====
+    // ==== CONTROL FUNCTIONS ====
+    $scope.insertNew = function(val){
+        SchFactory.insert('TITLE', val);
+    }
+>>>>>>> e0eeeaac4477465137163f9b95ca7e1baf09fd76
 }]);
 
 app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $location, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
