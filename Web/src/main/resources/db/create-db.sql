@@ -80,7 +80,7 @@ INSERT INTO SPASAVATELJ
 VALUES (10, 'Mace Muftic', '0993246444', 1, 2, '42.815399', '15.966568', TRUE, 'bonobos', '1234', '123', NULL, TRUE);
 
 INSERT INTO SPASAVATELJ
-VALUES (10, 'Stefano Zwei', '0993246444', 1, 2, '45.815399', '15.966568', TRUE, 'skliba2', '1234', '123', NULL, FALSE);
+VALUES (11, 'Stefano Zwei', '0993246444', 1, 2, '45.815399', '15.966568', TRUE, 'skliba2', '1234', '123', NULL, FALSE);
 
 INSERT INTO AKCIJA
 VALUES (1, '0993246333', '48.815399', '17.966568', 10, 'Super kul akcija, spasili smo 10 ljudi', TRUE, 'Nazorova 11, Zagreb', '14:00', 1);
