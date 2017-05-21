@@ -87,7 +87,7 @@ public class SpasavateljiController {
         String message = null;
 
         try {
-            action = akcijaDao.getActionById(actionId);
+            action = akcijaDao.getActionById(String.valueOf(1));
             rescuers = spasavateljDao.getAvailable();
             if (action.getLocation().getLng() == null || action.getLocation().getLat() == null) {
                 throw new Exception("Bad coordinates.");
