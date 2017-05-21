@@ -22,9 +22,9 @@ app.factory('UserFactory', ['$http', function ($http) {
 
     result.deleteProject = function (user) {
         /*
-        $http.delete('/users/' + user.id);
-        return project.id;
-        */
+         $http.delete('/users/' + user.id);
+         return project.id;
+         */
     };
 
     return result;
@@ -32,7 +32,7 @@ app.factory('UserFactory', ['$http', function ($http) {
 
 app.factory('ActionFactory', ['$http', 'ActionCreate', function ($http, ActionCreate) {
     var result = {};
-    
+
     result.addAction = function (action) {
         $http({
             method: 'PUT',
@@ -51,7 +51,7 @@ app.factory('ActionFactory', ['$http', 'ActionCreate', function ($http, ActionCr
     result.addRescToAction = function (actionID, rescIdArray) {
         $http({
             method: 'POST',
-            url: '/api/akcije/invite-rescuers/'+actionID,
+            url: '/api/akcije/invite-rescuers/' + actionID,
             data: rescIdArray,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data, status, header, config) {
@@ -76,9 +76,9 @@ app.factory('RescFactory', ['$http', 'ActionCreate', function ($http, ActionCrea
     result.getAll = function () {
         return $http.get('/api/spasavatelji/all')
     };
-    
+
     result.getAllNear = function (actionID) {
-        return $http.get('/api/spasavatelji/get-closest?actionId='+actionID);
+        return $http.get('/api/spasavatelji/get-closest?actionId=' + actionID);
     };
 
     result.addResc = function (resc) {
@@ -98,12 +98,28 @@ app.factory('RescFactory', ['$http', 'ActionCreate', function ($http, ActionCrea
     return result;
 }]);
 
-app.factory('ActionCreate', function() {
+app.factory('SchFactory', ['$http', function ($http) {
+    var result = {};
+
+    result.getAll = function (tableName) {
+        return $http.get('/api/codebook/' + tableName);
+    };
+
+    result.insert = function (tableName, value) {
+        return $http.get('/api/codebook/' + tableName + '/insert?value=' + value)
+    };
+
+    return result;
+}]);
+
+app.factory('ActionCreate', function () {
     var savedData = {};
-    function set(data) {
+
+    function set (data) {
         savedData = data;
     }
-    function get() {
+
+    function get () {
         return savedData;
     }
 

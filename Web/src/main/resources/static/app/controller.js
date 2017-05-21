@@ -157,10 +157,15 @@ app.controller('CurrentController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('CodesController', ['$scope', function ($scope) {
+app.controller('CodesController', ['$scope', 'SchFactory', function ($scope, SchFactory) {
     // ==== MODELS ====
+    $scope.codebook = SchFactory.getAll('title');
+
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+    $scope.insertNew = function(val){
+        SchFactory.insert('title', val);
+    }
 }]);
 
 app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $location, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
