@@ -5,7 +5,6 @@ import io.codebonobos.daos.SpasavateljDao;
 import io.codebonobos.entities.Akcija;
 import io.codebonobos.entities.Spasavatelj;
 import io.codebonobos.utils.Haversine;
-import io.codebonobos.utils.IdWrapper;
 import io.codebonobos.utils.RescuerDistanceWrapper;
 import io.codebonobos.utils.RescuerListsWrapper;
 import io.codebonobos.utils.ResponseWrapper;
@@ -175,7 +174,7 @@ public class SpasavateljiController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper<>(null, "Success"), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
