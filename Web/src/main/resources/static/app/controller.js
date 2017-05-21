@@ -159,12 +159,14 @@ app.controller('CurrentController', ['$scope', function ($scope) {
 
 app.controller('CodesController', ['$scope', 'SchFactory', function ($scope, SchFactory) {
     // ==== MODELS ====
-    $scope.codebook = SchFactory.getAll('title');
+    SchFactory.getAll('TITLE').then(function (response) {
+        $scope.codebook = response;
+    });
 
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
     $scope.insertNew = function(val){
-        SchFactory.insert('title', val);
+        SchFactory.insert('TITLE', val);
     }
 }]);
 
