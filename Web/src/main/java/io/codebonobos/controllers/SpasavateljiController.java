@@ -109,16 +109,16 @@ public class SpasavateljiController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String firebaseToken) throws Exception {
-        IdWrapper id;
+        Spasavatelj spasavatelj;
         String message = null;
         try {
-            id = new IdWrapper(spasavateljDao.getByLogin(username, password, firebaseToken).getId());
+            spasavatelj = spasavateljDao.getByLogin(username, password, firebaseToken);
         } catch (Exception e) {
             message = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(new ResponseWrapper<>(id, message), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
