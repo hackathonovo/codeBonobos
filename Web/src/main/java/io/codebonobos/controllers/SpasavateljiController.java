@@ -155,4 +155,16 @@ public class SpasavateljiController {
         return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/no-of-active-rescuers", method = RequestMethod.GET)
+    public ResponseEntity<?> getNumOfActiveRescuers() {
+        long count;
+        try {
+            count = spasavateljDao.getNumOfActiveUsers();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseWrapper<>(14, null), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);
+    }
+
 }
