@@ -1,0 +1,62 @@
+<div class="form-wrapper" ng-controller="AddActionRescController">
+    <div class="row">
+        <!-- PRETRAGA -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">
+                    Pretraži spašavatelje
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="search-wrapper icon-search">
+                                <input type="text" placeholder="Pretraži..." class="input-field" ng-model="userSearch">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2 spec-wrapper" role="group" aria-label="First group">
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[0].val}" class="spec-img img-alp" ng-click="specCategoryClick(0)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[1].val}" class="spec-img img-doc" ng-click="specCategoryClick(1)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[2].val}" class="spec-img img-heli" ng-click="specCategoryClick(2)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[3].val}" class="spec-img img-map" ng-click="specCategoryClick(3)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[4].val}" class="spec-img img-dog" ng-click="specCategoryClick(4)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[5].val}" class="spec-img img-ski" ng-click="specCategoryClick(5)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[6].val}" class="spec-img img-spel" ng-click="specCategoryClick(6)"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row spasavatelji-tables">
+        <!-- AKTIVNI -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-body fix-height-500">
+                    <table class="table call-resc">
+                        <thead>
+                            <tr>
+                                <th class="check"><button ng-click="selectAll()" class="check-all icon-tick"></button>Ime</th>
+                                <th>Specijalnost</th>
+                                <th class="distance">Relacija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="fr in filteredFreeResc | filter:userSearch" ng-class="{'selected': fr.selected}" ng-click="select(fr)">
+                                <td class="check"><span></span>{{fr.rescuer.ime}}</td>
+                                <td>{{dict[fr.rescuer.specijalnost.toLowerCase()]}}</td>
+                                <td class="distance" ng-class="generateCssClass(fr.distance)"><span></span></td>
+                            </tr>
+                        <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <button class="button button-normal" ng-click="getAllSelectedRows()">Pozovi</button>
+        </div>
+    </div>
+</div>

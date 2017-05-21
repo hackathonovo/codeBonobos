@@ -1,0 +1,18 @@
+<div class="form-wrapper sifra" ng-controller="CodesController">
+  <input type="text" placeholder="Unesi..." class="input-field" ng-model="newTitle">
+  <button type="button" class="button button-normal" ng-click="insertNew(newTitle)">Add</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Vrijednost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="entry in codebook track by $index">
+      <td>{{$index}}</td>
+      <td>{{entry}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

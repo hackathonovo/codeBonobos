@@ -1,0 +1,120 @@
+<div class="form-wrapper" ng-controller="RescController">
+
+    <div class="row btn-row">
+        <!-- DODAVANJE NOVOG -->
+        <a href="#/addResc" class="button button-normal">Dodaj spašavatelja</a>
+    </div>
+    <div class="clear"></div>
+
+    <div class="row">
+        <!-- PRETRAGA -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">
+                    Pretraži spašavatelje
+                </div>
+                <div class="widget-body">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="search-wrapper icon-search">
+                                <input type="text" placeholder="Pretraži..." class="input-field" ng-model="userSearch">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2 spec-wrapper" role="group" aria-label="First group">
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[0].val}" class="spec-img img-alp" ng-click="specCategoryClick(0)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[1].val}" class="spec-img img-doc" ng-click="specCategoryClick(1)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[2].val}" class="spec-img img-heli" ng-click="specCategoryClick(2)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[3].val}" class="spec-img img-map" ng-click="specCategoryClick(3)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[4].val}" class="spec-img img-dog" ng-click="specCategoryClick(4)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[5].val}" class="spec-img img-ski" ng-click="specCategoryClick(5)"></button>
+                                    <button type="button" ng-class="{'active-filter' : specCategoryFilter[6].val}" class="spec-img img-spel" ng-click="specCategoryClick(6)"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row spasavatelji-tables">
+        <!-- AKTIVNI -->
+        <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Slobodni spašavatelji</div>
+            <div class="widget">
+
+                <div class="widget-body fix-height-500">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Specijalnost</th>
+                            <!-- to expand line -->
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="fr in filteredFreeResc | filter:userSearch">
+                            <td>{{fr.ime}}</td>
+                            <td>{{dict[fr.specijalnost.toLowerCase()]}}</td>
+                        </tr>
+                        <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- ZAUZETI -->
+        <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Zauzeti spašavatelji</div>
+            <div class="widget">
+                <div class="widget-body fix-height-500">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Specijalnost</th>
+                            <!-- to expand line -->
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="act in filteredActionResc | filter:userSearch">
+                            <td>{{act.ime}}</td>
+                            <td>{{dict[act.specijalnost.toLowerCase()]}}</td>
+                        </tr>
+                        <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- NEAKTIVNI -->
+        <div class="col-md-4 col-sm-12 col-xs-12 ">
+            <div class="widget-name">Neaktivni spašavatelji</div>
+            <div class="widget">
+
+                <div class="widget-body fix-height-500">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Specijalnost</th>
+                            <!-- to expand line -->
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="ina in filteredInactiveResc | filter:userSearch">
+                            <td>{{ina.ime}}</td>
+                            <td>{{dict[ina.specijalnost.toLowerCase()]}}</td>
+                        </tr>
+                        <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

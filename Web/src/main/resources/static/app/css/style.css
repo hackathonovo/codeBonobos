@@ -1,0 +1,526 @@
+/*Custom css*/
+html, body, .hamburg {
+    font-family: Arial !important;
+}
+.clear {
+	clear: both;
+}
+.row.header .meta .page {
+	font-size: 18px;
+    padding-top: 19px;
+}
+.btn-row {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+.row > div {
+	margin-bottom: 0;
+}
+.hgss-logo {
+	background-image: url(../content/gss-logo-t.png);
+	display: inline-block;
+    height: 35px;
+    width: 35px;
+    background-size: cover;
+    position: relative;
+    top: 10px;
+    margin-right: 10px;
+}
+/*NAVIGATION*/
+@media screen and (max-width: 560px) {
+	.closed .sidebar-list {
+		display: none;
+	}
+	#page-wrapper.closed .sidebar {
+		height: 66px;
+	}
+}
+/*ul.sidebar .sidebar-list.prvi.active-tab, ul.sidebar .sidebar-list.prvi:hover {
+	border-left: 3px solid #f0f02f;
+}*/
+ul.sidebar .sidebar-list.prvi.active-tab .menu-icon, ul.sidebar .sidebar-list.prvi a:hover .menu-icon {
+	color: #f0f02f;
+} 
+ul.sidebar .sidebar-list.drugi.active-tab .menu-icon, ul.sidebar .sidebar-list.drugi a:hover .menu-icon {
+	color: #4ba738;
+}
+ul.sidebar .sidebar-list.treci.active-tab .menu-icon, ul.sidebar .sidebar-list.treci a:hover .menu-icon {
+	color: #d5414c;
+}
+ul.sidebar .sidebar-list.cetvrti.active-tab .menu-icon, ul.sidebar .sidebar-list.cetvrti a:hover .menu-icon {
+	color: #00ffff;
+}
+ul.sidebar .sidebar-list.peti.active-tab .menu-icon, ul.sidebar .sidebar-list.peti a:hover .menu-icon {
+	color: #7cfc00;
+} 
+/*PNG*/
+.spec-wrapper {
+    text-align: center;
+    margin-top: 10px;
+}
+.spec-img {
+	display: inline-block;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    width: 40px;
+    margin: 2px 8px !important;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 50%;
+}
+.spec-img:focus {
+	outline: none;
+}
+.spec-img:hover {
+    box-shadow: 0 0 5px black;
+	background-color: rgba(128, 128, 128, 0.16);
+}
+.spec-img.active-filter {
+    box-shadow: 0 0 5px black;
+	background-color: rgba(128, 128, 128, 0.26);
+}
+.img-alp {
+	background-image: url("../content/spec/alpinizam.png");
+}
+.img-doc {
+	background-image: url("../content/spec/doktor.png");
+}
+.img-heli {
+	background-image: url("../content/spec/helikopter.png");
+}
+.img-map {
+	background-image: url("../content/spec/mapa.png");
+}
+.img-dog {
+	background-image: url("../content/spec/pas.png");
+}
+.img-ski {
+	background-image: url("../content/spec/skijanje.png");
+}
+.img-spel {
+	background-image: url("../content/spec/speleologija.png");
+}
+.button {
+    padding: 7px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #fff;
+    display: block;
+    width: 250px;
+    text-align: center;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+.button:hover, .button:focus {
+    text-decoration: none;
+    outline: none;
+}
+.button.button-important {
+    color: #fff;
+	background-color: #d81c2a;
+}
+.button.button-important:hover, .button.button-important:focus {
+    color: #fff;
+    background-color: #AB1621;
+}
+.button.button-normal {
+    color: #fff;
+	background-color: #4BA738;
+}
+.button.button-normal:hover, .button.button-normal:focus {
+    color: #fff;
+    background-color: #427541;
+}
+@media screen and (max-width: 560px) {
+	.button {
+		width: 100%;
+	}
+}
+.widget .widget-body button {
+	margin: 0;
+}
+
+.input-field {
+    background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: 4px;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 32px 0 10px;
+    width: 100%;
+    line-height: 32px;
+    font-size: 15px;
+    box-sizing: border-box;
+    min-height: 33px;
+}
+.input-field:focus {
+    outline: none;
+    border: 1px solid #30426a;
+    box-shadow: 0 0 3px #30426a;
+}
+.search-wrapper {
+	position: relative;
+	width: 100%;
+	display: inline-block;
+}
+.search-wrapper:before {
+	position: absolute;
+    right: 10px;
+    font-size: 15px;
+    top: 10px;
+    color: #54698d;
+}
+
+/*WIDGET*/
+.widget {
+	border-radius: 4px;
+}
+.widget .widget-header {
+	line-height: 20px;
+	border-radius: 4px 4px 0 0;
+}
+.widget-name {
+	color: #767676;
+	padding: 4px 10px;
+}
+.spasavatelji-tables .widget-body {
+	padding: 0;
+}
+.spasavatelji-tables > div {
+	margin-top: 15px;
+}
+@media screen and (max-width: 560px) {
+	.widget .widget-body {
+		padding: 0;
+	}
+	.widget .widget-body .row {
+	    padding: 10px 0;
+	}
+	.widget.action-widget .widget-body .row {
+	    padding: 5px 0;
+	}
+}
+ul.sidebar .sidebar-list .menu-icon {
+	font-size: 20px;
+}
+
+.resc-no-label {
+	font-weight: bold;
+	font-size: 18px;
+}
+.resc-no {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0 0.5rem;
+}
+
+.widget.action-widget .widget-body .row {
+	padding: 5px 0;
+}
+.widget-body .row span:nth-child(2) {
+	margin-left: 10px;
+}
+.action-widget .widget-header {
+	font-size: 18px;
+	/*text-transform: uppercase;*/
+	/*font-weight: bold;*/
+}
+.action-widget.normal .widget-header {
+	background-color: #f0f02f;
+	color: #16325c;
+}
+.action-widget.medium .widget-header {
+	background-color: #ffa500;
+	color: #fff;
+}
+.action-widget.high .widget-header {
+	background-color: #d81c2a;
+	color: #fff;
+}
+
+.hitnost {
+	font-size: 16px;
+}
+.action-widget.normal .hitnost {
+	color: #a9a900;
+}
+.action-widget.medium .hitnost {
+	color: #ffa500;
+}
+.action-widget.high .hitnost {
+	color: #d81c2a;
+}
+.short-decription {
+	margin-bottom: 10px;
+}
+.active-actions {
+	padding-bottom: 20px;
+}
+/*ADD ACTION*/
+.add-action-form {
+	padding-bottom: 20px;
+}
+.add-action-form .widget-header {
+	background-color: #d9edf7;
+	background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);
+}
+.add-action-form .widget-body {
+	padding: 20px;
+}
+.section-name {
+	text-transform: uppercase;
+}
+.section-wrapper > div {
+	padding: 0;
+}
+.section-wrapper > div.kordinate {
+	padding-bottom: 10px;
+}
+.section-wrapper > div.col-sm-12 .left, .section-wrapper > div.col-xs-12 .left {
+	padding-left: 0;
+}
+.section-wrapper > div.col-sm-12 .right, .section-wrapper > div.col-xs-12 .right {
+	padding-left: 0;
+}
+label {
+	font-weight: normal;
+	margin-bottom: 0;
+	margin-top: 5px;
+}
+.table {
+	margin-bottom: 0;
+}
+/*ADD SPASAVATELJ*/
+.add-resc-form {
+	padding-bottom: 20px;
+}
+.add-resc-form .widget-header {
+	background-color: #d9edf7;
+	background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);
+}
+.add-resc-form .widget-body {
+	padding: 20px;
+}
+
+.widget-row .button {
+	margin: 5px 0;
+}
+
+.collapsable-section {
+	width: 100%;
+	margin: 15px 0;
+}
+.collapsable-section h2 {
+    margin: 0;
+    font-size: 20px;
+    padding: 5px 5px 5px 30px;
+    background-color: #f4f6f9;
+    position: relative;
+    cursor: pointer;
+    color: #16325c;
+    border-radius: 4px;
+}
+.collapsable-section h2:before {
+	position: absolute;
+	left: 9px;
+	font-size: 15px;
+	line-height: 22px;
+	cursor: pointer;
+}
+.collapsable-section h2:hover {
+	background-color: #eef1f6;
+}
+.collapsable-section h2.chevrondown {
+	border-radius: 4px 4px 0 0;
+}
+.icon-chevrondown:before {
+    content: "\69" !important;
+}
+.collapsable-section .collapsed {
+	height: auto;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.5s ease;
+}
+.collapsable-section .collapsed.expanded {
+	max-height: 1000px;
+}
+
+.collapsable-section .widget {
+	border-radius: 0;
+}
+.collapsable-section .widget .widget-body {
+	padding: 0;
+}
+
+/*MAIN*/
+.main-view-wrapper {
+	/*padding: 0 15px;*/
+}
+
+/*ADD RESC*/
+.distance {
+	text-align: center;
+}
+.distance span {
+	width: 15px;
+	height: 15px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+}
+.distance_long span {
+	border: 3px solid red;
+}
+.distance_mid span {
+	border: 3px solid orange;
+}
+.distance_close span {
+	border: 3px solid green;
+}
+.table .check {
+	position: relative;
+	padding-left: 40px;
+}
+.check-all {
+	background-color: #fff;
+	border: 1px solid #d8dde6;
+	border-radius: 5px;
+	position: absolute;
+    left: 6px;
+    top: 6px;
+}
+.check-all:hover, .check-all:focus {
+	background-color: #f4f6f9;
+	outline: none;
+}
+.check-all:before {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    color: #30426A;
+}
+.selected .check:before {
+	font-family: 'in2';
+	content: '\66';
+	position: absolute;
+    left: 12px;
+    top: 6px;
+    font-size: 15px;
+    color: #30426A;
+}
+.selected td {
+	background-color: #faffbd;
+}
+.table.call-resc td {
+	cursor: pointer;
+}
+.active-actions .widget {
+	margin-bottom: 10px;
+}
+.main-view-wrapper .widget {
+	margin-bottom: 10px;
+}
+.stanica {
+	margin-left: 15px;
+}
+.stanica p {
+	font-weight: bold;
+}
+.nesto, .planina, .dezurni {
+	display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+.nesto p, .planina p, .dezurni p {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.planina span {
+	background-image: url("../content/mountains (1).png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.nesto span {
+	background-image: url("../content/binoculars (1).png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.dezurni span {
+	background-image: url("../content/phone-call.png");
+	display: block;
+    height: 110px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.dolje {
+	margin-bottom: 0;
+}
+.gore {
+	margin-top: 0;
+}
+.akcije-u-tijeku {
+	font-size: 19px;
+    margin-left: 21px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.no-margin {
+	padding: 0;
+}
+.sifra {
+    padding: 5px 20px;
+}
+.sifra .input-field {
+	width: calc(80% - 30px);
+}
+.sifra .button {
+	width: 15%;
+	display: inline-block;
+    height: 38px;
+    min-width: 75px;
+}
+.row.widget-row span:nth-child(2) {
+    font-weight: bold;
+}
+
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-map, .active-actions .row:nth-child(3) .spec-img.img-map {
+	background-image: url("../content/spec/doktor.png");
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-dog, .active-actions .row:nth-child(3) .spec-img.img-dog {
+	background-image: url("../content/spec/skijanje.png");
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-ski, .active-actions .row:nth-child(3) .spec-img.img-ski {
+	display: none;
+}
+.main-view-wrapper .fix:nth-child(7) .spec-img.img-spel, .active-actions .row:nth-child(3) .spec-img.img-spel {
+	display: none;
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-map, .active-actions .row:nth-child(4) .spec-img.img-map {
+	background-image: url("../content/spec/alpinizam.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-dog, .active-actions .row:nth-child(4) .spec-img.img-dog {
+	background-image: url("../content/spec/mapa.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-ski, .active-actions .row:nth-child(4) .spec-img.img-ski {
+	background-image: url("../content/spec/helikopter.png");
+}
+.main-view-wrapper .fix:nth-child(8) .spec-img.img-spel, .active-actions .row:nth-child(4) .spec-img.img-spel {
+	display: none;
+}

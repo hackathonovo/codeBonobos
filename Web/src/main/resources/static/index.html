@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="application" ng-controller="applicationController">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>HGSS Admin Page</title>
+    <!-- Angularjs and JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Social login -->
+    <script src="app/libs/angularjs-social-login.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="app/css/theme.css">
+    <link rel="stylesheet" href="app/css/rdash.min.css">
+    <link rel="stylesheet" href="app/css/in2font.css">
+    <link rel="stylesheet" href="app/css/style.css">
+
+    <!-- Bootstrap Angular directive -->
+    <script src="app/libs/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <!-- Angular app -->
+    <script src="app/app.js"></script>
+    <script src="app/controller.js"></script>
+    <script src="app/factory.js"></script>
+    <!-- Video -->
+    <script src="http://static.videogular.com/scripts/videogular/latest/videogular.js"></script>
+    <!-- Maps -->
+    <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
+    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+</head>
+<body class="hamburg">
+<div id="page-wrapper" ng-class="{open: showSidebar, closed : !showSidebar}">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar">
+            <li class="sidebar-main">
+                <a href="" ng-click="toggleSidebar()">
+                    <span class="hgss-logo"></span>HGSS
+                    <span class="menu-icon glyphicon glyphicon-transfer"></span>
+                </a>
+            </li>
+            <li class="sidebar-title"><span>NAVIGACIJA</span></li>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list prvi">
+                <a href="#/">Pocetna <span class="menu-icon icon-cabin-3"></span></a>
+            </li>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list drugi">
+                <a href="#/resc">Spašavatelji <span class="menu-icon icon-worker"></span></a>
+            </li>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list treci">
+                <a href="#/current">Akcije u tijeku<span class="menu-icon icon-error-triangle" aria-hidden="true"></span></a>
+            </li>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list cetvrti">
+                <a href="#/codes">Šifrarnik <span class="menu-icon icon-table" aria-hidden="true"></span></a>
+            </li>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list peti">
+                <a href="#/action">Završene akcije<span class="menu-icon icon-tick"></span></a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="col-xs-4">
+
+            </div>
+            <div class="col-xs-4">
+
+            </div>
+            <div class="col-xs-4">
+
+            </div>
+        </div>
+    </div>
+    <!-- Content -->
+    <div id="content-wrapper">
+        <div class="page-content">
+            <!-- Header Bar -->
+            <div class="row header">
+                <div class="col-xs-12">
+                    <div class="user pull-right">
+                        <!-- TODO -->
+                    </div>
+                    <div class="meta">
+                        <div class="page">
+                            Administracijski panel HGSS
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Bar -->
+
+            <!-- Main Content -->
+            <div class="row">
+                <div class="main-wrapper">
+                    <div ng-view></div>
+                </div>
+            </div><!-- End Page Content -->
+        </div><!-- End Content Wrapper -->
+    </div>
+</div>
+</body>
+<script>
+    jQuery(".sidebar-list").click(function() {
+      jQuery( ".sidebar-list" ).removeClass("active-tab");
+      jQuery(this).addClass("active-tab");
+    });
+</script>
+</html>

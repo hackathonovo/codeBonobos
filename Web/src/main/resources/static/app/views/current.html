@@ -1,0 +1,74 @@
+<div class="form-wrapper active-actions" ng-controller="CurrentController">
+  <div class="row btn-row">
+    <!-- DODAVANJE NOVOG -->
+    <a href="#/addAction" class="button button-important">Dodaj akciju</a>
+  </div>
+  <div class="row" ng-repeat="action in allActive">
+    <!-- AKTIVNE AKCIJE -->
+    <div class="col-md-12 col-sm-12 col-xs-12 ">
+      <div class="widget action-widget" ng-class="{'medium':action.priority==1, 'high':action.priority==2, 'normal':action.priority==0}">
+        <div class="widget-header">AKCIJA#{{action.id}}</div>
+        <div class="widget-body">
+          <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12">
+              <div class="row">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="spec-img img-map"></button>
+                    <button type="button" class="spec-img img-dog"></button>
+                    <button type="button" class="spec-img img-ski"></button>
+                    <button type="button" class="spec-img img-spel"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="short-decription">
+                  {{action.opis}}
+                </div>
+              </div>
+              <div class="row widget-row">
+                <span class="">Kontakt broj voditelja:</span>
+                <span class="">{{action.voditelj}}</span>
+              </div>
+              <div class="row widget-row">
+                <span class="">Lokacija polaska:</span>
+                <span class="">{{action.meetingLocation}}</span>
+              </div>
+              <div class="row widget-row">
+                <span class="">Vrijeme polaska:</span>
+                <span class="">{{action.meetingTime+'h'}}</span>
+              </div>
+              <div class="row widget-row">
+                <span class="">Stupanj hitnosti:</span>
+                <span class="hitnost">{{dictPrio[action.priority]}}</span>
+              </div>
+              <div class="row widget-row">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Ime aktivnog spašavatelja</th>
+                    <!-- to expand line -->
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="act in action.prihvaceniSpasavatelji">
+                    <td>{{act.ime}}</td>
+                  </tr>
+                  <!-- -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <ng-map center="[{{action.location.lat}}, {{action.location.lng}}]">
+                <marker position="[{{action.location.lat}}, {{action.location.lng}}]" title="how" animation="Animation.BOUNCE"></marker>
+              </ng-map>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

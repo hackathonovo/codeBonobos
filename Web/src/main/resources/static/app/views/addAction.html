@@ -1,0 +1,57 @@
+<div class="form-wrapper add-action-form" ng-controller="AddActionController">
+    <div class="row">
+        <!-- AKTIVNE AKCIJE -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">Kreiraj novu akciju</div>
+                <div class="widget-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="actionName">Ime akcije</label>
+                            <input type="text" class="input-field" id="actionName" ng-model="currentAction.ime">
+                        </div>
+                        <div class="form-group">
+                            <label for="actionDetails">Opis akcije</label>
+                            <textarea class="input-field" rows="3" id="actionDetails" ng-model="currentAction.opis"></textarea>
+                        </div>
+                        <div class="form-group section-wrapper">
+                            <div class="kordinate col-md-6 col-sm-12 col-xs-12">
+                                <label class="section-name">Koordinate spasavanja</label><br>
+                                <div class="col-md-12 col-sm-6 col-xs-6 left">
+                                    <label for="actionLong">Geografska širina</label>
+                                    <input type="text" id="actionLong" class="input-field" ng-model="currentAction.location.lng">
+
+                                </div>
+                                <div class="col-md-12 col-sm-6 col-xs-6 right">
+                                    <label for="actionLat">Geografska visina</label>
+                                    <input type="text" id="actionLat" class="input-field" ng-model="currentAction.location.lat">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <ng-map center="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]">
+                                    <marker position="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]" title="how" animation="Animation.BOUNCE" draggable=true on-dragend="markerChanged(event)"></marker>
+                                </ng-map>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>DETALJI SASTAJANJA</label><br>
+
+                            <label for="actionLong">Lokacija</label>
+                            <input type="text" id="actionStartLocation" class="input-field">
+
+
+                            <label for="actionLat">Vrijeme</label>
+                            <input type="time" id="actionStartTime" class="input-field">
+                        </div>
+                        <div class="form-group">
+                            <label for="nmb">Kontakt broj</label>
+                            <input class="input-field" id="nmb" type="text" ng-model="currentAction.voditelj">
+                        </div>
+                        <button type="submit" class="button button-normal" ng-click="createAction()">Kreiraj!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

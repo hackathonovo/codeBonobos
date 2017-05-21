@@ -1,0 +1,62 @@
+<div class="form-wrapper add-resc-form" ng-controller="AddRescController">
+    <div class="row">
+        <!-- AKTIVNE AKCIJE -->
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="widget">
+                <div class="widget-header">Novi spašavatelj</div>
+                <div class="widget-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="rescName">Ime i prezime spašavatelja</label>
+                            <input type="text" class="input-field" id="rescName" ng-model="currentResc.ime">
+                        </div>
+                        <div class="form-group">
+                            <label for="rescNum">Broj telefona</label>
+                            <input type="text" class="input-field" id="rescNum" ng-model="currentResc.brojTelefona">
+                        </div>
+                        <div class="form-group">
+                            <label for="rescName">Iskustvo</label>
+                            <select class="input-field" ng-options="e as e.name for e in exp track by e.id" ng-model="selectedExp">
+                            </select>
+                        </div>
+                        <div class="form-group section-wrapper">
+                            <div class="kordinate col-md-6 col-sm-12 col-xs-12">
+                                <label class="section-name">Bazna lokacija spasavatelja</label><br>
+                                <div class="col-md-12 col-sm-6 col-xs-6 left">
+                                    <label for="actionLong">Geografska širina</label>
+                                    <input type="text" id="actionLong" class="input-field" ng-model="currentResc.lokacija.lng">
+
+                                </div>
+                                <div class="col-md-12 col-sm-6 col-xs-6 right">
+                                    <label for="actionLat">Geografska visina</label>
+                                    <input type="text" id="actionLat" class="input-field" ng-model="currentResc.lokacija.lat">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <ng-map center="[{{currentResc.lokacija.lat}}, {{currentResc.lokacija.lng}]">
+                                    <marker position="[{{currentResc.lokacija.lat}}, {{currentResc.lokacija.lng}}]" title="how" animation="Animation.BOUNCE" draggable=true on-dragend="markerChanged(event)"></marker>
+                                </ng-map>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Single button -->
+                            <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                                    Specijalizacija <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem" ng-repeat="s in spec"><div class="{{s.csscl}}"></div><a ng-click="selectSpec(s)" href="">{{s.name}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="{{spec[selectedSpec-1].csscl}}"></div><label>{{spec[selectedSpec-1].name}}</label>
+                        </div>
+                        <div class="form-group">
+                            <button class="button button-normal" ng-click="saveResc()">Dodaj</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
