@@ -154,6 +154,7 @@ ul.sidebar .sidebar-list.peti.active-tab .menu-icon, ul.sidebar .sidebar-list.pe
     line-height: 32px;
     font-size: 15px;
     box-sizing: border-box;
+    min-height: 33px;
 }
 .input-field:focus {
     outline: none;
@@ -482,4 +483,19 @@ label {
 }
 .no-margin {
 	padding: 0;
+}
+.sifra {
+    padding: 5px 20px;
+}
+.sifra .input-field {
+	width: calc(80% - 30px);
+}
+.sifra .button {
+	width: 15%;
+	display: inline-block;
+    height: 38px;
+    min-width: 75px;
+}
+.row.widget-row span:nth-child(2) {
+    font-weight: bold;
 }
