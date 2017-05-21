@@ -196,6 +196,8 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
     $scope.freeResc = [];
     $scope.filteredFreeResc = [];
 
+    
+
     $scope.tmp =  RescFactory.getAllNear($scope.actionId).then(function (response) {
         $scope.freeResc = response.data.response;
         angular.copy($scope.freeResc, $scope.filteredFreeResc);

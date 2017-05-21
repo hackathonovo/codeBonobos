@@ -89,6 +89,10 @@ app.factory('RescFactory', ['$http', 'ActionCreate', function ($http, ActionCrea
         return $http.get('/api/spasavatelji/get-closest?actionId='+actionID);
     };
 
+    result.getDetails = function (actionID) {
+        return $http.get('/api/akcije/'+actionID)
+    };
+
     result.addResc = function (resc) {
         $http({
             method: 'PUT',
