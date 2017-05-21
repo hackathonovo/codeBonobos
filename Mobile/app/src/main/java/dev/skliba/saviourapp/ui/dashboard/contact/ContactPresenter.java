@@ -3,6 +3,7 @@ package dev.skliba.saviourapp.ui.dashboard.contact;
 import dev.skliba.saviourapp.data.interactors.ContactInteractor;
 import dev.skliba.saviourapp.data.listeners.Listener;
 import dev.skliba.saviourapp.data.models.response.ContactResponse;
+import dev.skliba.saviourapp.data.network.ApiManagerImpl;
 
 public class ContactPresenter implements ContactMvp.Presenter {
 
@@ -26,7 +27,8 @@ public class ContactPresenter implements ContactMvp.Presenter {
         public void onSuccess(ContactResponse contactResponse) {
             view.hideProgress();
             if (contactResponse != null) {
-                view.loadWebViewUrl("http://192.168.201.44:8080/api/action" + contactResponse.getActionId());
+                view.loadWebViewUrl(ApiManagerImpl.WEB_ENDPOINT + "/#/current/" + contactResponse.getActionId(),
+                        contactResponse.getLeaderPhoneNo());
             } else {
                 view.showEmptyUi();
             }
@@ -35,7 +37,11 @@ public class ContactPresenter implements ContactMvp.Presenter {
         @Override
         public void onFailure(String message) {
             view.hideProgress();
-            view.showError(message);
+            if (message.equals("No such action")) {
+                view.showEmptyUi();
+            } else {
+                view.showError(message);
+            }
         }
 
         @Override

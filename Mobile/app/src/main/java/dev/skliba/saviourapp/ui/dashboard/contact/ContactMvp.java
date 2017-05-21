@@ -11,7 +11,7 @@ public interface ContactMvp {
 
     interface View extends BaseMvp.View {
 
-        void loadWebViewUrl(String url);
+        void loadWebViewUrl(String url, String leaderPhoneNo);
 
         void showEmptyUi();
     }

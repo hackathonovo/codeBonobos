@@ -24,7 +24,6 @@ public class ContactInteractor {
     }
 
     public void fetchActions(Listener<ContactResponse> listener) {
-
         if (SharedPrefsUtil.getUserId() == -1) {
             listener.onFailure("User isn't logged in");
             return;

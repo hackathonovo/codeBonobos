@@ -7,6 +7,7 @@ import dev.skliba.saviourapp.data.models.response.ActionDetailsResponse;
 import dev.skliba.saviourapp.data.models.response.BaseResponse;
 import dev.skliba.saviourapp.data.network.ApiService;
 import dev.skliba.saviourapp.data.network.BaseCallback;
+import dev.skliba.saviourapp.util.SharedPrefsUtil;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -17,6 +18,10 @@ public class ActionDetailsInteractor {
     private BaseCallback<BaseResponse<ActionDetailsResponse>> callback;
 
     private Call<BaseResponse<ActionDetailsResponse>> call;
+
+    private BaseCallback<BaseResponse<Void>> acceptCallback;
+
+    private Call<BaseResponse<Void>> acceptCall;
 
     public ActionDetailsInteractor(ApiService apiService) {
         this.apiService = apiService;
@@ -46,5 +51,44 @@ public class ActionDetailsInteractor {
             call.cancel();
             callback.cancel();
         }
+    }
+
+    public void onAcceptClicked(String actionId, Listener<BaseResponse<Void>> listener) {
+
+        acceptCall = apiService.onActionResponse(actionId, SharedPrefsUtil.getUserId(), true);
+
+        acceptCallback = new BaseCallback<BaseResponse<Void>>() {
+            @Override
+            public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
+                listener.onSuccess(body);
+            }
+
+            @Override
+            public void onUnknownError(@Nullable String error) {
+                listener.onFailure(error);
+            }
+        };
+
+        acceptCall.enqueue(acceptCallback);
+
+    }
+
+    public void onDeclineClicked(String actionId, Listener<BaseResponse<Void>> listener) {
+
+        acceptCall = apiService.onActionResponse(actionId, SharedPrefsUtil.getUserId(), false);
+
+        acceptCallback = new BaseCallback<BaseResponse<Void>>() {
+            @Override
+            public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
+                listener.onSuccess(body);
+            }
+
+            @Override
+            public void onUnknownError(@Nullable String error) {
+                listener.onFailure(error);
+            }
+        };
+
+        acceptCall.enqueue(acceptCallback);
     }
 }

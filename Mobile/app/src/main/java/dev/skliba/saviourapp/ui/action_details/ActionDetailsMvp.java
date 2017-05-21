@@ -8,10 +8,16 @@ public interface ActionDetailsMvp {
     interface Presenter extends BaseMvp.Presenter {
 
         void init(String actionId);
+
+        void onAcceptClicked();
+
+        void onDeclineClicked();
     }
 
     interface View extends BaseMvp.View {
 
         void displayData(ActionDetailsResponse actionDetailsResponse);
+
+        void successfulResponse();
     }
 }

@@ -8,7 +8,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import dev.skliba.saviourapp.R;
 import dev.skliba.saviourapp.ui.action_details.ActionDetailsActivity;
@@ -22,14 +21,8 @@ public class GAFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             showNotification(remoteMessage.getData().get("actionId"));
-
         }
     }
 
@@ -43,7 +36,7 @@ public class GAFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_logo_white)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText("There's a new action that requires your attention")
                 .setContentIntent(pendingIntent)

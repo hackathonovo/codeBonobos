@@ -7,10 +7,14 @@ public interface ProfileMvp {
     interface Presenter extends BaseMvp.Presenter {
 
         void signOut();
+
+        void onUserAvailable(boolean isAvailable);
     }
 
     interface View extends BaseMvp.View {
 
         void navigateToLogin();
+
+        void success();
     }
 }

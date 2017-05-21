@@ -3,14 +3,13 @@ package dev.skliba.saviourapp.ui.dashboard.news;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import java.util.List;
 
 import butterknife.BindView;
-import co.infinum.mjolnirrecyclerview.MjolnirRecyclerView;
 import dev.skliba.saviourapp.R;
 import dev.skliba.saviourapp.data.models.response.NewsResponse;
 import dev.skliba.saviourapp.di.MvpFactory;
@@ -19,11 +18,11 @@ import dev.skliba.saviourapp.ui.shared.BaseMvp;
 
 public class NewsFragment extends BaseFragment implements NewsMvp.View {
 
-    @BindView(R.id.newsRecycler)
-    MjolnirRecyclerView newsRecycler;
-
     @BindView(R.id.emptyView)
     LinearLayout emptyView;
+
+    @BindView(R.id.webview)
+    WebView webview;
 
     private NewsMvp.Presenter presenter;
 
@@ -43,12 +42,10 @@ public class NewsFragment extends BaseFragment implements NewsMvp.View {
         super.onViewCreated(view, savedInstanceState);
 
         init();
-        //presenter.fetchNews();
     }
 
     private void init() {
-        newsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        newsRecycler.setEmptyView(emptyView, true);
+        webview.loadUrl("http://www.gss.hr/");
     }
 
     @Override

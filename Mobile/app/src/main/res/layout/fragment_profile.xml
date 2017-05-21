@@ -26,29 +26,16 @@
                 android:textStyle="bold"
                 tools:text="Jake Wharton"/>
 
-    </LinearLayout>
+        <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#c2c2c2"/>
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c2c2c2"/>
-
-        <TextView
+        <Button
                 android:id="@+id/signOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_above="@+id/guardianAngel"
-                android:layout_marginBottom="60dp"
+                android:layout_margin="16dp"
                 android:padding="4dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@android:color/transparent"
@@ -58,10 +45,77 @@
                 android:drawablePadding="16dp"
                 android:text="Sign out"/>
 
-        <View
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_color_secondary"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/friendsPhonesText"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c2c2c2"/>
+                android:layout_height="wrap_content"
+                android:text="Friends' phones"
+                android:padding="16dp"
+                android:textSize="16sp"/>
+
+        <LinearLayout
+                android:id="@+id/firstNumberContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/friendsPhonesText"
+                android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_croatian_flag"/>
+
+            <EditText
+                    android:id="@+id/firstPersonNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+385 "
+                    android:padding="8dp"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/secondNumberContainer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/firstNumberContainer"
+                android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_croatian_flag"/>
+
+            <EditText
+                    android:id="@+id/secondPersonNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+385 "
+                    android:padding="8dp"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
 
         <Button
                 android:id="@+id/guardianAngel"
@@ -74,6 +128,37 @@
                 android:text="Guardian angel"
                 android:background="@drawable/guardian_angel_background"/>
 
+        <Button
+                android:id="@+id/saveNumbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_above="@id/guardianAngel"
+                android:text="Save numbers"
+                android:enabled="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/send_numb_background"/>
+
+        <CheckBox
+                android:id="@+id/isUserAvailable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/saveNumbers"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:hint="Available"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/isUserAvailable"
+                android:layout_above="@id/saveNumbers"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/button_background"
+                android:padding="16dp"
+                android:text="Send location"/>
     </RelativeLayout>
 
 </LinearLayout>

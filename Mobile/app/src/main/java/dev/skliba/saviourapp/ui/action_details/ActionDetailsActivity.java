@@ -4,9 +4,11 @@ package dev.skliba.saviourapp.ui.action_details;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -77,9 +79,25 @@ public class ActionDetailsActivity extends BaseActivity implements ActionDetails
         meetingLocation.setText(actionDetailsResponse.getMeetingLocation());
     }
 
+    @Override
+    public void successfulResponse() {
+        Toast.makeText(this, "Response submitted successfully", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> supportFinishAfterTransition(), 1000);
+    }
+
     @OnClick(R.id.actionLocation)
     protected void onActionLocationClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
+    }
+
+    @OnClick(R.id.accept)
+    protected void onAcceptClicked() {
+        presenter.onAcceptClicked();
+    }
+
+    @OnClick(R.id.decline)
+    protected void onDeclineClicked() {
+        presenter.onDeclineClicked();
     }
 }

@@ -29,7 +29,7 @@ public interface ApiService {
     @GET("spasavatelji/fb/{accessToken}")
     Call<BaseResponse<LoginResponse>> facebookLogin(@Path("accessToken") String accessToken, @Query("name") String name);
 
-    @GET("akcije/{userId}")
+    @GET("akcije/active/{userId}")
     Call<BaseResponse<ContactResponse>> checkIfIHaveAnyActions(@Path("userId") int userId);
 
     Call<BaseResponse<PanicModeResponse>> panicModeEngaged(@Path("userId") int userId, @Query("lat") double latitude,
@@ -37,4 +37,15 @@ public interface ApiService {
 
     @GET("akcije/{actionId}")
     Call<BaseResponse<ActionDetailsResponse>> getActionDetails(@Path("actionId") String actionId);
+
+    @GET("spasavatelji/answer-invite")
+    Call<BaseResponse<Void>> onActionResponse(@Query("actionId") String actionId, @Query("userId") int userId,
+            @Query("answer") boolean isAccepted);
+
+    @GET("spasavatelji/location/{userId}")
+    Call<BaseResponse<Void>> sendUserLocation(@Path("userId") int userId, @Query("lat") double lat, @Query("lng") double lng,
+            @Query("timestamp") long ms);
+
+    @GET("spasavatelji/dostupnost/{userId}")
+    Call<BaseResponse<Void>> setUserAccessability(@Path("userId") int userId, @Query("isAccessible") boolean isAccessible);
 }

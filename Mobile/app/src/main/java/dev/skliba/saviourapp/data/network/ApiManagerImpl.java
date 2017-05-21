@@ -10,6 +10,8 @@ public class ApiManagerImpl implements ApiManager {
 
     private static final String API_ENDPOINT = "http://192.168.201.44:8080/api/";
 
+    public static final String WEB_ENDPOINT = "http://192.168.201.44:8080";
+
     private ApiService apiService;
 
     private static ApiManagerImpl instance;

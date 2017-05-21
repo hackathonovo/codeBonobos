@@ -5,11 +5,10 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <co.infinum.mjolnirrecyclerview.MjolnirRecyclerView
-            android:id="@+id/newsRecycler"
+    <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
+            android:layout_height="match_parent"/>
 
     <LinearLayout
             android:id="@+id/emptyView"
