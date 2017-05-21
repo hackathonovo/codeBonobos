@@ -308,12 +308,15 @@ app.controller('AddActionController', ['$scope', '$location', 'NgMap', 'ActionFa
             lng: "15.00"
         },
         radius: 0,
-        voditelj: null
+        voditelj: null,
+        meetingTime: null,
+        meetingLocation: null
     };
     // ==== INIT MODELS ====
-
+    $scope.tmpTime = null;
     // ==== CONTROL FUNCTIONS ====
     $scope.createAction = function () {
+        $scope.currentAction.meetingTime = $scope.tmpTime.getHours()+":"+$scope.tmpTime.getMinutes();
         var id = ActionFactory.addAction($scope.currentAction);
         $location.url('/addActionResc')
     };
