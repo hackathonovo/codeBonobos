@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "610051909340",
+    "firebase_url": "https://saviourapp-43cd6.firebaseio.com",
+    "project_id": "saviourapp-43cd6",
+    "storage_bucket": "saviourapp-43cd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610051909340:android:a80d67e8e8cc6305",
+        "android_client_info": {
+          "package_name": "dev.skliba.saviourapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610051909340-eo43kie5fgar3gl6qnjc85cb9cb0pv2b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.skliba.saviourapp",
+            "certificate_hash": "5c1247224b090ad45fb85f5ef2f4dea1f1168407"
+          }
+        },
+        {
+          "client_id": "610051909340-chc3sfftvurimkmqi39ak4kpfon41003.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsV91Bzj1jOesiFVJBsS3C7rdsakbZeJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610051909340-chc3sfftvurimkmqi39ak4kpfon41003.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

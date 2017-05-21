@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+        <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"/>
+
+        <android.support.v4.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <Button
+                android:id="@+id/contactLeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Contact leader"
+                android:background="@drawable/button_background"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="200dp"
+                android:layout_height="110dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_no_news"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="It seems you have no active actions"
+                />
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/addAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add"
+                />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="bottom_sheet_title_margin_left">16dp</dimen>
+    <dimen name="bottom_sheet_title_margin_top">20dp</dimen>
+    <dimen name="bottom_sheet_title_margin_bottom">20dp</dimen>
+    <dimen name="bottom_sheet_title_text_size">14sp</dimen>
+
+    <integer name="error_flash_delay_ms">2000</integer>
+    <integer name="error_flash_delay_ms_half">1000</integer>
+</resources>

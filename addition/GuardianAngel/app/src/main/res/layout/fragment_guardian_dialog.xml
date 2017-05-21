@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"/>
+
+        <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/toolbarContainer"
+                android:layout_marginTop="30dp"
+                android:padding="16dp"
+                android:textSize="16sp"
+                android:text="Please set the interval time (in seconds)"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/intervalTime"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true">
+
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <LinearLayout
+                android:id="@+id/panicContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/intervalTime"
+                android:layout_marginTop="60dp"
+                android:padding="16dp"
+                android:gravity="center_horizontal"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+
+                    android:text="Set panic keyword"
+                    android:textSize="16dp"
+                    />
+
+            <EditText
+                    android:id="@+id/panicKeyword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="Panic keyword"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/panicContainer"
+                android:layout_marginTop="30dp"
+                android:padding="16dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Set OK keyword"
+                    android:textSize="16dp"
+                    />
+
+            <EditText
+                    android:id="@+id/okKeyword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="OK keyword"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    />
+
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/startGuardian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/guardian_angel_background"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="Start guardian angel"/>
+
+    </RelativeLayout>
+</ScrollView>
