@@ -54,36 +54,6 @@
                             </ng-map>
                         </div>
                         <div class="clear"></div>
-                        <div class="collapsable-section">
-                            <h2 class="icon-chevronright" ng-class="'icon-chevrondown' : {{action.expended}}" ng-click="showDetails(action)">Popis pozvanih spasavatelja</h2>
-                            <div class="collapsed" ng-class="'expanded' : {{action.expended}}">
-                                <div class="widget">
-                                    <div class="widget-body fix-height-500">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Ime</th>
-                                                <th>Specijalnost</th>
-                                                <th>Kontakt</th>
-                                                <th>Udaljenost</th>
-                                                <!-- to expand line -->
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr ng-repeat="fr in filteredFreeResc | filter:userSearch">
-                                                <td>{{fr.ime}}</td>
-                                                <td>{{dict[fr.specijalnost.toLowerCase()]}}</td>
-                                                <td>{{dict[fr.specijalnost.toLowerCase()]}}</td>
-                                                <td>{{dict[fr.specijalnost.toLowerCase()]}}</td>
-                                            </tr>
-                                            <!-- -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -166,11 +166,15 @@ app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope
         "1": "Srednje",
         "2": "Hitno"
     };
+    
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
     $scope.showDetails = function (action) {
         action.expended ? action.expanded = false : action.expanded = true;
-    }
+
+    };
+
+    $scope.detailArray = [];
 }]);
 
 app.controller('CodesController', ['$scope', function ($scope) {
@@ -182,7 +186,7 @@ app.controller('CodesController', ['$scope', function ($scope) {
 
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
-    $scope.insertNew = function(val){
+    $scope.insertNew = function (val) {
         SchFactory.insert('TITLE', val);
     }
 
@@ -196,9 +200,8 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
     $scope.freeResc = [];
     $scope.filteredFreeResc = [];
 
-    
 
-    $scope.tmp =  RescFactory.getAllNear($scope.actionId).then(function (response) {
+    $scope.tmp = RescFactory.getAllNear($scope.actionId).then(function (response) {
         $scope.freeResc = response.data.response;
         angular.copy($scope.freeResc, $scope.filteredFreeResc);
     });
@@ -256,11 +259,11 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
     var v = 2;
     // ==== CONTROL FUNCTIONS ====
 
-    $scope.select = function(item) {
+    $scope.select = function (item) {
         item.selected ? item.selected = false : item.selected = true;
     };
 
-    $scope.getAllSelectedRows = function() {
+    $scope.getAllSelectedRows = function () {
         var x = $filter("filter")($scope.filteredFreeResc, {
             selected: true
         }, true);
@@ -270,7 +273,7 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
         x.forEach(function (wrapper) {
             selected.push(wrapper.rescuer.id)
         });
-        
+
         ActionFactory.addRescToAction($scope.actionId, selected);
 
         $location.url('/current')
@@ -281,11 +284,11 @@ app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'Ng
             en.selected ? en.selected = false : en.selected = true;
         })
     };
-    
+
     $scope.generateCssClass = function (distance) {
-        if(distance<25) {
+        if (distance < 25) {
             return "distance_close"
-        } else if(distance>25 && distance<60) {
+        } else if (distance > 25 && distance < 60) {
             return "distance_mid"
         } else {
             return "distance_long"
