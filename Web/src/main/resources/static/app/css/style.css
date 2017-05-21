@@ -1,0 +1,158 @@
+/*Custom css*/
+html, body, .hamburg {
+    font-family: Arial !important;
+}
+.clear {
+	clear: both;
+}
+.btn-row {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+/*NAVIGATION*/
+@media screen and (max-width: 560px) {
+	.closed .sidebar-list {
+		display: none;
+	}
+	#page-wrapper.closed .sidebar {
+		height: 66px;
+	}
+}
+
+/*PNG*/
+.spec-wrapper {
+    text-align: center;
+}
+.spec-img {
+	display: inline-block;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    width: 40px;
+    margin: 2px 8px !important;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 50%;
+}
+.spec-img:focus {
+	outline: none;
+}
+.spec-img:hover {
+    box-shadow: 0 0 5px black;
+	background-color: rgba(128, 128, 128, 0.16);
+}
+.spec-img.active-filter {
+    box-shadow: 0 0 5px black;
+	background-color: rgba(128, 128, 128, 0.26);
+}
+.img-alp {
+	background-image: url("../content/spec/alpinizam.png");
+}
+.img-doc {
+	background-image: url("../content/spec/doktor.png");
+}
+.img-heli {
+	background-image: url("../content/spec/helikopter.png");
+}
+.img-map {
+	background-image: url("../content/spec/mapa.png");
+}
+.img-dog {
+	background-image: url("../content/spec/pas.png");
+}
+.img-ski {
+	background-image: url("../content/spec/skijanje.png");
+}
+.img-spel {
+	background-image: url("../content/spec/speleologija.png");
+}
+.button {
+    padding: 7px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #fff;
+    display: block;
+    width: 250px;
+    text-align: center;
+    transition: all .2s ease;
+}
+.button:hover, .button:focus {
+    text-decoration: none;
+    outline: none;
+}
+.button.button-important {
+    color: #fff;
+	background-color: #d81c2a;
+}
+.button.button-important:hover, .button.button-important:focus {
+    color: #fff;
+    background-color: #AB1621;
+}
+.button.button-normal {
+    color: #fff;
+	background-color: #4BA738;
+}
+.button.button-normal:hover, .button.button-normal:focus {
+    color: #fff;
+    background-color: #427541;
+}
+@media screen and (max-width: 560px) {
+	.button {
+		width: 100%;
+	}
+}
+
+.input-field {
+    background-color: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+    border-radius: 4px;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 32px 0 10px;
+    width: 100%;
+    line-height: 32px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+.input-field:focus {
+    outline: none;
+    border: 1px solid #30426a;
+    box-shadow: 0 0 3px #30426a;
+}
+.search-wrapper {
+	position: relative;
+	width: 100%;
+	display: inline-block;
+}
+.search-wrapper:before {
+	position: absolute;
+    right: 10px;
+    font-size: 15px;
+    top: 10px;
+    color: #54698d;
+}
+
+/*WIDGET*/
+.widget .widget-header {
+	line-height: 20px;
+}
+.widget-name {
+	color: #767676;
+	padding: 4px 10px;
+}
+.spasavatelji-tables .widget-body {
+	padding: 0;
+}
+@media screen and (max-width: 560px) {
+	.widget .widget-body {
+		padding: 0;
+	}
+	.widget .widget-body .row {
+	    padding: 10px 0;
+	}
+}
+ul.sidebar .sidebar-list .menu-icon {
+	font-size: 20px;
+}
