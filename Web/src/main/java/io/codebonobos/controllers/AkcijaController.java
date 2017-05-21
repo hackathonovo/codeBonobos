@@ -72,22 +72,6 @@ public class AkcijaController {
         return new ResponseEntity<>(new ResponseWrapper<>(list, message), HttpStatus.OK);
     }
 
-    //    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
-    //    public ResponseWrapper<List<Akcija>> getInactive() {
-    //        List<Akcija> list = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(list, message);
-    //    }
-
-    //    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    //    public ResponseWrapper<Akcija> getActionByUserId(@PathVariable String id) {
-    //        Akcija akcija = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(akcija, message);
-    //    }
-
     @RequestMapping(value = "/add", method = RequestMethod.PUT)
     public ResponseEntity addAction(@RequestBody Akcija action) {
         IdWrapper id;
@@ -133,6 +117,8 @@ public class AkcijaController {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
+        int success = 0;
+        int fail = 0;
         for (String devToken : devTokens) {
             JSONObject body = new JSONObject();
             body.put("to", devToken);
@@ -157,8 +143,10 @@ public class AkcijaController {
                 FirebaseResponse firebaseResponse = pushNotification.get();
                 if (firebaseResponse.getSuccess() == 1) {
                     log.info("push notification sent ok!");
+                    success++;
                 } else {
                     log.error("error sending push notifications: " + firebaseResponse.toString());
+                    fail++;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -166,7 +154,7 @@ public class AkcijaController {
                 e.printStackTrace();
             }
         }
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>("Success : " + success + ", Fail : " + fail, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{actionId}", method = RequestMethod.GET)
