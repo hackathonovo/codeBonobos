@@ -8,23 +8,23 @@
                     <form>
                         <div class="form-group">
                             <label for="actionName">Ime akcije</label>
-                            <input type="text" class="form-control" id="actionName" ng-model="currentAction.ime">
+                            <input type="text" class="input-field" id="actionName" ng-model="currentAction.ime">
                         </div>
                         <div class="form-group">
                             <label for="actionDetails">Opis akcije</label>
-                            <textarea class="form-control" rows="3" id="actionDetails" ng-model="currentAction.opis"></textarea>
+                            <textarea class="input-field" rows="3" id="actionDetails" ng-model="currentAction.opis"></textarea>
                         </div>
                         <div class="form-group section-wrapper">
                             <div class="kordinate col-md-6 col-sm-12 col-xs-12">
                                 <label class="section-name">Koordinate spasavanja</label><br>
                                 <div class="col-md-12 col-sm-6 col-xs-6 left">
                                     <label for="actionLong">Geografska širina</label>
-                                    <input type="text" id="actionLong" class="form-control" ng-model="currentAction.location.lng">
+                                    <input type="text" id="actionLong" class="input-field" ng-model="currentAction.location.lng">
 
                                 </div>
                                 <div class="col-md-12 col-sm-6 col-xs-6 right">
                                     <label for="actionLat">Geografska visina</label>
-                                    <input type="text" id="actionLat" class="form-control" ng-model="currentAction.location.lat">
+                                    <input type="text" id="actionLat" class="input-field" ng-model="currentAction.location.lat">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
@@ -38,15 +38,15 @@
                             <label>DETALJI SASTAJANJA</label><br>
 
                             <label for="actionLong">Lokacija</label>
-                            <input type="text" id="actionStartLocation" class="form-control">
+                            <input type="text" id="actionStartLocation" class="input-field">
 
 
                             <label for="actionLat">Vrijeme</label>
-                            <input type="time" id="actionStartTime" class="form-control">
+                            <input type="time" id="actionStartTime" class="input-field">
                         </div>
                         <div class="form-group">
                             <label for="nmb">Kontakt broj</label>
-                            <input class="form-control" id="nmb" type="text" ng-model="currentAction.voditelj">
+                            <input class="input-field" id="nmb" type="text" ng-model="currentAction.voditelj">
                         </div>
                         <button type="submit" class="button button-normal" ng-click="createAction()">Kreiraj!</button>
                     </form>
