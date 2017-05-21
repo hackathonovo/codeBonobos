@@ -15,6 +15,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import be.appfoundry.nfclibrary.activities.NfcActivity;
@@ -45,6 +46,9 @@ public class NfcScanActivity extends NfcActivity {
     @BindView(R.id.progressView)
     ProgressBar progressView;
 
+    @BindView(R.id.desription)
+    TextView desription;
+
     private String[] permissions = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION};
 
     private Location currentLocation;
@@ -55,6 +59,8 @@ public class NfcScanActivity extends NfcActivity {
         for (String message : getNfcMessages()) {
             if (!TextUtils.isEmpty(message)) {
                 progressView.setVisibility(View.VISIBLE);
+                webview.setVisibility(View.VISIBLE);
+                desription.setVisibility(View.GONE);
                 triggerSendingLocation();
             }
         }
