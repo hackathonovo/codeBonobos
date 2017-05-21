@@ -75,7 +75,9 @@ public class NfcScanActivity extends NfcActivity {
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                progressView.setVisibility(View.GONE);
+                if (progressView != null) {
+                    progressView.setVisibility(View.GONE);
+                }
             }
         });
     }

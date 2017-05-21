@@ -74,5 +74,6 @@
         </service>
         <service android:name=".ui.guardian.GuardianAngelService"/>
 
+        <receiver android:name=".ui.guardian.GuardianBroadcastReceiver"/>
     </application>
 </manifest>

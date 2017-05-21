@@ -85,7 +85,7 @@
                     android:id="@+id/firstPersonNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+385 "
+                    android:text="+385"
                     android:padding="8dp"
                     android:textSize="16sp"/>
 
@@ -112,7 +112,7 @@
                     android:id="@+id/secondPersonNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+385 "
+                    android:text="+385"
                     android:padding="8dp"
                     android:textSize="16sp"/>
 

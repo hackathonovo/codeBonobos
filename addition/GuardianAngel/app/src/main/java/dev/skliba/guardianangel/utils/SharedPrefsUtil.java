@@ -35,7 +35,7 @@ public class SharedPrefsUtil {
     }
 
     public static void signOutUser() {
-        PreferenceManager.getDefaultSharedPreferences(GuardianAngelApp.getInstance()).edit().remove(ACCESS_TOKEN).apply();
+        PreferenceManager.getDefaultSharedPreferences(GuardianAngelApp.getInstance()).edit().clear().apply();
     }
 
     public static int getUserId() {

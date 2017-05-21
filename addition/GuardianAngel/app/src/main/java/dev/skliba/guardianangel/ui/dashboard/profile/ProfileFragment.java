@@ -8,10 +8,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +39,7 @@ import timber.log.Timber;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.SEND_SMS;
+import static android.content.Context.LOCATION_SERVICE;
 
 public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
 
@@ -86,13 +87,20 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initUi();
     }
 
     private void initUi() {
         userImage.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_user));
         userName.setText("George Clooney");
+        if (!TextUtils.isEmpty(SharedPrefsUtil.getFirstPanicNumber())) {
+            firstPersonNumber.setText("");
+            firstPersonNumber.setText(SharedPrefsUtil.getFirstPanicNumber());
+        }
+        if (!TextUtils.isEmpty(SharedPrefsUtil.getSecondPanicNumber())) {
+            secondPersonNumber.setText("");
+            secondPersonNumber.setText(SharedPrefsUtil.getFirstPanicNumber());
+        }
         firstPersonNumber.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -105,6 +113,18 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
                 saveNumbers.setEnabled(true);
             }
         });
+    }
+
+    @OnClick(R.id.saveNumbers)
+    protected void onSaveNumbersClicked() {
+        if (!TextUtils.isEmpty(firstPersonNumber.getText().toString()) && firstPersonNumber.getText().toString().length() > 5) {
+            SharedPrefsUtil.setFirstPanicNumber(firstPersonNumber.getText().toString());
+        }
+        if (!TextUtils.isEmpty(secondPersonNumber.getText().toString()) && secondPersonNumber.getText().toString().length() > 5) {
+            SharedPrefsUtil.setFirstPanicNumber(secondPersonNumber.getText().toString());
+        }
+
+        Toast.makeText(getActivity(), "Successfully saved phones", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.signOut)
@@ -130,7 +150,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     fetchUserLocation();
                 } else {
-                    Toast.makeText(this, "You have declined the permissions for location therefore I'm not activating panic mode",
+                    Toast.makeText(getActivity(), "You have declined the permissions for location therefore I'm not activating panic mode",
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -138,7 +158,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     sendSmsToClosestPeople();
                 } else {
-                    Toast.makeText(this, "You have declined sms permissions, I wont send any messages to your closest people",
+                    Toast.makeText(getActivity(), "You have declined sms permissions, I wont send any messages to your closest people",
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -151,7 +171,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
     }
 
     private void startPanicMode() {
-        Toast.makeText(this, "Engaging panic mode", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Engaging panic mode", Toast.LENGTH_SHORT).show();
         fetchUserLocation();
         sendSmsToClosestPeople();
         sendLocationToApi();
@@ -166,14 +186,14 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
             BaseCallback<BaseResponse<Void>> callback = new BaseCallback<BaseResponse<Void>>() {
                 @Override
                 public void onSuccess(BaseResponse<Void> body, Response<BaseResponse<Void>> response) {
-                    Toast.makeText(LoginActivity.this,
+                    Toast.makeText(getActivity(),
                             "I've alerted your friends and sent your coordinates to the designated services. Don't move from your location!",
                             Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onUnknownError(@Nullable String error) {
-                    Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                 }
             };
 
@@ -182,7 +202,7 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
     }
 
     private void sendSmsToClosestPeople() {
-        if (ContextCompat.checkSelfPermission(this, SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getActivity(), SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
 
@@ -194,26 +214,26 @@ public class ProfileFragment extends BaseFragment implements ProfileMvp.View {
                         "Help me I'm trapped at: " + currentLocation.getLatitude() + " " + currentLocation.getLongitude()
                                 + "\nThis is NOT a joke! Call for help now!", null, null);
 
-                Toast.makeText(getApplicationContext(), "Messages Sent", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Messages Sent", Toast.LENGTH_LONG).show();
             } catch (Exception ex) {
                 Timber.e(ex);
             }
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, RC_SMS_PERM);
+            requestPermissions(new String[]{Manifest.permission.SEND_SMS}, RC_SMS_PERM);
         }
     }
 
     private void fetchUserLocation() {
-        LocationManager mLocationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        LocationManager mLocationManager = (LocationManager) GuardianAngelApp.getInstance().getSystemService(LOCATION_SERVICE);
 
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 &&
-                ContextCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(getActivity(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
                     LOCATION_REFRESH_DISTANCE, locationListener);
             currentLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         } else {
-            ActivityCompat.requestPermissions(this, permissions, RC_PERMISSIONS);
+            requestPermissions(permissions, RC_PERMISSIONS);
         }
     }
 
