@@ -3,6 +3,8 @@ package io.codebonobos.controllers;
 import io.codebonobos.daos.AkcijaDao;
 import io.codebonobos.daos.SpasavateljDao;
 import io.codebonobos.entities.Akcija;
+import io.codebonobos.entities.Spasavatelj;
+import io.codebonobos.enums.HgssSpecijalnost;
 import io.codebonobos.firebase.AndroidPushNotificationsService;
 import io.codebonobos.firebase.FirebaseResponse;
 import io.codebonobos.utils.IdWrapper;
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -171,6 +175,21 @@ public class AkcijaController {
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(akcija, message), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{actionId}/specialties", method = RequestMethod.GET)
+    public ResponseEntity<?> getSpec(@PathVariable String actionId) {
+        List<HgssSpecijalnost> list = new ArrayList<>();
+        String message = null;
+        try {
+            list = spasavateljDao.getUsersInActionByActionId(actionId, true).stream().map(Spasavatelj::getSpecijalnost).collect(Collectors.toList());
+        } catch (Exception e) {
+            message = e.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(list, message), HttpStatus.OK);
+
     }
 
 }
