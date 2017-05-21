@@ -189,4 +189,15 @@ public class SpasavateljiController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/dostupnost/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<?> accessibility(@RequestParam boolean isAccessible, @PathVariable String userId) {
+        try {
+            spasavateljDao.setActive(userId, isAccessible);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 }
