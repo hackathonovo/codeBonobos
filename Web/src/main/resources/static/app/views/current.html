@@ -4,7 +4,7 @@
         <!-- DODAVANJE NOVOG -->
         <a href="#/addAction" class="button button-important">Dodaj akciju</a>
     </div>
-    <div class="row">
+    <div class="row" ng-repeat="action in allActive">
         <!-- AKTIVNE AKCIJE -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="widget action-widget normal">
@@ -24,24 +24,20 @@
                             </div>
                             <div class="row">
                                 <div class="short-decription">
-                                    Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.Ovdje ce ici kratki opis spasavanja.
+                                    {{action.opis}}
                                 </div>
                             </div>
                             <div class="row widget-row">
-                                <span class="">Voditelj:</span>
-                                <span class="">Pajo Patak</span>
-                            </div>
-                            <div class="row widget-row">
-                                <span class="">Kontakt broj:</span>
-                                <span class="">0918542210</span>
+                                <span class="">Kontakt broj voditelja:</span>
+                                <span class="">{{action.voditelj}}</span>
                             </div>
                             <div class="row widget-row">
                                 <span class="">Lokacija polaska:</span>
-                                <span class="">Andrije Zaje 10</span>
+                                <span class="">{{action.meetingLocation}}</span>
                             </div>
                             <div class="row widget-row">
                                 <span class="">Vrijeme polaska:</span>
-                                <span class="">23:00h</span>
+                                <span class="">{{action.meetingTime+'h'}}</span>
                             </div>
                             <div class="row widget-row">
                                 <span class="">Stupanj hitnosti:</span>
@@ -50,13 +46,11 @@
                             <div class="row widget-row">
                                 <span class="resc-no-label">Broj aktivnih spašavatelja:</span>
                                 <span class="resc-no">12</span>
-                                <a class="button button-normal">Pozovi jos spasavatelja</a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <ng-map center="[45.814919, 15.935150]">
-                                <marker position="[45.814919, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
-                                <marker position="[45.85, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>
+                            <ng-map center="[{{action.location.lat}}, {{action.location.lng}}]">
+                                <marker position="[{{action.location.lat}}, {{action.location.lng}}]" title="how" animation="Animation.BOUNCE"></marker>
                             </ng-map>
                         </div>
                         <div class="clear"></div>

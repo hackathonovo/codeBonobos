@@ -151,8 +151,11 @@ app.controller('ActionController', ['$scope', 'NgMap', function ($scope, $NgMap)
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('CurrentController', ['$scope', function ($scope) {
+app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope, ActionFactory) {
     // ==== MODELS ====
+    ActionFactory.getAllActive().then(function (response) {
+       $scope.allActive = response.data.response;
+    });
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
 }]);
