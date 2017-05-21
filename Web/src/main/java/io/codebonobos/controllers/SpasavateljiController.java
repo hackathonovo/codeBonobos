@@ -33,14 +33,6 @@ public class SpasavateljiController {
     @Autowired
     private AkcijaDao akcijaDao;
 
-    //    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    //    public ResponseWrapper<List<Spasavatelj>> getAll() {
-    //        List<Spasavatelj> list = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(list, message);
-    //    }
-
     @RequestMapping(value = "/all-grouped", method = RequestMethod.GET)
     public ResponseEntity<?> getAllGroupedByType() {
         RescuerListsWrapper lists = null;
@@ -56,30 +48,6 @@ public class SpasavateljiController {
         return new ResponseEntity<>(new ResponseWrapper<>(lists, message), HttpStatus.OK);
     }
 
-    //    @RequestMapping(value = "/active", method = RequestMethod.GET)
-    //    public ResponseWrapper<List<Spasavatelj>> getActive() {
-    //        List<Spasavatelj> list = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(list, message);
-    //    }
-
-    //    @RequestMapping(value = "/inactive", method = RequestMethod.GET)
-    //    public ResponseWrapper<List<Spasavatelj>> getInactive() {
-    //        List<Spasavatelj> list = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(list, message);
-    //    }
-
-    //    @RequestMapping(value = "/action", method = RequestMethod.GET)
-    //    public ResponseWrapper<List<Spasavatelj>> getThoseInAction() {
-    //        List<Spasavatelj> list = null;
-    //        String message = null;
-    //
-    //        return new ResponseWrapper<>(list, message);
-    //    }
-
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getProfile(@PathVariable int id) {
         Spasavatelj spasavatelj = null;
@@ -92,19 +60,6 @@ public class SpasavateljiController {
         }
         return new ResponseEntity<>(new ResponseWrapper<>(spasavatelj, message), HttpStatus.OK);
     }
-
-    //    @RequestMapping(value = "/fb/{token}", method = RequestMethod.GET)
-    //    public ResponseWrapper<IdWrapper> getIdByFbToken(@PathVariable String token, @RequestParam String name) throws Exception {
-    //        IdWrapper id;
-    //        String message = null;
-    //        try {
-    //            id = new IdWrapper(spasavateljDao.getByFbToken(token).getId());
-    //        } catch (Exception e) {
-    //            id = new IdWrapper(spasavateljDao.saveFromFbTokenAndGetId(name, token));
-    //        }
-    //
-    //        return new ResponseWrapper<>(id, message);
-    //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<?> getIdFromLogin(@RequestParam String username, @RequestParam String password, @RequestParam(required = false) String firebaseToken) throws Exception {

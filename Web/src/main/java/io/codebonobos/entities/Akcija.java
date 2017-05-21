@@ -1,6 +1,5 @@
 package io.codebonobos.entities;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
