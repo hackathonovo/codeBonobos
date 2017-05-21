@@ -8,7 +8,7 @@ import java.util.List;
 import dev.skliba.saviourapp.data.models.ordinary.Location;
 import dev.skliba.saviourapp.data.models.ordinary.Rescuer;
 
-public class ContactResponse {
+public class ActionDetailsResponse {
 
     @SerializedName("id")
     private int actionId;
@@ -30,6 +30,12 @@ public class ContactResponse {
 
     @SerializedName("radius")
     private int radius;
+
+    @SerializedName("meetingTime")
+    private String meetingTime;
+
+    @SerializedName("meetingLocation")
+    private String meetingLocation;
 
     public int getActionId() {
         return actionId;
@@ -85,5 +91,21 @@ public class ContactResponse {
 
     public void setLeaderPhoneNo(String leaderPhoneNo) {
         this.leaderPhoneNo = leaderPhoneNo;
+    }
+
+    public String getMeetingTime() {
+        return meetingTime;
+    }
+
+    public void setMeetingTime(String meetingTime) {
+        this.meetingTime = meetingTime;
+    }
+
+    public String getMeetingLocation() {
+        return meetingLocation;
+    }
+
+    public void setMeetingLocation(String meetingLocation) {
+        this.meetingLocation = meetingLocation;
     }
 }

@@ -20,6 +20,8 @@ public class SharedPrefsUtil {
 
     private static final String SECOND_PANIC_NUMBER = "second_num";
 
+    private static final String FIREBASE_TOKEN = "firebase_token";
+
     public static boolean isLoggedIn() {
         return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).contains(ACCESS_TOKEN) || PreferenceManager
                 .getDefaultSharedPreferences(SaviourApplication.getInstance()).contains(USER_ID);
@@ -78,5 +80,14 @@ public class SharedPrefsUtil {
     public static void setSecondPanicNumber(String secondPanicNumber) {
         PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit()
                 .putString(SECOND_PANIC_NUMBER, secondPanicNumber).apply();
+    }
+
+    public static void storeFirebaseToken(String refreshedToken) {
+        PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).edit()
+                .putString(FIREBASE_TOKEN, refreshedToken).apply();
+    }
+
+    public static String getFirebaseToken() {
+        return PreferenceManager.getDefaultSharedPreferences(SaviourApplication.getInstance()).getString(FIREBASE_TOKEN, "");
     }
 }

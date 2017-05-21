@@ -6,19 +6,23 @@
 
     <ImageView
             android:id="@+id/logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
+            android:scaleType="fitXY"
             android:contentDescription="Logo"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/ic_logo"/>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
-            android:layout_marginTop="40dp"
-            android:padding="16dp"
+            android:layout_marginTop="15dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="10dp"
             android:orientation="vertical">
 
         <EditText
@@ -40,6 +44,17 @@
                 android:inputType="textPassword"/>
 
     </LinearLayout>
+
+    <Button
+            android:id="@+id/panicMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_above="@+id/facebook_login"
+            android:text="Panic mode"
+            android:background="@drawable/guardian_angel_background"/>
 
     <Button
             android:id="@+id/facebook_login"

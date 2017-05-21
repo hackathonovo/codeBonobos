@@ -10,6 +10,7 @@ import dev.skliba.saviourapp.data.network.ApiManagerImpl;
 import dev.skliba.saviourapp.data.network.ApiService;
 import dev.skliba.saviourapp.ui.push.GAFirebaseInstanceIdService;
 import dev.skliba.saviourapp.ui.push.GAFirebaseMessagingService;
+import timber.log.Timber;
 
 public class SaviourApplication extends Application {
 
@@ -30,6 +31,8 @@ public class SaviourApplication extends Application {
         super.onCreate();
         setInstance(this);
         FacebookSdk.sdkInitialize(this);
+
+        Timber.plant(new Timber.DebugTree());
 
         ApiManagerImpl.getInstance().init();
         apiService = ApiManagerImpl.getInstance().getService();

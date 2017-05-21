@@ -7,6 +7,7 @@ import dev.skliba.saviourapp.data.models.response.BaseResponse;
 import dev.skliba.saviourapp.data.models.response.LoginResponse;
 import dev.skliba.saviourapp.data.network.ApiService;
 import dev.skliba.saviourapp.data.network.BaseCallback;
+import dev.skliba.saviourapp.util.SharedPrefsUtil;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -24,7 +25,7 @@ public class LoginInteractor {
 
     public void nativeLogin(String username, String password, Listener<LoginResponse> listener) {
 
-        call = apiService.nativeLogin(username, password);
+        call = apiService.nativeLogin(username, password, SharedPrefsUtil.getFirebaseToken());
 
         callback = new BaseCallback<BaseResponse<LoginResponse>>() {
             @Override

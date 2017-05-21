@@ -11,12 +11,14 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import dev.skliba.saviourapp.R;
-import dev.skliba.saviourapp.ui.dashboard.MainActivity;
+import dev.skliba.saviourapp.ui.action_details.ActionDetailsActivity;
 
 
 public class GAFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "SaviourApp";
+
+    public static final String EXTRA_ACTION_ID = "EXTRA_ACTION_ID";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -26,20 +28,16 @@ public class GAFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            showNotification(remoteMessage.getData().get("actionId"));
 
-        }
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
     }
 
-    private void showNotification(String url, String message) {
+    private void showNotification(String actionId) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ActionDetailsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(EXTRA_ACTION_ID, actionId);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -47,11 +45,11 @@ public class GAFirebaseMessagingService extends FirebaseMessagingService {
                 .setAutoCancel(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText(message)
-                .setContentIntent(pendingIntent);
+                .setContentText("There's a new action that requires your attention")
+                .setContentIntent(pendingIntent)
+                .setVibrate(new long[]{500L, 200L, 200L, 500L});
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
     }
-
 }

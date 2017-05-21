@@ -2,11 +2,14 @@ package dev.skliba.saviourapp.di;
 
 
 import dev.skliba.saviourapp.SaviourApplication;
+import dev.skliba.saviourapp.data.interactors.ActionDetailsInteractor;
 import dev.skliba.saviourapp.data.interactors.ContactInteractor;
 import dev.skliba.saviourapp.data.interactors.LoginInteractor;
 import dev.skliba.saviourapp.data.interactors.NewsInteractor;
 import dev.skliba.saviourapp.data.interactors.ProfileInteractor;
 import dev.skliba.saviourapp.data.interactors.SplashInteractor;
+import dev.skliba.saviourapp.ui.action_details.ActionDetailsMvp;
+import dev.skliba.saviourapp.ui.action_details.ActionDetailsPresenter;
 import dev.skliba.saviourapp.ui.dashboard.contact.ContactMvp;
 import dev.skliba.saviourapp.ui.dashboard.contact.ContactPresenter;
 import dev.skliba.saviourapp.ui.dashboard.news.NewsMvp;
@@ -38,5 +41,9 @@ public class MvpFactory {
 
     public static ContactMvp.Presenter providePresenter(ContactMvp.View view) {
         return new ContactPresenter(view, new ContactInteractor(SaviourApplication.getApiService()));
+    }
+
+    public static ActionDetailsMvp.Presenter providePresenter(ActionDetailsMvp.View view) {
+        return new ActionDetailsPresenter(view, new ActionDetailsInteractor(SaviourApplication.getApiService()));
     }
 }
