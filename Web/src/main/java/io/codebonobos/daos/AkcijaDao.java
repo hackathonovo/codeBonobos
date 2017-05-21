@@ -21,6 +21,9 @@ public class AkcijaDao {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
+    private SpasavateljDao spasavateljDao;
+
+    @Autowired
     public AkcijaDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -29,7 +32,6 @@ public class AkcijaDao {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         String query = "INSERT INTO AKCIJA(VODITELJ_BROJ, LOK_LAT, LOK_LNG, RADIUS, OPIS, AKTIVNA, LOC_MEETING, TIME_MEETING, PRIO) VALUES(?,?,?,?,?,?,?,?,?)";
-
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -68,14 +70,17 @@ public class AkcijaDao {
         List<Akcija> retval = new ArrayList<>();
 
         for (Map<String, Object> dbRow : result) {
-            retval.add(mapToAction(dbRow));
+            Akcija tmp = mapToAction(dbRow);
+            tmp.setPrihvaceniSpasavatelji(spasavateljDao.getUsersInActionByActionId(String.valueOf(tmp.getId()), true));
+            tmp.setPozvaniSpasavatelji(spasavateljDao.getUsersInActionByActionId(String.valueOf(tmp.getId()), false));
+            retval.add(tmp);
         }
 
         return retval;
     }
 
     public Akcija getActionById(String id) throws Exception {
-        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '" + id + "'";
+        String query = "SELECT * FROM AKCIJA WHERE ID_A = " + id;
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {

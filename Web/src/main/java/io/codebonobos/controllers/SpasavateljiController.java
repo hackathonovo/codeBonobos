@@ -87,7 +87,7 @@ public class SpasavateljiController {
         String message = null;
 
         try {
-            action = akcijaDao.getActionById(actionId);
+            action = akcijaDao.getActionById(String.valueOf(1));
             rescuers = spasavateljDao.getAvailable();
             if (action.getLocation().getLng() == null || action.getLocation().getLat() == null) {
                 throw new Exception("Bad coordinates.");
@@ -150,6 +150,31 @@ public class SpasavateljiController {
             count = spasavateljDao.getUsersInActionByActionId(id, true).stream().count();
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/no-of-active-rescuers", method = RequestMethod.GET)
+    public ResponseEntity<?> getNumOfActiveRescuers() {
+        long count;
+        String message = null;
+        try {
+            count = spasavateljDao.getNumOfActiveUsers();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseWrapper<>(14, null), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(count, message), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/no-of-avail-rescuers", method = RequestMethod.GET)
+    public ResponseEntity<?> getNumOfAvailableRescuers() {
+        long count;
+        try {
+            count = spasavateljDao.getNumOfAvailUsers();
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseWrapper<>(36, null), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);

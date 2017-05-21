@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by afilakovic on 20.05.17..
@@ -38,14 +37,10 @@ public class SpasavateljDao {
     }
 
     public RescuerListsWrapper getRescuersByGroups() {
-        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
         List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE");
         List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
 
-        List<Spasavatelj> avail = new ArrayList<>();
-        for (Map<String, Object> dbRow : available) {
-            avail.add(mapToSpasavatelj(dbRow));
-        }
+        List<Spasavatelj> avail = getAvailable();
 
         List<Spasavatelj> action = new ArrayList<>();
         for (Map<String, Object> dbRow : inAction) {
@@ -59,6 +54,7 @@ public class SpasavateljDao {
 
         return new RescuerListsWrapper(avail, action, notActive);
     }
+
 
     public List<Spasavatelj> getAvailable() {
         List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
@@ -90,7 +86,9 @@ public class SpasavateljDao {
 
     public Spasavatelj getByLogin(String username, String password, String devToken) throws Exception {
         List<Map<String, Object>> result = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE USERNAME = '" + username + "' AND PWORD = '" + password + "'");
+
         Spasavatelj spasavatelj = mapToSpasavatelj(result.get(0));
+
         if (getDeviceTokenById(spasavatelj.getId()) == null && devToken != null) {
             jdbcTemplate.execute("UPDATE SPASAVATELJ SET DEV_TOKEN = '" + devToken + "' WHERE ID = " + spasavatelj.getId());
         }
@@ -99,13 +97,6 @@ public class SpasavateljDao {
         }
 
         return spasavatelj;
-    }
-
-    public int saveFromLoginAndGetId(String username, String password) throws Exception {
-        String query = "INSERT INTO SPASAVATELJ(USERNAME, PWORD) VALUES('" + username + "', '" + password + "')";
-        jdbcTemplate.update(query);
-
-        return (int) jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE USERNAME = '" + username + "'").get(0).get("ID");
     }
 
     public void saveRescuer(Spasavatelj rescuer) {
@@ -182,8 +173,23 @@ public class SpasavateljDao {
         return retval;
     }
 
+    public long getNumOfActiveUsers() {
+        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE");
+
+        List<Spasavatelj> action = new ArrayList<>();
+        for (Map<String, Object> dbRow : inAction) {
+            action.add(mapToSpasavatelj(dbRow));
+        }
+
+        return action.stream().count();
+    }
+
     public void saveUserLocation(String userId, double lat, double lng, long timestamp) {
         String query = "INSERT INTO USER_LOCATION VALUES (" + userId + ", " + timestamp + ", '" + lat + "', '" + lng + "')";
         jdbcTemplate.update(query);
+    }
+
+    public long getNumOfAvailUsers() {
+        return (long) getAvailable().size();
     }
 }
