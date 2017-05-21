@@ -38,8 +38,8 @@ public class SpasavateljDao {
     }
 
     public RescuerListsWrapper getRescuersByGroups() {
-        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE");
-        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE");
+        List<Map<String, Object>> available = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING (A.AKTIVNA = FALSE OR A.AKTIVNA IS NULL) AND S.AKTIVAN = TRUE AND SA.PRIHVATIO = NULL");
+        List<Map<String, Object>> inAction = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ AS S LEFT JOIN SPASAVATELJ_AKCIJA AS SA ON S.ID = SA.ID_SPASAVATELJ LEFT JOIN AKCIJA AS A ON SA.ID_AKCIJA = A.ID_A GROUP BY S.ID HAVING A.AKTIVNA = TRUE AND SA.PRIHVATIO = TRUE");
         List<Map<String, Object>> inactive = jdbcTemplate.queryForList("SELECT * FROM SPASAVATELJ WHERE AKTIVAN = FALSE");
 
         List<Spasavatelj> avail = new ArrayList<>();
@@ -163,12 +163,12 @@ public class SpasavateljDao {
     }
 
 
-    public void acceptAction(String userId) {
-        jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE");
+    public void acceptAction(String userId, String actionId) {
+        jdbcTemplate.update("UPDATE SPASAVATELJ_AKCIJA SET PRIHVATIO = TRUE WHERE ID_SPASAVATELJ = " + userId + "AND PRIHVATIO = FALSE" + " AND ID_AKCIJA = " + actionId);
     }
 
-    public void refuseAction(String userId) {
-        jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId);
+    public void refuseAction(String userId, String actionId) {
+        jdbcTemplate.update("DELETE FROM SPASAVATELJ_AKCIJA WHERE ID_SPASAVATELJ = " + userId + " AND ID_AKCIJA = " + actionId);
     }
 
     public List<Spasavatelj> getUsersInActionByActionId(String actionId, boolean accepted) {
