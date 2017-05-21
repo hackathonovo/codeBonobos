@@ -186,4 +186,8 @@ public class SpasavateljDao {
         String query = "INSERT INTO USER_LOCATION VALUES (" + userId + ", " + timestamp + ", '" + lat + "', '" + lng + "')";
         jdbcTemplate.update(query);
     }
+
+    public void setActive(String userId, boolean isAccessible) {
+        jdbcTemplate.update("UPDATE SPASAVATELJ SET AKTIVAN = TRUE WHERE ID = " + userId);
+    }
 }
