@@ -75,7 +75,7 @@ public class AkcijaDao {
     }
 
     public Akcija getActionById(String id) throws Exception {
-        String query = "SELECT * FROM AKCIJA WHERE ID_A LIKE '" + id + "'";
+        String query = "SELECT * FROM AKCIJA WHERE ID_A = " + id;
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
 
         if (result == null || result.isEmpty()) {

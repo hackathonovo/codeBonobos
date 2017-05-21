@@ -143,4 +143,16 @@ public class SpasavateljiController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/no-of-rescuers", method = RequestMethod.GET)
+    public ResponseEntity<?> getNumOfRescuers(@RequestParam String id) {
+        long count;
+        try {
+            count = spasavateljDao.getUsersInActionByActionId(id, true).stream().count();
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ResponseWrapper<>(count, null), HttpStatus.OK);
+    }
+
 }
