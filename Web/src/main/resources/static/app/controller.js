@@ -132,12 +132,12 @@ app.controller('RescController', ['$scope', 'RescFactory', function ($scope, Res
         });
 
         $scope.specCategoryFilter.forEach(function (ch) {
-            if(ch.val == true) {
+            if (ch.val == true) {
                 changed = true;
             }
         });
 
-        if(!changed) {
+        if (!changed) {
             angular.copy($scope.freeResc, $scope.filteredFreeResc);
             angular.copy($scope.actionResc, $scope.filteredActionResc);
             angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
@@ -163,23 +163,20 @@ app.controller('CodesController', ['$scope', function ($scope) {
     // ==== CONTROL FUNCTIONS ====
 }]);
 
-app.controller('AddActionRescController', ['$scope', 'NgMap', 'ActionFactory', 'RescFactory', function ($scope, NgMap, ActionFactory, RescFactory) {
+app.controller('AddActionRescController', ['$scope', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
     // ==== MODELS ====
-    RescFactory.getAllGrouped().then(function (response) {
-        var allResc = response.data.response;
-        $scope.freeResc = allResc.available;
-        $scope.actionResc = allResc.inAction;
-        $scope.inactiveResc = allResc.inactive;
 
-        $scope.filteredFreeResc = [];
-        $scope.filteredActionResc = [];
-        $scope.filteredInactiveResc = [];
+    $scope.actionId = ActionCreate.get();
 
+    $scope.freeResc = [];
+    $scope.filteredFreeResc = [];
 
+    $scope.tmp =  RescFactory.getAllNear($scope.actionId).then(function (response) {
+        $scope.freeResc = response.data.response;
         angular.copy($scope.freeResc, $scope.filteredFreeResc);
-        angular.copy($scope.actionResc, $scope.filteredActionResc);
-        angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
     });
+    //
+
 
     $scope.dict = {
         alpinizam: "Alpinizam",
@@ -231,53 +228,71 @@ app.controller('AddActionRescController', ['$scope', 'NgMap', 'ActionFactory', '
     // ==== INIT MODELS ====
     var v = 2;
     // ==== CONTROL FUNCTIONS ====
+
+    $scope.select = function(item) {
+        item.selected ? item.selected = false : item.selected = true;
+    };
+
+    $scope.getAllSelectedRows = function() {
+        var x = $filter("filter")($scope.filteredFreeResc, {
+            selected: true
+        }, true);
+        console.log(x);
+
+        var selected = [];
+        x.forEach(function (wrapper) {
+            selected.push(wrapper.rescuer.id)
+        });
+        
+        ActionFactory.addRescToAction($scope.actionId, selected);
+    };
+
+    $scope.selectAll = function () {
+        $scope.filteredFreeResc.forEach(function (en) {
+            en.selected ? en.selected = false : en.selected = true;
+        })
+    };
+    
+    $scope.generateCssClass = function (distance) {
+        if(distance<25) {
+            return "distance_close"
+        } else if(distance>25 && distance<60) {
+            return "distance_mid"
+        } else {
+            return "distance_long"
+        }
+    };
+
     $scope.specCategoryClick = function (ind) {
         $scope.specCategoryFilter[ind].val = !$scope.specCategoryFilter[ind].val;
 
         $scope.filteredFreeResc = [];
-        $scope.filteredActionResc = [];
-        $scope.filteredInactiveResc = [];
 
         var changed = false;
 
         $scope.specCategoryFilter.forEach(function (cat) {
             if (cat.val) {
                 $scope.freeResc.forEach(function (e1) {
-                    if (e1.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
+                    if (e1.rescuer.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
                         $scope.filteredFreeResc.push(e1);
-
                     }
                 });
-                $scope.actionResc.forEach(function (e2) {
-                    if (e2.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
-                        $scope.filteredActionResc.push(e2);
-
-                    }
-                });
-                $scope.inactiveResc.forEach(function (e3) {
-                    if (e3.specijalnost.toUpperCase() == cat.name.toUpperCase()) {
-                        $scope.filteredInactiveResc.push(e3);
-
-                    }
-                })
             }
         });
 
         $scope.specCategoryFilter.forEach(function (ch) {
-            if(ch.val == true) {
+            if (ch.val == true) {
                 changed = true;
             }
         });
 
-        if(!changed) {
+        if (!changed) {
             angular.copy($scope.freeResc, $scope.filteredFreeResc);
-            angular.copy($scope.actionResc, $scope.filteredActionResc);
-            angular.copy($scope.inactiveResc, $scope.filteredInactiveResc);
         }
     }
 }]);
 
-app.controller('AddActionController', ['$scope', 'NgMap', 'ActionFactory', function ($scope, NgMap, ActionFactory) {
+app.controller('AddActionController', ['$scope', '$location', 'NgMap', 'ActionFactory', 'ActionCreate', function ($scope, $location, NgMap, ActionFactory, ActionCreate) {
     // ==== MODELS ====
     $scope.currentAction = {
         id: null,
@@ -297,7 +312,8 @@ app.controller('AddActionController', ['$scope', 'NgMap', 'ActionFactory', funct
 
     // ==== CONTROL FUNCTIONS ====
     $scope.createAction = function () {
-        ActionFactory.addAction($scope.currentAction);
+        var id = ActionFactory.addAction($scope.currentAction);
+        $location.url('/addActionResc')
     };
 
     $scope.markerChanged = function (event) {

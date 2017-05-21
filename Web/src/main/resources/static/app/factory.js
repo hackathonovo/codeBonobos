@@ -30,7 +30,7 @@ app.factory('UserFactory', ['$http', function ($http) {
     return result;
 }]);
 
-app.factory('ActionFactory', ['$http', function ($http) {
+app.factory('ActionFactory', ['$http', 'ActionCreate', function ($http, ActionCreate) {
     var result = {};
     
     result.addAction = function (action) {
@@ -40,7 +40,24 @@ app.factory('ActionFactory', ['$http', function ($http) {
             data: action,
             headers: {'Content-Type': 'application/json; charset=UTF-8'}
         }).success(function (data, status, header, config) {
-            return data.id;
+            ActionCreate.set(data.response.id);
+            return data.response.id;
+        }).error(function (data, status, header, config) {
+            // TODO
+            return -1;
+        });
+    };
+
+    result.addRescToAction = function (actionID, rescIdArray) {
+        $http({
+            method: 'PUT',
+            url: '/api/akcije/add',
+            data: rescIdArray,
+            params: {actionId: actionID} ,
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        }).success(function (data, status, header, config) {
+            ActionCreate.set(data.response.id);
+            return data.response.id;
         }).error(function (data, status, header, config) {
             // TODO
             return -1;
@@ -50,7 +67,7 @@ app.factory('ActionFactory', ['$http', function ($http) {
     return result;
 }]);
 
-app.factory('RescFactory', ['$http', function ($http) {
+app.factory('RescFactory', ['$http', 'ActionCreate', function ($http, ActionCreate) {
     var result = {};
 
     result.getAllGrouped = function () {
@@ -61,8 +78,8 @@ app.factory('RescFactory', ['$http', function ($http) {
         return $http.get('/api/spasavatelji/all')
     };
     
-    result.getAllNear = function () {
-        
+    result.getAllNear = function (actionID) {
+        return $http.get('/api/spasavatelji/get-closest?actionId='+actionID);
     };
 
     result.addResc = function (resc) {
@@ -81,3 +98,19 @@ app.factory('RescFactory', ['$http', function ($http) {
 
     return result;
 }]);
+
+app.factory('ActionCreate', function() {
+    var savedData = {};
+    function set(data) {
+        savedData = data;
+    }
+    function get() {
+        return savedData;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
+
+});
