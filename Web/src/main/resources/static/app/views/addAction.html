@@ -1,61 +1,55 @@
-<div class="form-wrapper" ng-controller="AddActionController">
+<div class="form-wrapper add-action-form" ng-controller="AddActionController">
     <div class="row">
         <!-- AKTIVNE AKCIJE -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="widget">
-                <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Neimenovana
-                </div>
+                <div class="widget-header">Kreiraj novu akciju</div>
                 <div class="widget-body">
-                    <div class="row">
-                        <form>
-                            <div class="form-group">
-                                <label for="actionName">Ime akcije</label>
-                                <input type="text" class="form-control" id="actionName" ng-model="currentAction.ime">
-                            </div>
-                            <div class="form-group">
-                                <label for="actionDetails">Opis akcije</label>
-                                <textarea class="form-control" rows="3" id="actionDetails" ng-model="currentAction.opis"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <label>LOKACIJA AKCIJE</label><br>
-
-                                        <label for="actionLong">Geografska širina</label>
-                                        <input type="text" id="actionLong" class="form-control" ng-model="currentAction.location.lng">
-
-
-                                        <label for="actionLat">Geografska visina</label>
-                                        <input type="text" id="actionLat" class="form-control" ng-model="currentAction.location.lat">
-
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <ng-map center="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]">
-                                            <marker position="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]" title="how" animation="Animation.BOUNCE" draggable=true on-dragend="markerChanged(event)"></marker>
-                                        </ng-map>
-                                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="actionName">Ime akcije</label>
+                            <input type="text" class="form-control" id="actionName" ng-model="currentAction.ime">
+                        </div>
+                        <div class="form-group">
+                            <label for="actionDetails">Opis akcije</label>
+                            <textarea class="form-control" rows="3" id="actionDetails" ng-model="currentAction.opis"></textarea>
+                        </div>
+                        <div class="form-group section-wrapper">
+                            <div class="kordinate col-md-6 col-sm-12 col-xs-12">
+                                <label class="section-name">Koordinate spasavanja</label><br>
+                                <div class="col-md-12 col-sm-6 col-xs-6 left">
+                                    <label for="actionLong">Geografska širina</label>
+                                    <input type="text" id="actionLong" class="form-control" ng-model="currentAction.location.lng">
 
                                 </div>
+                                <div class="col-md-12 col-sm-6 col-xs-6 right">
+                                    <label for="actionLat">Geografska visina</label>
+                                    <input type="text" id="actionLat" class="form-control" ng-model="currentAction.location.lat">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>DETALJI SASTAJANJA</label><br>
-
-                                <label for="actionLong">Lokacija</label>
-                                <input type="text" id="actionStartLocation" class="form-control" ng-model="currentAction.meetingLocation">
-
-
-                                <label for="actionLat">Vrijeme</label>
-                                <input type="time" id="actionStartTime" class="form-control" ng-model="tmpTime">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <ng-map center="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]">
+                                    <marker position="[{{currentAction.location.lat}}, {{currentAction.location.lng}}]" title="how" animation="Animation.BOUNCE" draggable=true on-dragend="markerChanged(event)"></marker>
+                                </ng-map>
                             </div>
-                            <div class="form-group">
-                                <label for="nmb">Broj telefona</label>
-                                <input class="form-control" id="nmb" type="text" ng-model="currentAction.voditelj">
-                            </div>
-                            <button type="submit" class="btn btn-default" ng-click="createAction()">Submit</button>
-                        </form>
-                    </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>DETALJI SASTAJANJA</label><br>
+
+                            <label for="actionLong">Lokacija</label>
+                            <input type="text" id="actionStartLocation" class="form-control">
+
+
+                            <label for="actionLat">Vrijeme</label>
+                            <input type="time" id="actionStartTime" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="nmb">Kontakt broj</label>
+                            <input class="form-control" id="nmb" type="text" ng-model="currentAction.voditelj">
+                        </div>
+                        <button type="submit" class="button button-normal" ng-click="createAction()">Kreiraj!</button>
+                    </form>
                 </div>
             </div>
         </div>

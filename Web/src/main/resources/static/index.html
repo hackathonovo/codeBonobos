@@ -48,25 +48,25 @@
         <ul class="sidebar">
             <li class="sidebar-main">
                 <a href="" ng-click="toggleSidebar()">
-                    HGSS
+                    <span class="hgss-logo"></span>HGSS
                     <span class="menu-icon glyphicon glyphicon-transfer"></span>
                 </a>
             </li>
             <li class="sidebar-title"><span>NAVIGACIJA</span></li>
-            <li class="sidebar-list">
-                <a ng-class="{'active-tab' : activeTab}" href="#/">Panel <span class="menu-icon icon-cabin-3"></span></a>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list prvi">
+                <a href="#/">Pocetna <span class="menu-icon icon-cabin-3"></span></a>
             </li>
-            <li class="sidebar-list">
-                <a ng-class="{'active-tab' : activeTab}" href="#/resc">Spašavatelji <span class="menu-icon icon-worker"></span></a>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list drugi">
+                <a href="#/resc">Spašavatelji <span class="menu-icon icon-worker"></span></a>
             </li>
-            <li class="sidebar-list">
-                <a ng-class="{'active-tab' : activeTab}" href="#/current">Akcije u tijeku<span class="menu-icon icon-error-triangle" aria-hidden="true"></span></a>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list treci">
+                <a href="#/current">Akcije u tijeku<span class="menu-icon icon-error-triangle" aria-hidden="true"></span></a>
             </li>
-            <li class="sidebar-list">
-                <a ng-class="{'active-tab' : activeTab}" href="#/codes">Šifrarnik <span class="menu-icon icon-table" aria-hidden="true"></span></a>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list cetvrti">
+                <a href="#/codes">Šifrarnik <span class="menu-icon icon-table" aria-hidden="true"></span></a>
             </li>
-            <li class="sidebar-list">
-                <a ng-class="{'active-tab' : activeTab}" href="#/action">Završene akcije<span class="menu-icon icon-tick"></span></a>
+            <li ng-class="{'active-tab' : activeTab}" class="sidebar-list peti">
+                <a href="#/action">Završene akcije<span class="menu-icon icon-tick"></span></a>
             </li>
         </ul>
         <div class="sidebar-footer">

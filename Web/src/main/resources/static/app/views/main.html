@@ -1,10 +1,28 @@
 <div class="main-view-wrapper" ng-controller="MainController as controller">
-    <videogular vg-theme="controller.config.theme.url">
-        <vg-media vg-src="controller.config.sources"
-                  vg-tracks="controller.config.tracks"
-                  vg-native-controls="true">
-        </vg-media>
-    </videogular>
+    <div class="col-xs-12 col-md-8">
+        <div class="widget">
+            <div class="widget-header">Akcije u tijeku</div>
+            <div class="widget-body">
+
+            </div>
+        </div>
+    </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="widget">
+                <div class="widget-header">Stanica Zagreb</div>
+                <div class="widget-body">
+                    <div class="row">
+                        <label>Dezurni spasavatelj</label>
+                        <p>Pero Peric</p>
+                    </div>
+                    <div class="row">
+                        <label>Kontakt</label>
+                        <p>0987542182</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h2>MAP</h2>
     <ng-map center="[45.00, 15.00]">
         <marker position="[45.814919, 15.935150]" title="how" animation="Animation.BOUNCE"></marker>

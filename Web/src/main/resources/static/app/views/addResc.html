@@ -1,55 +1,60 @@
-<div class="form-wrapper" ng-controller="AddRescController">
+<div class="form-wrapper add-resc-form" ng-controller="AddRescController">
     <div class="row">
         <!-- AKTIVNE AKCIJE -->
         <div class="col-md-12 col-sm-12 col-xs-12 ">
             <div class="widget">
-                <div class="widget-header">
-                    <span class="fa fa-list" aria-hidden="true"></span>
-                    Novi spašavatelj
-                </div>
+                <div class="widget-header">Novi spašavatelj</div>
                 <div class="widget-body">
-                    <div class="row">
-                        <form>
-                            <div class="form-group">
-                                <label for="rescName">Ime i prezime spašavatelja</label>
-                                <input type="text" class="form-control" id="rescName" ng-model="currentResc.ime">
-                            </div>
-                            <div class="form-group">
-                                <label for="rescNum">Broj telefona</label>
-                                <input type="text" class="form-control" id="rescNum" ng-model="currentResc.brojTelefona">
-                            </div>
-                            <div class="form-group">
-                                <label for="rescName">Iskustvo</label>
-                                <select ng-options="e as e.name for e in exp track by e.id" ng-model="selectedExp">
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>BAZNA LOKACIJA SPAŠAVATELJA</label><br>
+                    <form>
+                        <div class="form-group">
+                            <label for="rescName">Ime i prezime spašavatelja</label>
+                            <input type="text" class="form-control" id="rescName" ng-model="currentResc.ime">
+                        </div>
+                        <div class="form-group">
+                            <label for="rescNum">Broj telefona</label>
+                            <input type="text" class="form-control" id="rescNum" ng-model="currentResc.brojTelefona">
+                        </div>
+                        <div class="form-group">
+                            <label for="rescName">Iskustvo</label>
+                            <select class="form-control" ng-options="e as e.name for e in exp track by e.id" ng-model="selectedExp">
+                            </select>
+                        </div>
+                        <div class="form-group section-wrapper">
+                            <div class="kordinate col-md-6 col-sm-12 col-xs-12">
+                                <label class="section-name">Bazna lokacija spasavatelja</label><br>
+                                <div class="col-md-12 col-sm-6 col-xs-6 left">
+                                    <label for="actionLong">Geografska širina</label>
+                                    <input type="text" id="actionLong" class="form-control" ng-model="currentResc.lokacija.lng">
 
-                                <label for="actionLong">Geografska širina</label>
-                                <input type="text" id="actionLong" class="form-control" ng-model="currentResc.lokacija.lng">
-
-
-                                <label for="actionLat">Geografska visina</label>
-                                <input type="text" id="actionLat" class="form-control" ng-model="currentResc.lokacija.lat">
-                            </div>
-                            <div class="form-group">
-                                <!-- Single button -->
-                                <div class="btn-group" uib-dropdown is-open="status.isopen">
-                                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                                        Specijalizacija <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                        <li role="menuitem" ng-repeat="s in spec"><div class="{{s.csscl}}"></div><a ng-click="selectSpec(s)" href="">{{s.name}}</a></li>
-                                    </ul>
                                 </div>
-                                <div class="{{spec[selectedSpec-1].csscl}}"></div><label>{{spec[selectedSpec-1].name}}</label>
+                                <div class="col-md-12 col-sm-6 col-xs-6 right">
+                                    <label for="actionLat">Geografska visina</label>
+                                    <input type="text" id="actionLat" class="form-control" ng-model="currentResc.lokacija.lat">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <button class="btn" ng-click="saveResc()">Dodaj</button>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <ng-map center="[{{currentResc.lokacija.lat}}, {{currentResc.lokacija.lng}]">
+                                    <marker position="[{{currentResc.lokacija.lat}}, {{currentResc.lokacija.lng}}]" title="how" animation="Animation.BOUNCE" draggable=true on-dragend="markerChanged(event)"></marker>
+                                </ng-map>
                             </div>
-                        </form>
-                    </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Single button -->
+                            <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                                    Specijalizacija <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem" ng-repeat="s in spec"><div class="{{s.csscl}}"></div><a ng-click="selectSpec(s)" href="">{{s.name}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="{{spec[selectedSpec-1].csscl}}"></div><label>{{spec[selectedSpec-1].name}}</label>
+                        </div>
+                        <div class="form-group">
+                            <button class="button button-normal" ng-click="saveResc()">Dodaj</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
