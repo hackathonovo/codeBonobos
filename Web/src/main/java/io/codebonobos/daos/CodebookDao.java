@@ -22,7 +22,7 @@ public class CodebookDao {
     }
 
     public void insertIntoTable(String tableName, String value) {
-        jdbcTemplate.update("INSERT INTO " + tableName + "(VALUE) VALUES(" + value + ")");
+        jdbcTemplate.update("INSERT INTO " + tableName + "(VALUE) VALUES('" + value + "')");
     }
 
     public Codebook getAllFromTable(String tableName) {
