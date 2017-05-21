@@ -161,7 +161,7 @@ public class SpasavateljiController {
                 spasavateljDao.refuseAction(userId, actionId);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>(new ResponseWrapper<>(null, "Success"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseWrapper<>(null, "Fail"), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(new ResponseWrapper<>(null, "Success"), HttpStatus.OK);
