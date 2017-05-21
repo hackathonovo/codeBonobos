@@ -66,6 +66,10 @@ app.factory('ActionFactory', ['$http', 'ActionCreate', function ($http, ActionCr
     result.getAllActive = function () {
         return $http.get("/api/akcije/active")
     };
+    
+    result.getDetails = function (actionID) {
+        return $http.get("/api/akcije/"+actionID)
+    };
 
     return result;
 }]);

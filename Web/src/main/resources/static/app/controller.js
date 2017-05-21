@@ -154,18 +154,28 @@ app.controller('ActionController', ['$scope', 'NgMap', function ($scope, $NgMap)
 app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope, ActionFactory) {
     // ==== MODELS ====
     ActionFactory.getAllActive().then(function (response) {
-       $scope.allActive = response.data.response;
+        $scope.allActive = response.data.response;
+
+        $scope.allActive.forEach(function (e) {
+            e.expended = false;
+        })
     });
+
+    $scope.dictPrio = {
+        "0": "Normalno",
+        "1": "Srednje",
+        "2": "Hitno"
+    };
     // ==== INIT MODELS ====
     // ==== CONTROL FUNCTIONS ====
+    $scope.showDetails = function (action) {
+        action.expended ? action.expanded = false : action.expanded = true;
+    }
 }]);
 
 app.controller('CodesController', ['$scope', function ($scope) {
     // ==== MODELS ====
-<<<<<<< HEAD
-    // ==== INIT MODELS ====
-    // ==== CONTROL FUNCTIONS ====
-=======
+
     SchFactory.getAll('TITLE').then(function (response) {
         $scope.codebook = response;
     });
@@ -175,7 +185,7 @@ app.controller('CodesController', ['$scope', function ($scope) {
     $scope.insertNew = function(val){
         SchFactory.insert('TITLE', val);
     }
->>>>>>> e0eeeaac4477465137163f9b95ca7e1baf09fd76
+
 }]);
 
 app.controller('AddActionRescController', ['$scope', '$location', '$filter', 'NgMap', 'ActionFactory', 'RescFactory', 'ActionCreate', function ($scope, $location, $filter, NgMap, ActionFactory, RescFactory, ActionCreate) {
