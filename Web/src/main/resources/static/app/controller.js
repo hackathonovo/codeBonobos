@@ -3,15 +3,13 @@ app.controller('MainController', ['$scope', '$sce', '$http', '$route', 'ActionFa
 
     ActionFactory.getAllActive().then(function (response) {
         $scope.allActive = response.data.response;
+
+        $scope.numOfActive = [];
+
+        
     });
 
     // ==== INIT MODELS ====
-
-
-    // ==== CONTROL FUNCTIONS ====
-    $scope.sampleFunction = function (project) {
-
-    };
 }]);
 
 app.controller('RescController', ['$scope', 'RescFactory', function ($scope, RescFactory) {
@@ -158,16 +156,10 @@ app.controller('CurrentController', ['$scope', 'ActionFactory', function ($scope
 }]);
 
 app.controller('CodesController', ['$scope', function ($scope) {
-    // ==== MODELS ====
-
-    SchFactory.getAll('TITLE').then(function (response) {
-        $scope.codebook = response;
-    });
-
-    // ==== INIT MODELS ====
-    // ==== CONTROL FUNCTIONS ====
-    $scope.insertNew = function (val) {
-        SchFactory.insert('TITLE', val);
+    $scope.codebook = ['Version1', 'Version2'];
+    $scope.insertNew = function (newIn) {
+        $scope.codebook.push(newIn);
+        $scope.newTitle = null;
     }
 
 }]);
